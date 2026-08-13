@@ -21,7 +21,7 @@
               {%- if block.type == 'rotator_product' -%}
                 <span class="pimg {{ block.settings.fallback_class }} {% if count_rotator == 0 %}on{% endif %}" role="img" aria-label="{{ block.settings.title | escape }}" data-name="{{ block.settings.title | escape }}" data-note="{{ block.settings.note | escape }}"></span>
                 {%- assign count_rotator = count_rotator | plus: 1 -%}
-              {%- endif -%-}
+              {%- endif -%}
             {%- endfor -%}
           </div>
           <div class="cap">
