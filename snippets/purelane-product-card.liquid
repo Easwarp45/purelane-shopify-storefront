@@ -30,42 +30,63 @@
             <span class="pill">Sale</span>
           {%- endif -%}
         {%- endif -%}
-        {%- if card_product.featured_image != blank -%}
+        {%- liquid
+          assign is_resolved_image = false
+          assign resolved_img_name = nil
+
+          if card_product.featured_image != blank
+            assign is_resolved_image = true
+            assign resolved_img_url = card_product.featured_image | image_url: width: 300
+            assign resolved_img_w = card_product.featured_image.width
+            assign resolved_img_h = card_product.featured_image.height
+          else
+            # Try to match the handle/title to one of our AI brand assets
+            assign handle_down = card_product.handle | downcase
+            assign title_down = card_product.title | downcase
+            
+            if handle_down contains "kitchen" or title_down contains "kitchen"
+              assign resolved_img_name = "purelane-kitchen.png"
+            elsif handle_down contains "dish" or title_down contains "dish"
+              assign resolved_img_name = "purelane-dish.png"
+            elsif handle_down contains "tap" or title_down contains "tap" or handle_down contains "limescale" or title_down contains "limescale"
+              assign resolved_img_name = "purelane-tap.png"
+            elsif handle_down contains "laundry" or title_down contains "laundry"
+              assign resolved_img_name = "purelane-laundry.png"
+            elsif handle_down contains "conditioner" or title_down contains "conditioner"
+              assign resolved_img_name = "purelane-conditioner.png"
+            elsif handle_down contains "washing" or handle_down contains "machine" or title_down contains "washing" or title_down contains "machine"
+              assign resolved_img_name = "purelane-wm.png"
+            elsif handle_down contains "toilet" or title_down contains "toilet"
+              assign resolved_img_name = "purelane-toilet.png"
+            elsif handle_down contains "floor" or title_down contains "floor"
+              assign resolved_img_name = "purelane-floor.png"
+            elsif handle_down contains "hand" or title_down contains "hand"
+              assign resolved_img_name = "purelane-handwash.png"
+            elsif handle_down contains "eraser" or title_down contains "eraser"
+              assign resolved_img_name = "purelane-eraser.png"
+            endif
+
+            if resolved_img_name != blank
+              assign is_resolved_image = true
+              assign resolved_img_url = resolved_img_name | asset_url
+              assign resolved_img_w = 300
+              assign resolved_img_h = 375
+            endif
+          endif
+        -%}
+
+        {%- if is_resolved_image -%}
           <img 
-            src="{{ card_product.featured_image | image_url: width: 300 }}" 
+            src="{{ resolved_img_url }}" 
             class="pimg" 
-            alt="{{ card_product.featured_image.alt | escape }}" 
+            alt="{{ card_product.title | escape }}" 
             loading="lazy"
-            width="{{ card_product.featured_image.width }}"
-            height="{{ card_product.featured_image.height }}"
+            width="{{ resolved_img_w }}"
+            height="{{ resolved_img_h }}"
             style="height: 122px; width: auto; object-fit: contain;"
           >
         {%- else -%}
-          {%- liquid
-            assign fallback_class = "p-kitchen"
-            assign handle_down = card_product.handle | downcase
-            assign title_down = card_product.title | downcase
-            if handle_down contains "tap" or title_down contains "tap"
-              assign fallback_class = "p-tap"
-            elsif handle_down contains "metal" or title_down contains "copper" or title_down contains "brass" or title_down contains "bronze"
-              assign fallback_class = "p-metal"
-            elsif handle_down contains "washing" or handle_down contains "machine" or title_down contains "washing" or title_down contains "machine"
-              assign fallback_class = "p-wm"
-            elsif handle_down contains "laundry" or title_down contains "laundry"
-              assign fallback_class = "p-laundry"
-            elsif handle_down contains "floor" or title_down contains "floor"
-              assign fallback_class = "p-floor"
-            elsif handle_down contains "toilet" or title_down contains "toilet"
-              assign fallback_class = "p-toilet"
-            elsif handle_down contains "hand" or title_down contains "hand"
-              assign fallback_class = "p-handwash"
-            elsif handle_down contains "dish" or title_down contains "dish"
-              assign fallback_class = "p-dish"
-            elsif handle_down contains "eraser" or title_down contains "eraser"
-              assign fallback_class = "p-eraser"
-            endif
-          -%}
-          <span class="pimg {{ fallback_class }}" role="img" aria-label="{{ card_product.title | escape }}" style="height: 122px; width: 100%; display: block;"></span>
+          <span class="pimg p-kitchen" role="img" aria-label="{{ card_product.title | escape }}" style="height: 122px; width: 100%; display: block;"></span>
         {%- endif -%}
       </div>
     </a>

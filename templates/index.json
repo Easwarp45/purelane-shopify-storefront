@@ -208,16 +208,106 @@
             "button_link": "shopify://collections/all",
             "product_1_class": "p-laundry",
             "product_1_label": "Removes tough stains & odour",
-            "product_2_class": "tile",
-            "product_2_label": "Softens & freshens every wash",
-            "product_3_class": "p-wm",
-            "product_3_label": "Deep-cleans your machine"
+            "product_2_class": "p-wm",
+            "product_2_label": "Deep-cleans your machine",
+            "product_3_class": "p-floor",
+            "product_3_label": "Neem-powered floor care"
+          }
+        },
+        "combo_3": {
+          "type": "combo",
+          "settings": {
+            "is_hero": false,
+            "badge": "Best for bathrooms",
+            "savings": "Save ₹368",
+            "title": "Bathroom deep clean",
+            "products_count": 3,
+            "benefits": "Includes: Toilet Cleaner, Tap & Limescale Remover & Hand Wash. Kills 99.9% of germs, melts scale, gentle on hands.",
+            "price": 529,
+            "compare_at_price": 897,
+            "button_label": "Shop bundle",
+            "button_link": "shopify://collections/all",
+            "product_1_class": "p-toilet",
+            "product_1_label": "Kills 99.9% of germs",
+            "product_2_class": "p-tap",
+            "product_2_label": "Descales in minutes",
+            "product_3_class": "p-handwash",
+            "product_3_label": "Gentle plant-based wash"
+          }
+        },
+        "combo_4": {
+          "type": "combo",
+          "settings": {
+            "is_hero": false,
+            "badge": "",
+            "savings": "Save ₹299",
+            "title": "Floor & surface care",
+            "products_count": 3,
+            "benefits": "Includes: Floor Cleaner, Kitchen Cleaner & Magic Eraser Scrub Pad. Spotless floors and surfaces, pet-safe formula.",
+            "price": 448,
+            "compare_at_price": 747,
+            "button_label": "Shop bundle",
+            "button_link": "shopify://collections/all",
+            "product_1_class": "p-floor",
+            "product_1_label": "Pet-safe neem formula",
+            "product_2_class": "p-kitchen",
+            "product_2_label": "Degreases instantly",
+            "product_3_class": "p-eraser",
+            "product_3_label": "No chemical scrubbing"
+          }
+        },
+        "combo_5": {
+          "type": "combo",
+          "settings": {
+            "is_hero": false,
+            "badge": "Hard water special",
+            "savings": "Save ₹349",
+            "title": "Hard water rescue",
+            "products_count": 2,
+            "benefits": "Includes: Tap & Limescale Remover & Magic Eraser Scrub Pad. Eliminates stubborn limescale from taps, showers & tiles.",
+            "price": 349,
+            "compare_at_price": 698,
+            "button_label": "Shop bundle",
+            "button_link": "shopify://collections/all",
+            "product_1_class": "p-tap",
+            "product_1_label": "Dissolves limescale",
+            "product_2_class": "p-eraser",
+            "product_2_label": "Scrubs tiles streak-free"
+          }
+        },
+        "combo_6": {
+          "type": "combo",
+          "settings": {
+            "is_hero": false,
+            "badge": "Best value",
+            "savings": "Save ₹696",
+            "title": "Full home kit",
+            "products_count": 5,
+            "benefits": "Includes: Kitchen, Dishwash, Toilet, Laundry & Floor Cleaner. Every room covered in one order. Our biggest saving.",
+            "price": 799,
+            "compare_at_price": 1495,
+            "button_label": "Shop bundle",
+            "button_link": "shopify://collections/all",
+            "product_1_class": "p-kitchen",
+            "product_1_label": "Kitchen cleaner",
+            "product_2_class": "p-dish",
+            "product_2_label": "Dishwash gel",
+            "product_3_class": "p-toilet",
+            "product_3_label": "Toilet cleaner",
+            "product_4_class": "p-laundry",
+            "product_4_label": "Laundry detergent",
+            "product_5_class": "p-floor",
+            "product_5_label": "Floor cleaner"
           }
         }
       },
       "block_order": [
         "combo_1",
-        "combo_2"
+        "combo_2",
+        "combo_3",
+        "combo_4",
+        "combo_5",
+        "combo_6"
       ],
       "settings": {
         "kicker": "Pre-built to save you money",
@@ -377,7 +467,7 @@
         "kicker": "Bestsellers",
         "heading": "Loved by 30,000 homes",
         "collection": "all",
-        "products_to_show": 4
+        "products_to_show": 8
       }
     }
   },

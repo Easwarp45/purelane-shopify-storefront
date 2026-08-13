@@ -69,6 +69,54 @@
 
     {{ content_for_header }}
 
+    <!-- ── Purelane: Force INR (₹) money format globally ── -->
+    <script>
+      // Override Shopify money format so cart drawer + dynamic prices use ₹
+      (function patchINR() {
+        function apply() {
+          if (window.Shopify) {
+            window.Shopify.money_format               = '\u20b9{{amount_no_decimals}}';
+            window.Shopify.money_with_currency_format = '\u20b9{{amount_no_decimals}} INR';
+          }
+        }
+        apply();
+        // Also re-apply after any Shopify script loads
+        document.addEventListener('DOMContentLoaded', apply);
+      })();
+
+      // DOM-level fallback: replace any $NNN or £NNN or €NNN with ₹NNN
+      document.addEventListener('DOMContentLoaded', function () {
+        function fixPrices(root) {
+          var walker = document.createTreeWalker(
+            root || document.body,
+            NodeFilter.SHOW_TEXT,
+            null, false
+          );
+          var node;
+          var re = /([\$\£\€])(\s?)(\d[\d,\.]*)/g;
+          while ((node = walker.nextNode())) {
+            if (node.parentNode && node.parentNode.closest('script,style,noscript')) continue;
+            var orig = node.nodeValue;
+            var fixed = orig.replace(re, '\u20b9$2$3');
+            if (fixed !== orig) node.nodeValue = fixed;
+          }
+        }
+        fixPrices(document.body);
+
+        // Watch for dynamic content (cart drawer, quick-add etc.)
+        if (window.MutationObserver) {
+          var obs = new MutationObserver(function (mutations) {
+            mutations.forEach(function (m) {
+              m.addedNodes.forEach(function (n) {
+                if (n.nodeType === 1) fixPrices(n);
+              });
+            });
+          });
+          obs.observe(document.body, { childList: true, subtree: true });
+        }
+      });
+    </script>
+
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
       assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
@@ -82,6 +130,7 @@
       {{ body_font_bold_italic | font_face: font_display: 'swap' }}
       {{ settings.type_header_font | font_face: font_display: 'swap' }}
 
+      {% assign scheme_classes = '' %}
       {% for scheme in settings.color_schemes -%}
         {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
         {% if forloop.index == 1 -%}
@@ -336,7 +385,7 @@
         <a href="#proof" aria-label="Proof"></a>
         <a href="#bundles" aria-label="Bundles"></a>
         <a href="#shop" aria-label="Shop"></a>
-        <a href="#voices" aria-label="Reviews"></a>
+        <a href="#reviews" aria-label="Reviews"></a>
       </nav>
 
       <div class="scenes" id="scenes" data-d="1">
@@ -453,7 +502,7 @@
 
     <main
       id="MainContent"
-      class="content-for-layout focus-none"
+      class="content-for-layout focus-none {% if template.name != 'index' %}page-header-offset{% endif %}"
       role="main"
       tabindex="-1"
       data-template="{{ template.name }}"

@@ -13,9 +13,148 @@
       {%- endif -%}
     </div>
     
-    <div class="comborail">
+{%- liquid
+  assign resolved_kitchen = nil
+  assign resolved_tap = nil
+  assign resolved_laundry = nil
+  assign resolved_toilet = nil
+  assign resolved_floor = nil
+  assign resolved_dish = nil
+  assign resolved_wm = nil
+  assign resolved_handwash = nil
+  assign resolved_eraser = nil
+
+  for p in collections.all.products
+    assign title_down = p.title | downcase
+    assign handle_down = p.handle | downcase
+    if title_down contains 'kitchen' or handle_down contains 'kitchen'
+      assign resolved_kitchen = p
+    elsif title_down contains 'tap' or title_down contains 'limescale' or handle_down contains 'tap' or handle_down contains 'limescale'
+      assign resolved_tap = p
+    elsif title_down contains 'laundry' or handle_down contains 'laundry'
+      assign resolved_laundry = p
+    elsif title_down contains 'toilet' or handle_down contains 'toilet'
+      assign resolved_toilet = p
+    elsif title_down contains 'floor' or handle_down contains 'floor'
+      assign resolved_floor = p
+    elsif title_down contains 'dish' or handle_down contains 'dish'
+      assign resolved_dish = p
+    elsif title_down contains 'washing' or title_down contains 'machine' or handle_down contains 'washing' or handle_down contains 'machine'
+      assign resolved_wm = p
+    elsif title_down contains 'hand' or handle_down contains 'hand'
+      assign resolved_handwash = p
+    elsif title_down contains 'eraser' or title_down contains 'scrub' or handle_down contains 'eraser'
+      assign resolved_eraser = p
+    endif
+  endfor
+-%}
+
+    <div class="comborail" id="comborail-{{ section.id }}">
       {%- for block in section.blocks -%}
         {%- if block.type == 'combo' -%}
+          {%- liquid
+            assign p1_image = block.settings.product_1_image
+            assign p1_label = block.settings.product_1_label
+            if p1_image == blank
+              if block.settings.product_1_class == 'p-kitchen' and resolved_kitchen != blank
+                assign p1_image = resolved_kitchen.featured_image
+                assign p1_label = resolved_kitchen.title
+              elsif block.settings.product_1_class == 'p-laundry' and resolved_laundry != blank
+                assign p1_image = resolved_laundry.featured_image
+                assign p1_label = resolved_laundry.title
+              elsif block.settings.product_1_class == 'p-toilet' and resolved_toilet != blank
+                assign p1_image = resolved_toilet.featured_image
+                assign p1_label = resolved_toilet.title
+              elsif block.settings.product_1_class == 'p-floor' and resolved_floor != blank
+                assign p1_image = resolved_floor.featured_image
+                assign p1_label = resolved_floor.title
+              elsif block.settings.product_1_class == 'p-handwash' and resolved_handwash != blank
+                assign p1_image = resolved_handwash.featured_image
+                assign p1_label = resolved_handwash.title
+              elsif block.settings.product_1_class == 'p-tap' and resolved_tap != blank
+                assign p1_image = resolved_tap.featured_image
+                assign p1_label = resolved_tap.title
+              endif
+            endif
+
+            assign p2_image = block.settings.product_2_image
+            assign p2_label = block.settings.product_2_label
+            if p2_image == blank
+              if block.settings.product_2_class == 'p-dish' and resolved_dish != blank
+                assign p2_image = resolved_dish.featured_image
+                assign p2_label = resolved_dish.title
+              elsif block.settings.product_2_class == 'p-floor' and resolved_floor != blank
+                assign p2_image = resolved_floor.featured_image
+                assign p2_label = resolved_floor.title
+              elsif block.settings.product_2_class == 'p-tap' and resolved_tap != blank
+                assign p2_image = resolved_tap.featured_image
+                assign p2_label = resolved_tap.title
+              elsif block.settings.product_2_class == 'p-toilet' and resolved_toilet != blank
+                assign p2_image = resolved_toilet.featured_image
+                assign p2_label = resolved_toilet.title
+              elsif block.settings.product_2_class == 'p-handwash' and resolved_handwash != blank
+                assign p2_image = resolved_handwash.featured_image
+                assign p2_label = resolved_handwash.title
+              elsif block.settings.product_2_class == 'p-eraser' and resolved_eraser != blank
+                assign p2_image = resolved_eraser.featured_image
+                assign p2_label = resolved_eraser.title
+              elsif block.settings.product_2_class == 'p-kitchen' and resolved_kitchen != blank
+                assign p2_image = resolved_kitchen.featured_image
+                assign p2_label = resolved_kitchen.title
+              endif
+            endif
+
+            assign p3_image = block.settings.product_3_image
+            assign p3_label = block.settings.product_3_label
+            if p3_image == blank
+              if block.settings.product_3_class == 'p-tap' and resolved_tap != blank
+                assign p3_image = resolved_tap.featured_image
+                assign p3_label = resolved_tap.title
+              elsif block.settings.product_3_class == 'p-wm' and resolved_wm != blank
+                assign p3_image = resolved_wm.featured_image
+                assign p3_label = resolved_wm.title
+              elsif block.settings.product_3_class == 'p-floor' and resolved_floor != blank
+                assign p3_image = resolved_floor.featured_image
+                assign p3_label = resolved_floor.title
+              elsif block.settings.product_3_class == 'p-eraser' and resolved_eraser != blank
+                assign p3_image = resolved_eraser.featured_image
+                assign p3_label = resolved_eraser.title
+              elsif block.settings.product_3_class == 'p-handwash' and resolved_handwash != blank
+                assign p3_image = resolved_handwash.featured_image
+                assign p3_label = resolved_handwash.title
+              elsif block.settings.product_3_class == 'p-toilet' and resolved_toilet != blank
+                assign p3_image = resolved_toilet.featured_image
+                assign p3_label = resolved_toilet.title
+              endif
+            endif
+
+            assign p4_image = block.settings.product_4_image
+            assign p4_label = block.settings.product_4_label
+            if p4_image == blank
+              if block.settings.product_4_class == 'p-laundry' and resolved_laundry != blank
+                assign p4_image = resolved_laundry.featured_image
+                assign p4_label = resolved_laundry.title
+              elsif block.settings.product_4_class == 'p-kitchen' and resolved_kitchen != blank
+                assign p4_image = resolved_kitchen.featured_image
+                assign p4_label = resolved_kitchen.title
+              elsif block.settings.product_4_class == 'p-dish' and resolved_dish != blank
+                assign p4_image = resolved_dish.featured_image
+                assign p4_label = resolved_dish.title
+              endif
+            endif
+
+            assign p5_image = block.settings.product_5_image
+            assign p5_label = block.settings.product_5_label
+            if p5_image == blank
+              if block.settings.product_5_class == 'p-wm' and resolved_wm != blank
+                assign p5_image = resolved_wm.featured_image
+                assign p5_label = resolved_wm.title
+              elsif block.settings.product_5_class == 'p-dish' and resolved_dish != blank
+                assign p5_image = resolved_dish.featured_image
+                assign p5_label = resolved_dish.title
+              endif
+            endif
+          -%}
           {%- render 'purelane-combo-card',
             title: block.settings.title,
             products_count: block.settings.products_count,
@@ -25,21 +164,21 @@
             savings: block.settings.savings,
             badge: block.settings.badge,
             is_hero: block.settings.is_hero,
-            product_1_image: block.settings.product_1_image,
+            product_1_image: p1_image,
             product_1_class: block.settings.product_1_class,
-            product_1_label: block.settings.product_1_label,
-            product_2_image: block.settings.product_2_image,
+            product_1_label: p1_label,
+            product_2_image: p2_image,
             product_2_class: block.settings.product_2_class,
-            product_2_label: block.settings.product_2_label,
-            product_3_image: block.settings.product_3_image,
+            product_2_label: p2_label,
+            product_3_image: p3_image,
             product_3_class: block.settings.product_3_class,
-            product_3_label: block.settings.product_3_label,
-            product_4_image: block.settings.product_4_image,
+            product_3_label: p3_label,
+            product_4_image: p4_image,
             product_4_class: block.settings.product_4_class,
-            product_4_label: block.settings.product_4_label,
-            product_5_image: block.settings.product_5_image,
+            product_4_label: p4_label,
+            product_5_image: p5_image,
             product_5_class: block.settings.product_5_class,
-            product_5_label: block.settings.product_5_label,
+            product_5_label: p5_label,
             button_link: block.settings.button_link,
             button_label: block.settings.button_label
           -%}
@@ -48,22 +187,58 @@
     </div>
     
     {%- if section.settings.show_swipecue -%}
-      <div class="swipecue" aria-hidden="true">
+      <div class="swipecue" aria-hidden="true" id="combo-swipecue-{{ section.id }}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
           <path d="M5 12h14M12 5l7 7-7 7"/>
         </svg>
         <span>Swipe to see all combos</span>
       </div>
+      <div class="combo-scroll-track" id="combo-track-{{ section.id }}" aria-hidden="true">
+        <div class="bar" id="combo-bar-{{ section.id }}"></div>
+      </div>
     {%- endif -%}
   </div>
 </section>
+
+<script>
+(function() {
+  var rail  = document.getElementById('comborail-{{ section.id }}');
+  var bar   = document.getElementById('combo-bar-{{ section.id }}');
+  var track = document.getElementById('combo-track-{{ section.id }}');
+  var cue   = document.getElementById('combo-swipecue-{{ section.id }}');
+  if (!rail || !bar || !track) return;
+
+  function updateBar() {
+    var scrollLeft  = rail.scrollLeft;
+    var maxScroll   = rail.scrollWidth - rail.clientWidth;
+    if (maxScroll <= 0) {
+      track.style.display = 'none';
+      if (cue) cue.style.display = 'none';
+      return;
+    }
+    track.style.display = 'block';
+    var pct = Math.min(100, Math.round((scrollLeft / maxScroll) * 100));
+    /* bar width = visible proportion of total scroll width */
+    var visiblePct = Math.round((rail.clientWidth / rail.scrollWidth) * 100);
+    bar.style.width = visiblePct + '%';
+    bar.style.marginLeft = pct / 100 * (100 - visiblePct) + '%';
+    /* hide swipe cue once the user has started scrolling */
+    if (cue && scrollLeft > 20) cue.style.opacity = '0';
+    else if (cue) cue.style.opacity = '';
+  }
+
+  rail.addEventListener('scroll', updateBar, { passive: true });
+  window.addEventListener('resize', updateBar);
+  updateBar();
+})();
+</script>
 
 {% schema %}
 {
   "name": "Best Selling Combos",
   "tag": "section",
   "class": "section-purelane-best-selling-combos",
-  "max_blocks": 6,
+  "max_blocks": 8,
   "settings": [
     {
       "type": "text",

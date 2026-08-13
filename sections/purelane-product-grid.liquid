@@ -19,27 +19,77 @@
     
     <div class="shelf">
       {%- assign collection = collections[section.settings.collection] -%}
+      {%- assign rendered_count = 0 -%}
       {%- if collection != blank and collection.products.size > 0 -%}
-        {%- for product in collection.products limit: section.settings.products_to_show -%}
-          {%- render 'purelane-product-card', card_product: product -%}
+        {%- for product in collection.products -%}
+          {%- liquid
+            assign handle_down = product.handle | downcase
+            assign title_down = product.title | downcase
+            assign is_unrelated = false
+            if handle_down contains 'snowboard' or title_down contains 'snowboard'
+              assign is_unrelated = true
+            elsif handle_down contains 'ski-wax' or title_down contains 'ski-wax' or title_down contains 'selling plans' or handle_down contains 'selling-plans'
+              assign is_unrelated = true
+            elsif handle_down contains 'gift-card' or title_down contains 'gift card'
+              assign is_unrelated = true
+            endif
+          -%}
+          {%- unless is_unrelated -%}
+            {%- render 'purelane-product-card', card_product: product -%}
+            {%- assign rendered_count = rendered_count | plus: 1 -%}
+            {%- if rendered_count >= section.settings.products_to_show -%}
+              {%- break -%}
+            {%- endif -%}
+          {%- endunless -%}
         {%- endfor -%}
+        {%- if rendered_count == 0 -%}
+          <p class="lede" style="grid-column: 1/-1; text-align: center; color: var(--paper-2);">Add Purelane products to the selected collection.</p>
+        {%- endif -%}
       {%- else -%}
-        <!-- Fallback if no collection selected or empty -->
-        {%- for i in (1..section.settings.products_to_show) -%}
-          <article class="glass card rv">
-            <div class="shot">
-              <span class="pill">Best seller</span>
-              <svg viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
-                <ellipse cx="65" cy="190" rx="40" ry="7" fill="#01201c" opacity=".5"/>
-                <rect x="31" y="112" width="66" height="60" rx="6" fill="#4b3a8f" opacity="0.8"/>
-                <text x="65" y="146" text-anchor="middle" fill="#ffffff" font-size="10" font-family="Outfit, sans-serif">PURELANE</text>
-              </svg>
-            </div>
-            <h4 style="margin-top: 10px;"><a href="#">Kitchen cleaner, foaming</a></h4>
-            <div class="rate"><b>★ 4.8</b> · 254 reviews</div>
-            <div class="pr"><strong>₹200</strong><s>₹299</s><em>33% off</em></div>
-            <button class="btn btn-ghost btn-sm" style="width: 100%; justify-content: center;">Add to cart</button>
-          </article>
+        <!-- Hardcoded brand product showcase when no collection is configured -->
+        {%- assign showcase_products = "kitchen,dish,tap,laundry,toilet,floor,handwash,wm" | split: "," -%}
+        {%- assign showcase_names = "Foaming Kitchen Cleaner,Dishwash Gel,Tap & Limescale Remover,Laundry Detergent,Toilet Cleaner,Floor Cleaner,Hand Wash,Washing Machine Cleaner" | split: "," -%}
+        {%- assign showcase_prices = "₹200,₹199,₹249,₹299,₹149,₹179,₹189,₹229" | split: "," -%}
+        {%- assign showcase_compare = "₹299,₹299,₹349,₹449,₹249,₹279,₹279,₹349" | split: "," -%}
+        {%- assign showcase_discounts = "33% off,33% off,29% off,33% off,40% off,36% off,32% off,34% off" | split: "," -%}
+        {%- assign showcase_badges = "Best seller,Best seller,Best seller,,Best seller,,,Best seller" | split: "," -%}
+        {%- assign showcase_imgs = "purelane-kitchen.png,purelane-dish.png,purelane-tap.png,purelane-laundry.png,purelane-toilet.png,purelane-floor.png,purelane-handwash.png,purelane-wm.png" | split: "," -%}
+        {%- assign max_show = section.settings.products_to_show | default: 8 -%}
+        {%- for i in (0..7) -%}
+          {%- if i < max_show -%}
+            {%- assign sc_name = showcase_names[i] -%}
+            {%- assign sc_price = showcase_prices[i] -%}
+            {%- assign sc_compare = showcase_compare[i] -%}
+            {%- assign sc_discount = showcase_discounts[i] -%}
+            {%- assign sc_badge = showcase_badges[i] -%}
+            {%- assign sc_img = showcase_imgs[i] | asset_url -%}
+            <article class="glass card rv">
+              <div class="shot">
+                {%- if sc_badge != blank -%}
+                  <span class="pill">{{ sc_badge }}</span>
+                {%- else -%}
+                  <span class="pill">Sale</span>
+                {%- endif -%}
+                <img
+                  src="{{ sc_img }}"
+                  class="pimg"
+                  alt="{{ sc_name }}"
+                  loading="lazy"
+                  width="300"
+                  height="375"
+                  style="height: 122px; width: auto; object-fit: contain;"
+                >
+              </div>
+              <h4 style="margin-top: 10px;"><a href="#shop">{{ sc_name }}</a></h4>
+              <div class="rate"><b>★ 4.8</b> · 250+ reviews</div>
+              <div class="pr">
+                <strong>{{ sc_price }}</strong>
+                <s>{{ sc_compare }}</s>
+                <em>{{ sc_discount }}</em>
+              </div>
+              <a href="#shop" class="btn btn-ghost btn-sm" style="width: 100%; justify-content: center;">Shop now</a>
+            </article>
+          {%- endif -%}
         {%- endfor -%}
       {%- endif -%}
     </div>

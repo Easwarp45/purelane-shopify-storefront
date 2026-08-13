@@ -1,3 +1,268 @@
+{%- liquid
+  assign resolved_kitchen = nil
+  assign resolved_tap = nil
+  assign resolved_laundry = nil
+  assign resolved_toilet = nil
+  assign resolved_floor = nil
+  assign resolved_dish = nil
+  assign resolved_wm = nil
+
+  for p in collections.all.products
+    assign title_down = p.title | downcase
+    assign handle_down = p.handle | downcase
+    if title_down contains 'kitchen' or handle_down contains 'kitchen'
+      assign resolved_kitchen = p
+    elsif title_down contains 'tap' or title_down contains 'limescale' or handle_down contains 'tap' or handle_down contains 'limescale'
+      assign resolved_tap = p
+    elsif title_down contains 'laundry' or handle_down contains 'laundry'
+      assign resolved_laundry = p
+    elsif title_down contains 'toilet' or handle_down contains 'toilet'
+      assign resolved_toilet = p
+    elsif title_down contains 'floor' or handle_down contains 'floor'
+      assign resolved_floor = p
+    elsif title_down contains 'dish' or handle_down contains 'dish'
+      assign resolved_dish = p
+    elsif title_down contains 'washing' or title_down contains 'machine' or handle_down contains 'washing' or handle_down contains 'machine'
+      assign resolved_wm = p
+    endif
+  endfor
+
+  assign s1_image = section.settings.slide_1_image
+  if s1_image == blank and resolved_kitchen != blank
+    assign s1_image = resolved_kitchen.featured_image
+  endif
+  assign s1_title = section.settings.slide_1_title
+  if s1_title == 'Foaming kitchen cleaner' and resolved_kitchen != blank
+    assign s1_title = resolved_kitchen.title
+  endif
+  assign s1_price = section.settings.slide_1_price
+  if s1_price == '₹200' and resolved_kitchen != blank
+    assign s1_price = resolved_kitchen.price | money_without_trailing_zeros
+  endif
+  assign s1_compare = section.settings.slide_1_compare
+  if s1_compare == '₹299' and resolved_kitchen != blank
+    if resolved_kitchen.compare_at_price > resolved_kitchen.price
+      assign s1_compare = resolved_kitchen.compare_at_price | money_without_trailing_zeros
+    else
+      assign s1_compare = ''
+    endif
+  endif
+
+  assign s2_img_1 = section.settings.slide_2_img_1
+  if s2_img_1 == blank and resolved_kitchen != blank
+    assign s2_img_1 = resolved_kitchen.featured_image
+  endif
+  assign s2_img_2 = section.settings.slide_2_img_2
+  if s2_img_2 == blank and resolved_dish != blank
+    assign s2_img_2 = resolved_dish.featured_image
+  endif
+
+  assign s3_img_1 = section.settings.slide_3_img_1
+  if s3_img_1 == blank and resolved_kitchen != blank
+    assign s3_img_1 = resolved_kitchen.featured_image
+  endif
+  assign s3_img_2 = section.settings.slide_3_img_2
+  if s3_img_2 == blank and resolved_dish != blank
+    assign s3_img_2 = resolved_dish.featured_image
+  endif
+  assign s3_img_3 = section.settings.slide_3_img_3
+  if s3_img_3 == blank and resolved_tap != blank
+    assign s3_img_3 = resolved_tap.featured_image
+  endif
+
+  assign s1_img_url = nil
+  if s1_image != blank
+    assign s1_img_url = s1_image | image_url: width: 400
+    assign s1_w = s1_image.width
+    assign s1_h = s1_image.height
+  else
+    assign cls = section.settings.slide_1_class | default: 'p-kitchen'
+    if cls == 'p-kitchen' or cls == 'p-combo2' or cls == 'p-kbtl'
+      assign s1_img_url = 'purelane-kitchen.png' | asset_url
+    elsif cls == 'p-dish'
+      assign s1_img_url = 'purelane-dish.png' | asset_url
+    elsif cls == 'p-tap' or cls == 'p-tbtl'
+      assign s1_img_url = 'purelane-tap.png' | asset_url
+    elsif cls == 'p-laundry' or cls == 'p-mbtl'
+      assign s1_img_url = 'purelane-laundry.png' | asset_url
+    elsif cls == 'p-wm'
+      assign s1_img_url = 'purelane-wm.png' | asset_url
+    elsif cls == 'p-toilet'
+      assign s1_img_url = 'purelane-toilet.png' | asset_url
+    elsif cls == 'p-floor'
+      assign s1_img_url = 'purelane-floor.png' | asset_url
+    elsif cls == 'p-handwash'
+      assign s1_img_url = 'purelane-handwash.png' | asset_url
+    elsif cls == 'p-eraser'
+      assign s1_img_url = 'purelane-eraser.png' | asset_url
+    else
+      assign s1_img_url = 'purelane-kitchen.png' | asset_url
+    endif
+    assign s1_w = 400
+    assign s1_h = 500
+  endif
+
+  assign s2_img_1_url = nil
+  if s2_img_1 != blank
+    assign s2_img_1_url = s2_img_1 | image_url: width: 350
+    assign s2_img_1_w = s2_img_1.width
+    assign s2_img_1_h = s2_img_1.height
+  else
+    assign cls = section.settings.slide_2_class_1 | default: 'p-kitchen'
+    if cls == 'p-kitchen' or cls == 'p-combo2' or cls == 'p-kbtl'
+      assign s2_img_1_url = 'purelane-kitchen.png' | asset_url
+    elsif cls == 'p-dish'
+      assign s2_img_1_url = 'purelane-dish.png' | asset_url
+    elsif cls == 'p-tap' or cls == 'p-tbtl'
+      assign s2_img_1_url = 'purelane-tap.png' | asset_url
+    elsif cls == 'p-laundry' or cls == 'p-mbtl'
+      assign s2_img_1_url = 'purelane-laundry.png' | asset_url
+    elsif cls == 'p-wm'
+      assign s2_img_1_url = 'purelane-wm.png' | asset_url
+    elsif cls == 'p-toilet'
+      assign s2_img_1_url = 'purelane-toilet.png' | asset_url
+    elsif cls == 'p-floor'
+      assign s2_img_1_url = 'purelane-floor.png' | asset_url
+    elsif cls == 'p-handwash'
+      assign s2_img_1_url = 'purelane-handwash.png' | asset_url
+    elsif cls == 'p-eraser'
+      assign s2_img_1_url = 'purelane-eraser.png' | asset_url
+    else
+      assign s2_img_1_url = 'purelane-kitchen.png' | asset_url
+    endif
+    assign s2_img_1_w = 350
+    assign s2_img_1_h = 437
+  endif
+
+  assign s2_img_2_url = nil
+  if s2_img_2 != blank
+    assign s2_img_2_url = s2_img_2 | image_url: width: 350
+    assign s2_img_2_w = s2_img_2.width
+    assign s2_img_2_h = s2_img_2.height
+  else
+    assign cls = section.settings.slide_2_class_2 | default: 'p-dish'
+    if cls == 'p-kitchen' or cls == 'p-combo2' or cls == 'p-kbtl'
+      assign s2_img_2_url = 'purelane-kitchen.png' | asset_url
+    elsif cls == 'p-dish'
+      assign s2_img_2_url = 'purelane-dish.png' | asset_url
+    elsif cls == 'p-tap' or cls == 'p-tbtl'
+      assign s2_img_2_url = 'purelane-tap.png' | asset_url
+    elsif cls == 'p-laundry' or cls == 'p-mbtl'
+      assign s2_img_2_url = 'purelane-laundry.png' | asset_url
+    elsif cls == 'p-wm'
+      assign s2_img_2_url = 'purelane-wm.png' | asset_url
+    elsif cls == 'p-toilet'
+      assign s2_img_2_url = 'purelane-toilet.png' | asset_url
+    elsif cls == 'p-floor'
+      assign s2_img_2_url = 'purelane-floor.png' | asset_url
+    elsif cls == 'p-handwash'
+      assign s2_img_2_url = 'purelane-handwash.png' | asset_url
+    elsif cls == 'p-eraser'
+      assign s2_img_2_url = 'purelane-eraser.png' | asset_url
+    else
+      assign s2_img_2_url = 'purelane-dish.png' | asset_url
+    endif
+    assign s2_img_2_w = 350
+    assign s2_img_2_h = 437
+  endif
+
+  assign s3_img_1_url = nil
+  if s3_img_1 != blank
+    assign s3_img_1_url = s3_img_1 | image_url: width: 300
+    assign s3_img_1_w = s3_img_1.width
+    assign s3_img_1_h = s3_img_1.height
+  else
+    assign cls = section.settings.slide_3_class_1 | default: 'p-kitchen'
+    if cls == 'p-kitchen' or cls == 'p-combo2' or cls == 'p-kbtl'
+      assign s3_img_1_url = 'purelane-kitchen.png' | asset_url
+    elsif cls == 'p-dish'
+      assign s3_img_1_url = 'purelane-dish.png' | asset_url
+    elsif cls == 'p-tap' or cls == 'p-tbtl'
+      assign s3_img_1_url = 'purelane-tap.png' | asset_url
+    elsif cls == 'p-laundry' or cls == 'p-mbtl'
+      assign s3_img_1_url = 'purelane-laundry.png' | asset_url
+    elsif cls == 'p-wm'
+      assign s3_img_1_url = 'purelane-wm.png' | asset_url
+    elsif cls == 'p-toilet'
+      assign s3_img_1_url = 'purelane-toilet.png' | asset_url
+    elsif cls == 'p-floor'
+      assign s3_img_1_url = 'purelane-floor.png' | asset_url
+    elsif cls == 'p-handwash'
+      assign s3_img_1_url = 'purelane-handwash.png' | asset_url
+    elsif cls == 'p-eraser'
+      assign s3_img_1_url = 'purelane-eraser.png' | asset_url
+    else
+      assign s3_img_1_url = 'purelane-kitchen.png' | asset_url
+    endif
+    assign s3_img_1_w = 300
+    assign s3_img_1_h = 375
+  endif
+
+  assign s3_img_2_url = nil
+  if s3_img_2 != blank
+    assign s3_img_2_url = s3_img_2 | image_url: width: 300
+    assign s3_img_2_w = s3_img_2.width
+    assign s3_img_2_h = s3_img_2.height
+  else
+    assign cls = section.settings.slide_3_class_2 | default: 'p-dish'
+    if cls == 'p-kitchen' or cls == 'p-combo2' or cls == 'p-kbtl'
+      assign s3_img_2_url = 'purelane-kitchen.png' | asset_url
+    elsif cls == 'p-dish'
+      assign s3_img_2_url = 'purelane-dish.png' | asset_url
+    elsif cls == 'p-tap' or cls == 'p-tbtl'
+      assign s3_img_2_url = 'purelane-tap.png' | asset_url
+    elsif cls == 'p-laundry' or cls == 'p-mbtl'
+      assign s3_img_2_url = 'purelane-laundry.png' | asset_url
+    elsif cls == 'p-wm'
+      assign s3_img_2_url = 'purelane-wm.png' | asset_url
+    elsif cls == 'p-toilet'
+      assign s3_img_2_url = 'purelane-toilet.png' | asset_url
+    elsif cls == 'p-floor'
+      assign s3_img_2_url = 'purelane-floor.png' | asset_url
+    elsif cls == 'p-handwash'
+      assign s3_img_2_url = 'purelane-handwash.png' | asset_url
+    elsif cls == 'p-eraser'
+      assign s3_img_2_url = 'purelane-eraser.png' | asset_url
+    else
+      assign s3_img_2_url = 'purelane-dish.png' | asset_url
+    endif
+    assign s3_img_2_w = 300
+    assign s3_img_2_h = 375
+  endif
+
+  assign s3_img_3_url = nil
+  if s3_img_3 != blank
+    assign s3_img_3_url = s3_img_3 | image_url: width: 300
+    assign s3_img_3_w = s3_img_3.width
+    assign s3_img_3_h = s3_img_3.height
+  else
+    assign cls = section.settings.slide_3_class_3 | default: 'p-tap'
+    if cls == 'p-kitchen' or cls == 'p-combo2' or cls == 'p-kbtl'
+      assign s3_img_3_url = 'purelane-kitchen.png' | asset_url
+    elsif cls == 'p-dish'
+      assign s3_img_3_url = 'purelane-dish.png' | asset_url
+    elsif cls == 'p-tap' or cls == 'p-tbtl'
+      assign s3_img_3_url = 'purelane-tap.png' | asset_url
+    elsif cls == 'p-laundry' or cls == 'p-mbtl'
+      assign s3_img_3_url = 'purelane-laundry.png' | asset_url
+    elsif cls == 'p-wm'
+      assign s3_img_3_url = 'purelane-wm.png' | asset_url
+    elsif cls == 'p-toilet'
+      assign s3_img_3_url = 'purelane-toilet.png' | asset_url
+    elsif cls == 'p-floor'
+      assign s3_img_3_url = 'purelane-floor.png' | asset_url
+    elsif cls == 'p-handwash'
+      assign s3_img_3_url = 'purelane-handwash.png' | asset_url
+    elsif cls == 'p-eraser'
+      assign s3_img_3_url = 'purelane-eraser.png' | asset_url
+    else
+      assign s3_img_3_url = 'purelane-tap.png' | asset_url
+    endif
+    assign s3_img_3_w = 300
+    assign s3_img_3_h = 375
+  endif
+-%}
+
 <section class="hero" data-scene="1" id="purelane-hero-{{ section.id }}">
   <div class="hero-grid">
     <!-- Desktop Promise Badges -->
@@ -92,18 +357,14 @@
         
         <!-- Slide 1: 1-Product State -->
         <div class="hslide hs1 on">
-          {%- if section.settings.slide_1_image != blank -%}
-            <img src="{{ section.settings.slide_1_image | image_url: width: 400 }}" class="hp a d1" alt="{{ section.settings.slide_1_title | escape }}" width="{{ section.settings.slide_1_image.width }}" height="{{ section.settings.slide_1_image.height }}">
-          {%- else -%}
-            <div class="hp a {{ section.settings.slide_1_class | default: 'p-kitchen' }} d1" role="img" aria-label="{{ section.settings.slide_1_title | escape }}"></div>
-          {%- endif -%}
+          <img src="{{ s1_img_url }}" class="hp a d1" alt="{{ s1_title | escape }}" width="{{ s1_w }}" height="{{ s1_h }}" style="height: 380px; width: auto; object-fit: contain; margin: 0 auto;">
           
           <div class="glass-2 ptag">
-            <span class="lbl">{{ section.settings.slide_1_title }}</span>
+            <span class="lbl">{{ s1_title }}</span>
             <div class="val">
-              <strong>{{ section.settings.slide_1_price }}</strong>
-              {%- if section.settings.slide_1_compare != blank -%}
-                <s>{{ section.settings.slide_1_compare }}</s>
+              <strong>{{ s1_price }}</strong>
+              {%- if s1_compare != blank -%}
+                <s>{{ s1_compare }}</s>
               {%- endif -%}
             </div>
             {%- if section.settings.slide_1_badge != blank -%}
@@ -114,16 +375,8 @@
 
         <!-- Slide 2: 2-Product State -->
         <div class="hslide hs2">
-          {%- if section.settings.slide_2_img_1 != blank -%}
-            <img src="{{ section.settings.slide_2_img_1 | image_url: width: 350 }}" class="hp a d1" alt="Product 1" width="{{ section.settings.slide_2_img_1.width }}" height="{{ section.settings.slide_2_img_1.height }}">
-          {%- else -%}
-            <div class="hp a {{ section.settings.slide_2_class_1 | default: 'p-kitchen' }} d1"></div>
-          {%- endif -%}
-          {%- if section.settings.slide_2_img_2 != blank -%}
-            <img src="{{ section.settings.slide_2_img_2 | image_url: width: 350 }}" class="hp b d2" alt="Product 2" width="{{ section.settings.slide_2_img_2.width }}" height="{{ section.settings.slide_2_img_2.height }}">
-          {%- else -%}
-            <div class="hp b {{ section.settings.slide_2_class_2 | default: 'p-dish' }} d2"></div>
-          {%- endif -%}
+          <img src="{{ s2_img_1_url }}" class="hp a d1" alt="Product 1" width="{{ s2_img_1_w }}" height="{{ s2_img_1_h }}" style="height: 340px; width: auto; object-fit: contain;">
+          <img src="{{ s2_img_2_url }}" class="hp b d2" alt="Product 2" width="{{ s2_img_2_w }}" height="{{ s2_img_2_h }}" style="height: 340px; width: auto; object-fit: contain;">
           
           <div class="glass-2 ptag">
             <span class="lbl">{{ section.settings.slide_2_title }}</span>
@@ -141,21 +394,9 @@
 
         <!-- Slide 3: 3-Product State -->
         <div class="hslide hs3">
-          {%- if section.settings.slide_3_img_1 != blank -%}
-            <img src="{{ section.settings.slide_3_img_1 | image_url: width: 300 }}" class="hp a d1" alt="Product 1" width="{{ section.settings.slide_3_img_1.width }}" height="{{ section.settings.slide_3_img_1.height }}">
-          {%- else -%}
-            <div class="hp a {{ section.settings.slide_3_class_1 | default: 'p-kitchen' }} d1"></div>
-          {%- endif -%}
-          {%- if section.settings.slide_3_img_2 != blank -%}
-            <img src="{{ section.settings.slide_3_img_2 | image_url: width: 300 }}" class="hp b d2" alt="Product 2" width="{{ section.settings.slide_3_img_2.width }}" height="{{ section.settings.slide_3_img_2.height }}">
-          {%- else -%}
-            <div class="hp b {{ section.settings.slide_3_class_2 | default: 'p-dish' }} d2"></div>
-          {%- endif -%}
-          {%- if section.settings.slide_3_img_3 != blank -%}
-            <img src="{{ section.settings.slide_3_img_3 | image_url: width: 300 }}" class="hp c d3" alt="Product 3" width="{{ section.settings.slide_3_img_3.width }}" height="{{ section.settings.slide_3_img_3.height }}">
-          {%- else -%}
-            <div class="hp c {{ section.settings.slide_3_class_3 | default: 'p-tap' }} d3"></div>
-          {%- endif -%}
+          <img src="{{ s3_img_1_url }}" class="hp a d1" alt="Product 1" width="{{ s3_img_1_w }}" height="{{ s3_img_1_h }}" style="height: 300px; width: auto; object-fit: contain;">
+          <img src="{{ s3_img_2_url }}" class="hp b d2" alt="Product 2" width="{{ s3_img_2_w }}" height="{{ s3_img_2_h }}" style="height: 300px; width: auto; object-fit: contain;">
+          <img src="{{ s3_img_3_url }}" class="hp c d3" alt="Product 3" width="{{ s3_img_3_w }}" height="{{ s3_img_3_h }}" style="height: 300px; width: auto; object-fit: contain;">
           
           <div class="glass-2 ptag">
             <span class="lbl">{{ section.settings.slide_3_title }}</span>

@@ -11,8 +11,38 @@
 
 <a class="glass cat rv {{ delay_class }}" href="{{ link | default: '#combos' }}">
   <span class="ph">
-    {%- if image != blank -%}
-      <img src="{{ image | image_url: width: 250 }}" class="pimg" alt="{{ title | escape }}" loading="lazy" width="{{ image.width }}" height="{{ image.height }}" style="height: 176px; width: auto; object-fit: contain; position: relative;">
+    {%- liquid
+      assign bundle_img_url = nil
+      if image != blank
+        assign bundle_img_url = image | image_url: width: 250
+        assign b_w = image.width
+        assign b_h = image.height
+      else
+        if fallback_class == 'p-kitchen' or fallback_class == 'p-combo2'
+          assign bundle_img_url = 'purelane-kitchen.png' | asset_url
+        elsif fallback_class == 'p-dish'
+          assign bundle_img_url = 'purelane-dish.png' | asset_url
+        elsif fallback_class == 'p-tap'
+          assign bundle_img_url = 'purelane-tap.png' | asset_url
+        elsif fallback_class == 'p-laundry'
+          assign bundle_img_url = 'purelane-laundry.png' | asset_url
+        elsif fallback_class == 'p-wm'
+          assign bundle_img_url = 'purelane-wm.png' | asset_url
+        elsif fallback_class == 'p-toilet'
+          assign bundle_img_url = 'purelane-toilet.png' | asset_url
+        elsif fallback_class == 'p-floor'
+          assign bundle_img_url = 'purelane-floor.png' | asset_url
+        elsif fallback_class == 'p-handwash'
+          assign bundle_img_url = 'purelane-handwash.png' | asset_url
+        elsif fallback_class == 'p-eraser'
+          assign bundle_img_url = 'purelane-eraser.png' | asset_url
+        endif
+        assign b_w = 250
+        assign b_h = 312
+      endif
+    -%}
+    {%- if bundle_img_url != blank -%}
+      <img src="{{ bundle_img_url }}" class="pimg" alt="{{ title | escape }}" loading="lazy" width="{{ b_w }}" height="{{ b_h }}" style="height: 176px; width: auto; object-fit: contain; position: relative;">
     {%- else -%}
       <span class="pimg {{ fallback_class | default: 'p-kitchen' }}" role="img" aria-label="{{ title | escape }}"></span>
     {%- endif -%}

@@ -1,0 +1,504 @@
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .customer-account-container {
+    max-width: var(--maxw);
+    margin: 40px auto 80px;
+    padding: 0 16px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .account-header {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .account-header h1 {
+    font-family: 'Outfit', sans-serif;
+    text-transform: uppercase;
+    font-size: clamp(24px, 4vw, 38px);
+    line-height: 1;
+    color: var(--surface);
+    margin: 0;
+  }
+
+  .account-header p {
+    color: var(--paper-2);
+    margin-top: 6px;
+    font-size: 14px;
+  }
+
+  .btn-logout {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: transparent;
+    border: 1px solid var(--g-line);
+    border-radius: 99px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--paper-2);
+    transition: all 0.25s var(--ease);
+  }
+
+  .btn-logout:hover {
+    background: rgba(75, 58, 143, 0.08);
+    color: var(--surface);
+    border-color: var(--brand);
+  }
+
+  /* Dashboard Grid Layout */
+  .account-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  @media (min-width: 990px) {
+    .account-grid {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+
+  /* Glass Cards */
+  .glass-card {
+    background: var(--g-bg);
+    border: 1px solid var(--g-line);
+    border-radius: var(--r);
+    box-shadow: var(--g-shadow);
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: linear-gradient(135deg, rgba(255,255,255,0.4), transparent);
+  }
+
+  .glass-card > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .card-title {
+    font-family: 'Outfit', sans-serif;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--brand);
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--g-line);
+    padding-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Profile card details */
+  .profile-details {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .profile-row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .profile-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--paper-3);
+  }
+
+  .profile-value {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--surface);
+    margin-top: 2px;
+  }
+
+  .address-block {
+    margin-top: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: var(--r-sm);
+    border: 1px dashed var(--g-line);
+    font-size: 14px;
+    color: var(--paper-2);
+    line-height: 1.5;
+  }
+
+  .address-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+  }
+
+  .btn-address {
+    flex: 1;
+    text-align: center;
+    padding: 12px;
+    background: var(--brand);
+    color: #fff;
+    border-radius: var(--r-sm);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    transition: all 0.25s var(--ease);
+    box-shadow: 0 4px 12px rgba(75, 58, 143, 0.2);
+  }
+
+  .btn-address:hover {
+    background: var(--brand-lt);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(75, 58, 143, 0.3);
+  }
+
+  .btn-address-secondary {
+    background: transparent;
+    color: var(--brand);
+    border: 1px solid var(--brand);
+    box-shadow: none;
+  }
+
+  .btn-address-secondary:hover {
+    background: rgba(75, 58, 143, 0.05);
+    color: var(--brand-lt);
+    border-color: var(--brand-lt);
+    transform: translateY(-2px);
+    box-shadow: none;
+  }
+
+  /* Order History styling */
+  .orders-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .order-card {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid var(--g-line);
+    border-radius: var(--r-sm);
+    padding: 20px;
+    transition: all 0.25s var(--ease);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  @media (min-width: 600px) {
+    .order-card {
+      grid-template-columns: auto auto auto 1fr;
+      align-items: center;
+      gap: 30px;
+    }
+  }
+
+  .order-card:hover {
+    background: rgba(255, 255, 255, 0.65);
+    border-color: var(--brand);
+    box-shadow: 0 10px 25px rgba(75, 58, 143, 0.06);
+    transform: translateY(-2px);
+  }
+
+  .order-id-meta {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .order-number {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--brand);
+  }
+
+  .order-date {
+    font-size: 13px;
+    color: var(--paper-3);
+    margin-top: 2px;
+  }
+
+  .order-stat-col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .order-price {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--surface);
+  }
+
+  .order-qty {
+    font-size: 12px;
+    color: var(--paper-3);
+  }
+
+  /* Status Badges */
+  .badge-container {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Color presets for badges */
+  .badge-paid, .badge-fulfilled {
+    background: #e8f9ec;
+    color: #1e7e34;
+    border: 1px solid rgba(30, 126, 52, 0.15);
+  }
+
+  .badge-unfulfilled, .badge-unpaid, .badge-pending {
+    background: #fff8eb;
+    color: #b8701c;
+    border: 1px solid rgba(184, 112, 28, 0.15);
+  }
+
+  .badge-cancelled, .badge-refunded {
+    background: #fff0f0;
+    color: #d93838;
+    border: 1px solid rgba(217, 56, 56, 0.15);
+  }
+
+  .order-action-col {
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .btn-view-order {
+    padding: 10px 20px;
+    border-radius: 99px;
+    border: 1px solid var(--brand);
+    color: var(--brand);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: all 0.25s var(--ease);
+  }
+
+  .btn-view-order:hover {
+    background: var(--brand);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(75, 58, 143, 0.15);
+  }
+
+  /* Empty state */
+  .orders-empty {
+    text-align: center;
+    padding: 40px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px dashed var(--g-line);
+    border-radius: var(--r-sm);
+  }
+
+  .orders-empty svg {
+    margin: 0 auto 16px;
+    color: var(--brand);
+    opacity: 0.5;
+  }
+
+  .orders-empty p {
+    font-size: 15px;
+    color: var(--paper-2);
+    margin-bottom: 20px;
+  }
+
+  .btn-shop-now {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    background: var(--brand);
+    color: #fff;
+    border-radius: var(--r);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    transition: all 0.25s var(--ease);
+    box-shadow: 0 6px 20px rgba(75, 58, 143, 0.25);
+  }
+
+  .btn-shop-now:hover {
+    background: var(--brand-lt);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(75, 58, 143, 0.35);
+  }
+</style>
+
+<div class="customer-account-container">
+  <!-- Header with Log out -->
+  <div class="account-header">
+    <div>
+      <h1>Namaste, {% if customer.first_name %}{{ customer.first_name }}{% else %}Cleaner{% endif %}!</h1>
+      <p>Manage your orders, profile details and shipping addresses below.</p>
+    </div>
+    <a href="{{ routes.account_logout_url }}" class="btn-logout">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 15px; height: 15px;">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+        <polyline points="16 17 21 12 16 7"></polyline>
+        <line x1="21" y1="12" x2="9" y2="12"></line>
+      </svg>
+      {{ 'customer.log_out' | t }}
+    </a>
+  </div>
+
+  <div class="account-grid">
+    <!-- Order History Card -->
+    <div class="glass-card">
+      <h2 class="card-title">
+        <span>{{ 'customer.orders.title' | t }}</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; color: var(--brand); opacity: 0.8;">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+      </h2>
+
+      {% paginate customer.orders by 10 %}
+        {% if customer.orders.size > 0 %}
+          <div class="orders-container">
+            {% for order in customer.orders %}
+              <div class="order-card">
+                <!-- Order ID & Date -->
+                <div class="order-id-meta">
+                  <span class="order-number">{{ order.name }}</span>
+                  <span class="order-date">{{ order.created_at | time_tag: format: 'date' }}</span>
+                </div>
+
+                <!-- Status Badges -->
+                <div class="badge-container">
+                  <!-- Payment Status -->
+                  {%- assign pay_status = order.financial_status -%}
+                  <span class="status-badge badge-{{ pay_status }}">
+                    {{ order.financial_status_label }}
+                  </span>
+
+                  <!-- Fulfillment Status -->
+                  {%- assign ful_status = order.fulfillment_status -%}
+                  <span class="status-badge badge-{{ ful_status }}">
+                    {{ order.fulfillment_status_label }}
+                  </span>
+                </div>
+
+                <!-- Price and Qty -->
+                <div class="order-stat-col">
+                  <span class="order-price">{{ order.total_price | money_without_trailing_zeros }}</span>
+                  <span class="order-qty">{{ order.item_count }} {{ order.item_count | pluralize: 'item', 'items' }}</span>
+                </div>
+
+                <!-- Actions -->
+                <div class="order-action-col">
+                  <a href="{{ order.customer_url }}" class="btn-view-order" aria-label="View Details of {{ order.name }}">
+                    View Details
+                  </a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          {%- if paginate.pages > 1 -%}
+            {%- render 'pagination', paginate: paginate -%}
+          {%- endif -%}
+
+        {% else %}
+          <div class="orders-empty">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width: 48px; height: 48px;">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="8" y1="12" x2="16" y2="12"></line>
+            </svg>
+            <p>{{ 'customer.orders.none' | t }}</p>
+            <a href="{{ routes.all_products_collection_url }}" class="btn-shop-now">
+              Shop Bestsellers
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px;">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        {% endif %}
+      {% endpaginate %}
+    </div>
+
+    <!-- Sidebar Profile Details Card -->
+    <div class="account-sidebar">
+      <div class="glass-card">
+        <h2 class="card-title">
+          <span>{{ 'customer.account.details' | t }}</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; color: var(--brand); opacity: 0.8;">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </h2>
+
+        <div class="profile-details">
+          <div class="profile-row">
+            <span class="profile-label">Name</span>
+            <span class="profile-value">{{ customer.name }}</span>
+          </div>
+
+          <div class="profile-row">
+            <span class="profile-label">Email</span>
+            <span class="profile-value">{{ customer.email }}</span>
+          </div>
+
+          <div class="profile-row">
+            <span class="profile-label">Primary Address</span>
+            {% if customer.default_address %}
+              <div class="address-block">
+                {{ customer.default_address | format_address }}
+              </div>
+            {% else %}
+              <p style="font-size: 13.5px; color: var(--paper-3); margin-top: 5px;">No shipping addresses saved yet.</p>
+            {% endif %}
+          </div>
+
+          <div class="address-actions">
+            <a href="{{ routes.addresses_url }}" class="btn-address">
+              Manage Addresses ({{ customer.addresses_count }})
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

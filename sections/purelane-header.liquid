@@ -37,7 +37,22 @@
     
     <nav class="nav" aria-label="Main">
       {%- for link in linklists[section.settings.menu].links -%}
-        <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- liquid
+          assign target_url = link.url
+          assign title_down = link.title | downcase
+          if title_down == 'catalog' or title_down == 'shop' or link.url contains '/collections/all'
+            assign target_url = '/#shop'
+          elsif title_down == 'home'
+            assign target_url = '/#top'
+          elsif title_down == 'combos'
+            assign target_url = '/#combos'
+          elsif title_down == 'bundles'
+            assign target_url = '/#bundles'
+          elsif title_down == 'reviews' or title_down == 'voices'
+            assign target_url = '/#reviews'
+          endif
+        -%}
+        <a href="{{ target_url }}">{{ link.title }}</a>
       {%- endfor -%}
     </nav>
     

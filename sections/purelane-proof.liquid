@@ -1,3 +1,34 @@
+{%- liquid
+  # Resolve real products
+  assign resolved_kitchen = nil
+  assign resolved_tap = nil
+  assign resolved_laundry = nil
+  assign resolved_toilet = nil
+  assign resolved_floor = nil
+  assign resolved_dish = nil
+  assign resolved_wm = nil
+
+  for p in collections.all.products
+    assign title_down = p.title | downcase
+    assign handle_down = p.handle | downcase
+    if title_down contains 'kitchen' or handle_down contains 'kitchen'
+      assign resolved_kitchen = p
+    elsif title_down contains 'tap' or title_down contains 'limescale' or handle_down contains 'tap' or handle_down contains 'limescale'
+      assign resolved_tap = p
+    elsif title_down contains 'laundry' or handle_down contains 'laundry'
+      assign resolved_laundry = p
+    elsif title_down contains 'toilet' or handle_down contains 'toilet'
+      assign resolved_toilet = p
+    elsif title_down contains 'floor' or handle_down contains 'floor'
+      assign resolved_floor = p
+    elsif title_down contains 'dish' or handle_down contains 'dish'
+      assign resolved_dish = p
+    elsif title_down contains 'washing' or title_down contains 'machine' or handle_down contains 'washing' or handle_down contains 'machine'
+      assign resolved_wm = p
+    endif
+  endfor
+-%}
+
 <section class="sec" id="proof" data-scene="3" {{ section.shopify_attributes }}>
   <div class="wrap">
     <div class="glass sec-pad rv">
@@ -19,7 +50,57 @@
             {%- assign count_rotator = 0 -%}
             {%- for block in section.blocks -%}
               {%- if block.type == 'rotator_product' -%}
-                <span class="pimg {{ block.settings.fallback_class }} {% if count_rotator == 0 %}on{% endif %}" role="img" aria-label="{{ block.settings.title | escape }}" data-name="{{ block.settings.title | escape }}" data-note="{{ block.settings.note | escape }}"></span>
+                {%- liquid
+                  assign rot_img = nil
+                  if block.settings.fallback_class == 'p-kitchen' and resolved_kitchen != blank
+                    assign rot_img = resolved_kitchen.featured_image
+                  elsif block.settings.fallback_class == 'p-tap' and resolved_tap != blank
+                    assign rot_img = resolved_tap.featured_image
+                  elsif block.settings.fallback_class == 'p-laundry' and resolved_laundry != blank
+                    assign rot_img = resolved_laundry.featured_image
+                  elsif block.settings.fallback_class == 'p-toilet' and resolved_toilet != blank
+                    assign rot_img = resolved_toilet.featured_image
+                  elsif block.settings.fallback_class == 'p-floor' and resolved_floor != blank
+                    assign rot_img = resolved_floor.featured_image
+                  elsif block.settings.fallback_class == 'p-dish' and resolved_dish != blank
+                    assign rot_img = resolved_dish.featured_image
+                  endif
+
+                  assign rot_url = nil
+                  if rot_img != blank
+                    assign rot_url = rot_img | image_url: width: 300
+                    assign r_w = rot_img.width
+                    assign r_h = rot_img.height
+                  else
+                    assign cls = block.settings.fallback_class
+                    if cls == 'p-kitchen' or cls == 'p-combo2'
+                      assign rot_url = 'purelane-kitchen.png' | asset_url
+                    elsif cls == 'p-dish'
+                      assign rot_url = 'purelane-dish.png' | asset_url
+                    elsif cls == 'p-tap'
+                      assign rot_url = 'purelane-tap.png' | asset_url
+                    elsif cls == 'p-laundry'
+                      assign rot_url = 'purelane-laundry.png' | asset_url
+                    elsif cls == 'p-wm'
+                      assign rot_url = 'purelane-wm.png' | asset_url
+                    elsif cls == 'p-toilet'
+                      assign rot_url = 'purelane-toilet.png' | asset_url
+                    elsif cls == 'p-floor'
+                      assign rot_url = 'purelane-floor.png' | asset_url
+                    elsif cls == 'p-handwash'
+                      assign rot_url = 'purelane-handwash.png' | asset_url
+                    elsif cls == 'p-eraser'
+                      assign rot_url = 'purelane-eraser.png' | asset_url
+                    endif
+                    assign r_w = 300
+                    assign r_h = 375
+                  endif
+                -%}
+                {%- if rot_url != blank -%}
+                  <img src="{{ rot_url }}" class="pimg {% if count_rotator == 0 %}on{% endif %}" alt="{{ block.settings.title | escape }}" data-name="{{ block.settings.title | escape }}" data-note="{{ block.settings.note | escape }}" width="{{ r_w }}" height="{{ r_h }}" style="object-fit: contain; padding: 15px; width: 100%; height: 100%;">
+                {%- else -%}
+                  <span class="pimg {{ block.settings.fallback_class }} {% if count_rotator == 0 %}on{% endif %}" role="img" aria-label="{{ block.settings.title | escape }}" data-name="{{ block.settings.title | escape }}" data-note="{{ block.settings.note | escape }}"></span>
+                {%- endif -%}
                 {%- assign count_rotator = count_rotator | plus: 1 -%}
               {%- endif -%}
             {%- endfor -%}

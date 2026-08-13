@@ -9,7 +9,7 @@
   {% render 'header-drawer', show_language_selector: true %}
 {% enddoc %}
 
-<header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
+<header-drawer data-breakpoint="{% if section and section.settings and section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
   <details id="Details-menu-drawer-container" class="menu-drawer-container">
     <summary
       class="header__icon header__icon--menu header__icon--summary link focus-inset"
@@ -20,9 +20,10 @@
         {{- 'icon-close.svg' | inline_asset_content -}}
       </span>
     </summary>
-    <div id="menu-drawer" class="gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}">
+    <div id="menu-drawer" class="gradient menu-drawer motion-reduce {% if section and section.settings %}color-{{ section.settings.menu_color_scheme }}{% else %}color-light{% endif %}">
       <div class="menu-drawer__inner-container">
         <div class="menu-drawer__navigation-container">
+          {% if section and section.settings and section.settings.menu and section.settings.menu.links -%}
           <nav class="menu-drawer__navigation">
             <ul class="menu-drawer__menu has-submenu list-menu" role="list">
               {%- for link in section.settings.menu.links -%}
@@ -139,6 +140,7 @@
               {%- endfor -%}
             </ul>
           </nav>
+          {%- endif -%}
           <div class="menu-drawer__utility-links">
             {%- if show_country_selector or show_language_selector -%}
               <div class="menu-drawer__localization header-localization">

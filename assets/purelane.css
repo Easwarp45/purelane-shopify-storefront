@@ -1,6 +1,6 @@
 :root {
-  --ink: #f4f0fb;
-  --deep: #e2daf3;
+  --ink: #eafaec;
+  --deep: #bfe8ca;
   --brand: #4b3a8f;
   --brand-lt: #6b55b8;
   --paper: #241a3d;                        /* body ink */
@@ -9,7 +9,7 @@
   --accent: #b8701c;                        /* accent, darkened for light ground */
   --accent-2: #c9761d;
   --surface: #17102b;                        /* headings */
-  --g-bg: linear-gradient(158deg,rgba(255,255,255,.80),rgba(236,230,247,.56) 58%,rgba(222,212,240,.50));
+  --g-bg: linear-gradient(158deg,rgba(255,255,255,.80),rgba(230,247,234,.56) 58%,rgba(212,240,218,.50));
   --g-line: rgba(75,58,143,.16);
   --g-shadow: 0 22px 54px rgba(58,44,112,.13);
   --g-inset: inset 0 1px 0 rgba(255,255,255,.92);
@@ -48,7 +48,7 @@ html {
 }
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background: var(--ink);
+  background: linear-gradient(178deg, #fbfffb 0%, #eafaec 24%, #d6f1dc 54%, #bfe8ca 100%) no-repeat fixed;
   color: var(--paper);
   line-height: 1.62;
   -webkit-font-smoothing: antialiased;
@@ -142,7 +142,7 @@ button {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  background: #eee7fb;
+  background: #eafaec;
 }
 .scene {
   position: absolute;
@@ -448,6 +448,9 @@ header {
 header.up {
   top: 10px;
 }
+.page-header-offset {
+  padding-top: 110px !important;
+}
 .navpill {
   max-width: var(--maxw);
   margin: 0 auto;
@@ -605,6 +608,50 @@ header.up {
 @media (min-width: 1024px) {
   .nav { display: flex; }
   .burger { display: none; }
+}
+
+/* ---------- SEARCH DROPDOWN FIX ----------
+   The predictive search panel must float above:
+   - Purelane sticky header  (z-index: 50)
+   - Purelane sticky footer  (z-index: 48)
+   - Purelane sticky mob CTA (z-index: 48)
+   We set z-index: 300 on the panel and make sure
+   the navpill doesn't clip it with overflow:hidden. */
+
+/* Allow dropdown to escape the navpill container */
+.navpill {
+  overflow: visible !important;
+}
+
+/* Header must form its own stacking context at z-index 50
+   but children with higher z-index escape correctly */
+#hdr predictive-search,
+header predictive-search {
+  position: relative;
+  z-index: 300;
+}
+
+#hdr .predictive-search,
+header .predictive-search,
+.predictive-search {
+  z-index: 300 !important;
+  max-height: min(60vh, 520px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* On the /search results page add bottom padding
+   so results are never hidden under the sticky mobile CTA */
+.template-search main,
+.template-search .search-results-page {
+  padding-bottom: 90px;
+}
+
+/* Ensure the search form wrapper on search page is above content */
+.template-search .predictive-search--search-template {
+  position: relative;
+  z-index: 300 !important;
+  max-height: calc(100dvh - 200px);
 }
 
 /* ---------- HERO ---------- */
@@ -1606,12 +1653,36 @@ main {
   letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--paper-3);
-  margin-top: 2px;
+  margin-top: 6px;
+  opacity: .82;
 }
 .swipecue svg {
-  width: 14px;
-  height: 14px;
+  width: 15px;
+  height: 15px;
   color: var(--accent);
+  animation: swipe-nudge 1.8s ease-in-out infinite;
+}
+@keyframes swipe-nudge {
+  0%, 100% { transform: translateX(0); opacity: 1; }
+  40%       { transform: translateX(5px); opacity: .7; }
+  60%       { transform: translateX(3px); opacity: .9; }
+}
+/* Scroll progress track */
+.combo-scroll-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(75, 58, 143, .1);
+  border-radius: 99px;
+  margin-top: 10px;
+  overflow: hidden;
+  display: none;
+}
+.combo-scroll-track .bar {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--accent), var(--lime));
+  transition: width .2s ease;
+  width: 33%;
 }
 
 /* ---------- REVIEW MARQUEE WALL ---------- */

@@ -39,9 +39,39 @@
     
     <div class="stack">
       {%- if product_1_label != blank or product_1_class != blank or product_1_image != blank -%}
+        {%- liquid
+          assign p1_url = nil
+          if product_1_image != blank
+            assign p1_url = product_1_image | image_url: width: 120
+            assign p1_w = product_1_image.width
+            assign p1_h = product_1_image.height
+          else
+            if product_1_class == 'p-kitchen' or product_1_class == 'p-combo2'
+              assign p1_url = 'purelane-kitchen.png' | asset_url
+            elsif product_1_class == 'p-dish'
+              assign p1_url = 'purelane-dish.png' | asset_url
+            elsif product_1_class == 'p-tap'
+              assign p1_url = 'purelane-tap.png' | asset_url
+            elsif product_1_class == 'p-laundry'
+              assign p1_url = 'purelane-laundry.png' | asset_url
+            elsif product_1_class == 'p-wm'
+              assign p1_url = 'purelane-wm.png' | asset_url
+            elsif product_1_class == 'p-toilet'
+              assign p1_url = 'purelane-toilet.png' | asset_url
+            elsif product_1_class == 'p-floor'
+              assign p1_url = 'purelane-floor.png' | asset_url
+            elsif product_1_class == 'p-handwash'
+              assign p1_url = 'purelane-handwash.png' | asset_url
+            elsif product_1_class == 'p-eraser'
+              assign p1_url = 'purelane-eraser.png' | asset_url
+            endif
+            assign p1_w = 120
+            assign p1_h = 150
+          endif
+        -%}
         <div class="it">
-          {%- if product_1_image != blank -%}
-            <img src="{{ product_1_image | image_url: width: 120 }}" class="pimg" alt="{{ product_1_label | escape }}" loading="lazy" width="{{ product_1_image.width }}" height="{{ product_1_image.height }}" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
+          {%- if p1_url != blank -%}
+            <img src="{{ p1_url }}" class="pimg" alt="{{ product_1_label | escape }}" loading="lazy" width="{{ p1_w }}" height="{{ p1_h }}" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
           {%- else -%}
             <span class="pimg {{ product_1_class }}" role="img" aria-label="{{ product_1_label | escape }}"></span>
           {%- endif -%}
@@ -50,10 +80,40 @@
       {%- endif -%}
       
       {%- if product_2_label != blank or product_2_class != blank or product_2_image != blank -%}
+        {%- liquid
+          assign p2_url = nil
+          if product_2_image != blank
+            assign p2_url = product_2_image | image_url: width: 120
+            assign p2_w = product_2_image.width
+            assign p2_h = product_2_image.height
+          else
+            if product_2_class == 'p-kitchen' or product_2_class == 'p-combo2'
+              assign p2_url = 'purelane-kitchen.png' | asset_url
+            elsif product_2_class == 'p-dish'
+              assign p2_url = 'purelane-dish.png' | asset_url
+            elsif product_2_class == 'p-tap'
+              assign p2_url = 'purelane-tap.png' | asset_url
+            elsif product_2_class == 'p-laundry'
+              assign p2_url = 'purelane-laundry.png' | asset_url
+            elsif product_2_class == 'p-wm'
+              assign p2_url = 'purelane-wm.png' | asset_url
+            elsif product_2_class == 'p-toilet'
+              assign p2_url = 'purelane-toilet.png' | asset_url
+            elsif product_2_class == 'p-floor'
+              assign p2_url = 'purelane-floor.png' | asset_url
+            elsif product_2_class == 'p-handwash'
+              assign p2_url = 'purelane-handwash.png' | asset_url
+            elsif product_2_class == 'p-eraser'
+              assign p2_url = 'purelane-eraser.png' | asset_url
+            endif
+            assign p2_w = 120
+            assign p2_h = 150
+          endif
+        -%}
         <div class="plus">+</div>
         <div class="it">
-          {%- if product_2_image != blank -%}
-            <img src="{{ product_2_image | image_url: width: 120 }}" class="pimg" alt="{{ product_2_label | escape }}" loading="lazy" width="{{ product_2_image.width }}" height="{{ product_2_image.height }}" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
+          {%- if p2_url != blank -%}
+            <img src="{{ p2_url }}" class="pimg" alt="{{ product_2_label | escape }}" loading="lazy" width="{{ p2_w }}" height="{{ p2_h }}" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
           {%- else -%}
             <span class="pimg {{ product_2_class }}" role="img" aria-label="{{ product_2_label | escape }}"></span>
           {%- endif -%}
@@ -62,10 +122,40 @@
       {%- endif -%}
       
       {%- if product_3_label != blank or product_3_class != blank or product_3_image != blank -%}
+        {%- liquid
+          assign p3_url = nil
+          if product_3_image != blank
+            assign p3_url = product_3_image | image_url: width: 120
+            assign p3_w = product_3_image.width
+            assign p3_h = product_3_image.height
+          else
+            if product_3_class == 'p-kitchen' or product_3_class == 'p-combo2'
+              assign p3_url = 'purelane-kitchen.png' | asset_url
+            elsif product_3_class == 'p-dish'
+              assign p3_url = 'purelane-dish.png' | asset_url
+            elsif product_3_class == 'p-tap'
+              assign p3_url = 'purelane-tap.png' | asset_url
+            elsif product_3_class == 'p-laundry'
+              assign p3_url = 'purelane-laundry.png' | asset_url
+            elsif product_3_class == 'p-wm'
+              assign p3_url = 'purelane-wm.png' | asset_url
+            elsif product_3_class == 'p-toilet'
+              assign p3_url = 'purelane-toilet.png' | asset_url
+            elsif product_3_class == 'p-floor'
+              assign p3_url = 'purelane-floor.png' | asset_url
+            elsif product_3_class == 'p-handwash'
+              assign p3_url = 'purelane-handwash.png' | asset_url
+            elsif product_3_class == 'p-eraser'
+              assign p3_url = 'purelane-eraser.png' | asset_url
+            endif
+            assign p3_w = 120
+            assign p3_h = 150
+          endif
+        -%}
         <div class="plus">+</div>
         <div class="it">
-          {%- if product_3_image != blank -%}
-            <img src="{{ product_3_image | image_url: width: 120 }}" class="pimg" alt="{{ product_3_label | escape }}" loading="lazy" width="{{ product_3_image.width }}" height="{{ product_3_image.height }}" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
+          {%- if p3_url != blank -%}
+            <img src="{{ p3_url }}" class="pimg" alt="{{ product_3_label | escape }}" loading="lazy" width="{{ p3_w }}" height="{{ p3_h }}" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
           {%- else -%}
             <span class="pimg {{ product_3_class }}" role="img" aria-label="{{ product_3_label | escape }}"></span>
           {%- endif -%}
@@ -74,10 +164,40 @@
       {%- endif -%}
 
       {%- if product_4_label != blank or product_4_class != blank or product_4_image != blank -%}
+        {%- liquid
+          assign p4_url = nil
+          if product_4_image != blank
+            assign p4_url = product_4_image | image_url: width: 120
+            assign p4_w = product_4_image.width
+            assign p4_h = product_4_image.height
+          else
+            if product_4_class == 'p-kitchen' or product_4_class == 'p-combo2'
+              assign p4_url = 'purelane-kitchen.png' | asset_url
+            elsif product_4_class == 'p-dish'
+              assign p4_url = 'purelane-dish.png' | asset_url
+            elsif product_4_class == 'p-tap'
+              assign p4_url = 'purelane-tap.png' | asset_url
+            elsif product_4_class == 'p-laundry'
+              assign p4_url = 'purelane-laundry.png' | asset_url
+            elsif product_4_class == 'p-wm'
+              assign p4_url = 'purelane-wm.png' | asset_url
+            elsif product_4_class == 'p-toilet'
+              assign p4_url = 'purelane-toilet.png' | asset_url
+            elsif product_4_class == 'p-floor'
+              assign p4_url = 'purelane-floor.png' | asset_url
+            elsif product_4_class == 'p-handwash'
+              assign p4_url = 'purelane-handwash.png' | asset_url
+            elsif product_4_class == 'p-eraser'
+              assign p4_url = 'purelane-eraser.png' | asset_url
+            endif
+            assign p4_w = 120
+            assign p4_h = 150
+          endif
+        -%}
         <div class="plus">+</div>
         <div class="it">
-          {%- if product_4_image != blank -%}
-            <img src="{{ product_4_image | image_url: width: 120 }}" class="pimg" alt="{{ product_4_label | escape }}" loading="lazy" width="{{ product_4_image.width }}" height="{{ product_4_image.height }}" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
+          {%- if p4_url != blank -%}
+            <img src="{{ p4_url }}" class="pimg" alt="{{ product_4_label | escape }}" loading="lazy" width="{{ p4_w }}" height="{{ p4_h }}" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
           {%- else -%}
             <span class="pimg {{ product_4_class }}" role="img" aria-label="{{ product_4_label | escape }}"></span>
           {%- endif -%}
@@ -86,10 +206,40 @@
       {%- endif -%}
 
       {%- if product_5_label != blank or product_5_class != blank or product_5_image != blank -%}
+        {%- liquid
+          assign p5_url = nil
+          if product_5_image != blank
+            assign p5_url = product_5_image | image_url: width: 120
+            assign p5_w = product_5_image.width
+            assign p5_h = product_5_image.height
+          else
+            if product_5_class == 'p-kitchen' or product_5_class == 'p-combo2'
+              assign p5_url = 'purelane-kitchen.png' | asset_url
+            elsif product_5_class == 'p-dish'
+              assign p5_url = 'purelane-dish.png' | asset_url
+            elsif product_5_class == 'p-tap'
+              assign p5_url = 'purelane-tap.png' | asset_url
+            elsif product_5_class == 'p-laundry'
+              assign p5_url = 'purelane-laundry.png' | asset_url
+            elsif product_5_class == 'p-wm'
+              assign p5_url = 'purelane-wm.png' | asset_url
+            elsif product_5_class == 'p-toilet'
+              assign p5_url = 'purelane-toilet.png' | asset_url
+            elsif product_5_class == 'p-floor'
+              assign p5_url = 'purelane-floor.png' | asset_url
+            elsif product_5_class == 'p-handwash'
+              assign p5_url = 'purelane-handwash.png' | asset_url
+            elsif product_5_class == 'p-eraser'
+              assign p5_url = 'purelane-eraser.png' | asset_url
+            endif
+            assign p5_w = 120
+            assign p5_h = 150
+          endif
+        -%}
         <div class="plus">+</div>
         <div class="it">
-          {%- if product_5_image != blank -%}
-            <img src="{{ product_5_image | image_url: width: 120 }}" class="pimg" alt="{{ product_5_label | escape }}" loading="lazy" width="{{ product_5_image.width }}" height="{{ product_5_image.height }}" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
+          {%- if p5_url != blank -%}
+            <img src="{{ p5_url }}" class="pimg" alt="{{ product_5_label | escape }}" loading="lazy" width="{{ p5_w }}" height="{{ p5_h }}" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
           {%- else -%}
             <span class="pimg {{ product_5_class }}" role="img" aria-label="{{ product_5_label | escape }}"></span>
           {%- endif -%}

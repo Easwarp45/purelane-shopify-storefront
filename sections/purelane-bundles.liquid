@@ -1,3 +1,34 @@
+{%- liquid
+  # Resolve real products
+  assign resolved_kitchen = nil
+  assign resolved_tap = nil
+  assign resolved_laundry = nil
+  assign resolved_toilet = nil
+  assign resolved_floor = nil
+  assign resolved_dish = nil
+  assign resolved_wm = nil
+
+  for p in collections.all.products
+    assign title_down = p.title | downcase
+    assign handle_down = p.handle | downcase
+    if title_down contains 'kitchen' or handle_down contains 'kitchen'
+      assign resolved_kitchen = p
+    elsif title_down contains 'tap' or title_down contains 'limescale' or handle_down contains 'tap' or handle_down contains 'limescale'
+      assign resolved_tap = p
+    elsif title_down contains 'laundry' or handle_down contains 'laundry'
+      assign resolved_laundry = p
+    elsif title_down contains 'toilet' or handle_down contains 'toilet'
+      assign resolved_toilet = p
+    elsif title_down contains 'floor' or handle_down contains 'floor'
+      assign resolved_floor = p
+    elsif title_down contains 'dish' or handle_down contains 'dish'
+      assign resolved_dish = p
+    elsif title_down contains 'washing' or title_down contains 'machine' or handle_down contains 'washing' or handle_down contains 'machine'
+      assign resolved_wm = p
+    endif
+  endfor
+-%}
+
 <section class="sec" id="bundles" data-scene="3">
   
   <!-- PART 1: WHY BUNDLES BEAT BUYING SINGLE -->
@@ -52,11 +83,26 @@
             {%- assign delay = "rv-d3" -%}
           {%- endif -%}
           
+          {%- liquid
+            assign cat_image = block.settings.image
+            if cat_image == blank
+              if block.settings.fallback_class == 'p-kitchen' and resolved_kitchen != blank
+                assign cat_image = resolved_kitchen.featured_image
+              elsif block.settings.fallback_class == 'p-toilet' and resolved_toilet != blank
+                assign cat_image = resolved_toilet.featured_image
+              elsif block.settings.fallback_class == 'p-laundry' and resolved_laundry != blank
+                assign cat_image = resolved_laundry.featured_image
+              elsif block.settings.fallback_class == 'p-tap' and resolved_tap != blank
+                assign cat_image = resolved_tap.featured_image
+              endif
+            endif
+          -%}
+          
           {%- render 'purelane-bundle-card',
             title: block.settings.title,
             description: block.settings.description,
             link: block.settings.link,
-            image: block.settings.image,
+            image: cat_image,
             fallback_class: block.settings.fallback_class,
             delay_class: delay
           -%}
@@ -95,32 +141,223 @@
             
             <!-- Tier Product Staging Stack -->
             <div class="tierpix {% if block.settings.product_4_class != blank or block.settings.product_5_class != blank %}five{% endif %}">
-              {%- if block.settings.product_1_image != blank -%}
-                <img src="{{ block.settings.product_1_image | image_url: width: 100 }}" class="pimg" alt="P1" loading="lazy" width="{{ block.settings.product_1_image.width }}" height="{{ block.settings.product_1_image.height }}" style="height: 54px; width: auto; object-fit: contain;">
+              {%- liquid
+                assign p1_img = block.settings.product_1_image
+                if p1_img == blank
+                  if block.settings.product_1_class == 'p-kitchen' and resolved_kitchen != blank
+                    assign p1_img = resolved_kitchen.featured_image
+                  elsif block.settings.product_1_class == 'p-combo2' and resolved_kitchen != blank
+                    assign p1_img = resolved_kitchen.featured_image
+                  endif
+                endif
+
+                assign p1_url = nil
+                if p1_img != blank
+                  assign p1_url = p1_img | image_url: width: 100
+                  assign p1_w = p1_img.width
+                  assign p1_h = p1_img.height
+                else
+                  assign cls = block.settings.product_1_class
+                  if cls == 'p-kitchen' or cls == 'p-combo2'
+                    assign p1_url = 'purelane-kitchen.png' | asset_url
+                  elsif cls == 'p-dish'
+                    assign p1_url = 'purelane-dish.png' | asset_url
+                  elsif cls == 'p-tap'
+                    assign p1_url = 'purelane-tap.png' | asset_url
+                  elsif cls == 'p-laundry'
+                    assign p1_url = 'purelane-laundry.png' | asset_url
+                  elsif cls == 'p-wm'
+                    assign p1_url = 'purelane-wm.png' | asset_url
+                  elsif cls == 'p-toilet'
+                    assign p1_url = 'purelane-toilet.png' | asset_url
+                  elsif cls == 'p-floor'
+                    assign p1_url = 'purelane-floor.png' | asset_url
+                  elsif cls == 'p-handwash'
+                    assign p1_url = 'purelane-handwash.png' | asset_url
+                  elsif cls == 'p-eraser'
+                    assign p1_url = 'purelane-eraser.png' | asset_url
+                  endif
+                  assign p1_w = 100
+                  assign p1_h = 125
+                endif
+
+                assign p2_img = block.settings.product_2_image
+                if p2_img == blank
+                  if block.settings.product_2_class == 'p-dish' and resolved_dish != blank
+                    assign p2_img = resolved_dish.featured_image
+                  endif
+                endif
+
+                assign p2_url = nil
+                if p2_img != blank
+                  assign p2_url = p2_img | image_url: width: 100
+                  assign p2_w = p2_img.width
+                  assign p2_h = p2_img.height
+                else
+                  assign cls = block.settings.product_2_class
+                  if cls == 'p-kitchen' or cls == 'p-combo2'
+                    assign p2_url = 'purelane-kitchen.png' | asset_url
+                  elsif cls == 'p-dish'
+                    assign p2_url = 'purelane-dish.png' | asset_url
+                  elsif cls == 'p-tap'
+                    assign p2_url = 'purelane-tap.png' | asset_url
+                  elsif cls == 'p-laundry'
+                    assign p2_url = 'purelane-laundry.png' | asset_url
+                  elsif cls == 'p-wm'
+                    assign p2_url = 'purelane-wm.png' | asset_url
+                  elsif cls == 'p-toilet'
+                    assign p2_url = 'purelane-toilet.png' | asset_url
+                  elsif cls == 'p-floor'
+                    assign p2_url = 'purelane-floor.png' | asset_url
+                  elsif cls == 'p-handwash'
+                    assign p2_url = 'purelane-handwash.png' | asset_url
+                  elsif cls == 'p-eraser'
+                    assign p2_url = 'purelane-eraser.png' | asset_url
+                  endif
+                  assign p2_w = 100
+                  assign p2_h = 125
+                endif
+
+                assign p3_img = block.settings.product_3_image
+                if p3_img == blank
+                  if block.settings.product_3_class == 'p-tap' and resolved_tap != blank
+                    assign p3_img = resolved_tap.featured_image
+                  endif
+                endif
+
+                assign p3_url = nil
+                if p3_img != blank
+                  assign p3_url = p3_img | image_url: width: 100
+                  assign p3_w = p3_img.width
+                  assign p3_h = p3_img.height
+                else
+                  assign cls = block.settings.product_3_class
+                  if cls == 'p-kitchen' or cls == 'p-combo2'
+                    assign p3_url = 'purelane-kitchen.png' | asset_url
+                  elsif cls == 'p-dish'
+                    assign p3_url = 'purelane-dish.png' | asset_url
+                  elsif cls == 'p-tap'
+                    assign p3_url = 'purelane-tap.png' | asset_url
+                  elsif cls == 'p-laundry'
+                    assign p3_url = 'purelane-laundry.png' | asset_url
+                  elsif cls == 'p-wm'
+                    assign p3_url = 'purelane-wm.png' | asset_url
+                  elsif cls == 'p-toilet'
+                    assign p3_url = 'purelane-toilet.png' | asset_url
+                  elsif cls == 'p-floor'
+                    assign p3_url = 'purelane-floor.png' | asset_url
+                  elsif cls == 'p-handwash'
+                    assign p3_url = 'purelane-handwash.png' | asset_url
+                  elsif cls == 'p-eraser'
+                    assign p3_url = 'purelane-eraser.png' | asset_url
+                  endif
+                  assign p3_w = 100
+                  assign p3_h = 125
+                endif
+
+                assign p4_img = block.settings.product_4_image
+                if p4_img == blank
+                  if block.settings.product_4_class == 'p-floor' and resolved_floor != blank
+                    assign p4_img = resolved_floor.featured_image
+                  endif
+                endif
+
+                assign p4_url = nil
+                if p4_img != blank
+                  assign p4_url = p4_img | image_url: width: 100
+                  assign p4_w = p4_img.width
+                  assign p4_h = p4_img.height
+                else
+                  assign cls = block.settings.product_4_class
+                  if cls == 'p-kitchen' or cls == 'p-combo2'
+                    assign p4_url = 'purelane-kitchen.png' | asset_url
+                  elsif cls == 'p-dish'
+                    assign p4_url = 'purelane-dish.png' | asset_url
+                  elsif cls == 'p-tap'
+                    assign p4_url = 'purelane-tap.png' | asset_url
+                  elsif cls == 'p-laundry'
+                    assign p4_url = 'purelane-laundry.png' | asset_url
+                  elsif cls == 'p-wm'
+                    assign p4_url = 'purelane-wm.png' | asset_url
+                  elsif cls == 'p-toilet'
+                    assign p4_url = 'purelane-toilet.png' | asset_url
+                  elsif cls == 'p-floor'
+                    assign p4_url = 'purelane-floor.png' | asset_url
+                  elsif cls == 'p-handwash'
+                    assign p4_url = 'purelane-handwash.png' | asset_url
+                  elsif cls == 'p-eraser'
+                    assign p4_url = 'purelane-eraser.png' | asset_url
+                  endif
+                  assign p4_w = 100
+                  assign p4_h = 125
+                endif
+
+                assign p5_img = block.settings.product_5_image
+                if p5_img == blank
+                  if block.settings.product_5_class == 'p-laundry' and resolved_laundry != blank
+                    assign p5_img = resolved_laundry.featured_image
+                  elsif block.settings.product_5_class == 'p-handwash' and resolved_dish != blank
+                    assign p5_img = resolved_dish.featured_image
+                  endif
+                endif
+
+                assign p5_url = nil
+                if p5_img != blank
+                  assign p5_url = p5_img | image_url: width: 100
+                  assign p5_w = p5_img.width
+                  assign p5_h = p5_img.height
+                else
+                  assign cls = block.settings.product_5_class
+                  if cls == 'p-kitchen' or cls == 'p-combo2'
+                    assign p5_url = 'purelane-kitchen.png' | asset_url
+                  elsif cls == 'p-dish'
+                    assign p5_url = 'purelane-dish.png' | asset_url
+                  elsif cls == 'p-tap'
+                    assign p5_url = 'purelane-tap.png' | asset_url
+                  elsif cls == 'p-laundry'
+                    assign p5_url = 'purelane-laundry.png' | asset_url
+                  elsif cls == 'p-wm'
+                    assign p5_url = 'purelane-wm.png' | asset_url
+                  elsif cls == 'p-toilet'
+                    assign p5_url = 'purelane-toilet.png' | asset_url
+                  elsif cls == 'p-floor'
+                    assign p5_url = 'purelane-floor.png' | asset_url
+                  elsif cls == 'p-handwash'
+                    assign p5_url = 'purelane-handwash.png' | asset_url
+                  elsif cls == 'p-eraser'
+                    assign p5_url = 'purelane-eraser.png' | asset_url
+                  endif
+                  assign p5_w = 100
+                  assign p5_h = 125
+                endif
+              -%}
+
+              {%- if p1_url != blank -%}
+                <img src="{{ p1_url }}" class="pimg" alt="P1" loading="lazy" width="{{ p1_w }}" height="{{ p1_h }}" style="height: 54px; width: auto; object-fit: contain;">
               {%- elsif block.settings.product_1_class != blank -%}
                 <span class="pimg {{ block.settings.product_1_class }}" role="img"></span>
               {%- endif -%}
 
-              {%- if block.settings.product_2_image != blank -%}
-                <img src="{{ block.settings.product_2_image | image_url: width: 100 }}" class="pimg" alt="P2" loading="lazy" width="{{ block.settings.product_2_image.width }}" height="{{ block.settings.product_2_image.height }}" style="height: 54px; width: auto; object-fit: contain;">
+              {%- if p2_url != blank -%}
+                <img src="{{ p2_url }}" class="pimg" alt="P2" loading="lazy" width="{{ p2_w }}" height="{{ p2_h }}" style="height: 54px; width: auto; object-fit: contain;">
               {%- elsif block.settings.product_2_class != blank -%}
                 <span class="pimg {{ block.settings.product_2_class }}" role="img"></span>
               {%- endif -%}
 
-              {%- if block.settings.product_3_image != blank -%}
-                <img src="{{ block.settings.product_3_image | image_url: width: 100 }}" class="pimg" alt="P3" loading="lazy" width="{{ block.settings.product_3_image.width }}" height="{{ block.settings.product_3_image.height }}" style="height: 54px; width: auto; object-fit: contain;">
+              {%- if p3_url != blank -%}
+                <img src="{{ p3_url }}" class="pimg" alt="P3" loading="lazy" width="{{ p3_w }}" height="{{ p3_h }}" style="height: 54px; width: auto; object-fit: contain;">
               {%- elsif block.settings.product_3_class != blank -%}
                 <span class="pimg {{ block.settings.product_3_class }}" role="img"></span>
               {%- endif -%}
 
-              {%- if block.settings.product_4_image != blank -%}
-                <img src="{{ block.settings.product_4_image | image_url: width: 100 }}" class="pimg" alt="P4" loading="lazy" width="{{ block.settings.product_4_image.width }}" height="{{ block.settings.product_4_image.height }}" style="height: 54px; width: auto; object-fit: contain;">
+              {%- if p4_url != blank -%}
+                <img src="{{ p4_url }}" class="pimg" alt="P4" loading="lazy" width="{{ p4_w }}" height="{{ p4_h }}" style="height: 54px; width: auto; object-fit: contain;">
               {%- elsif block.settings.product_4_class != blank -%}
                 <span class="pimg {{ block.settings.product_4_class }}" role="img"></span>
               {%- endif -%}
 
-              {%- if block.settings.product_5_image != blank -%}
-                <img src="{{ block.settings.product_5_image | image_url: width: 100 }}" class="pimg" alt="P5" loading="lazy" width="{{ block.settings.product_5_image.width }}" height="{{ block.settings.product_5_image.height }}" style="height: 54px; width: auto; object-fit: contain;">
+              {%- if p5_url != blank -%}
+                <img src="{{ p5_url }}" class="pimg" alt="P5" loading="lazy" width="{{ p5_w }}" height="{{ p5_h }}" style="height: 54px; width: auto; object-fit: contain;">
               {%- elsif block.settings.product_5_class != blank -%}
                 <span class="pimg {{ block.settings.product_5_class }}" role="img"></span>
               {%- endif -%}

@@ -10,6 +10,11 @@
   /* ---------- REVEAL ON SCROLL ---------- */
   Purelane.initScrollReveal = function () {
     var revs = document.querySelectorAll('.rv');
+    // Disconnect any previous reveal observers to avoid duplicate observers
+    if (revealObservers && revealObservers.length) {
+      revealObservers.forEach(function (o) { try { o.disconnect(); } catch (e) {} });
+      revealObservers = [];
+    }
     if ('IntersectionObserver' in window && !reduce) {
       var ro = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
@@ -19,15 +24,10 @@
           }
         });
       }, { rootMargin: '0px 0px -12% 0px', threshold: 0.12 });
-      
-      revs.forEach(function (el) { 
-        ro.observe(el); 
-      });
+      revs.forEach(function (el) { ro.observe(el); });
       revealObservers.push(ro);
     } else {
-      revs.forEach(function (el) { 
-        el.classList.add('in'); 
-      });
+      revs.forEach(function (el) { el.classList.add('in'); });
     }
   };
 
@@ -102,6 +102,7 @@
   var raf = null;
   var mx = 0;
   var my = 0;
+  var mouseMoveHandler = null;
 
   Purelane.initParallax = function () {
     hdr = document.getElementById('hdr');
@@ -319,11 +320,16 @@
     window.addEventListener('resize', Purelane.onScroll);
 
     if (!reduce && window.matchMedia('(min-width: 1024px)').matches) {
-      window.addEventListener('mousemove', function (e) {
-        mx = (e.clientX / window.innerWidth - 0.5) * 2;
-        my = (e.clientY / window.innerHeight - 0.5) * 2;
-        Purelane.onScroll();
-      }, { passive: true });
+      if (!mouseMoveHandler) {
+        mouseMoveHandler = function (e) {
+          mx = (e.clientX / window.innerWidth - 0.5) * 2;
+          my = (e.clientY / window.innerHeight - 0.5) * 2;
+          Purelane.onScroll();
+        };
+      } else {
+        window.removeEventListener('mousemove', mouseMoveHandler);
+      }
+      window.addEventListener('mousemove', mouseMoveHandler, { passive: true });
     }
   };
 
@@ -368,6 +374,13 @@
     if (rotatorIntervals[sectionId]) {
       clearInterval(rotatorIntervals[sectionId]);
       delete rotatorIntervals[sectionId];
+    }
+    // Remove global mousemove handler if present to avoid duplicate listeners
+    try { window.removeEventListener('mousemove', mouseMoveHandler); } catch (e) {}
+    // Disconnect reveal observers
+    if (revealObservers && revealObservers.length) {
+      revealObservers.forEach(function (o) { try { o.disconnect(); } catch (e) {} });
+      revealObservers = [];
     }
   });
 

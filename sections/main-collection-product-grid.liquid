@@ -158,6 +158,19 @@
               >
                 {% assign skip_card_product_styles = false %}
                 {%- for product in collection.products -%}
+                  {%- liquid
+                    assign handle_down = product.handle | downcase
+                    assign title_down = product.title | downcase
+                    assign is_unrelated = false
+                    if handle_down contains 'snowboard' or title_down contains 'snowboard'
+                      assign is_unrelated = true
+                    elsif handle_down contains 'ski-wax' or title_down contains 'ski-wax' or title_down contains 'selling plans' or handle_down contains 'selling-plans'
+                      assign is_unrelated = true
+                    elsif handle_down contains 'gift-card' or title_down contains 'gift card'
+                      assign is_unrelated = true
+                    endif
+                  -%}
+                  {%- if is_unrelated -%}{%- continue -%}{%- endif -%}
                   {% assign lazy_load = false %}
                   {%- if forloop.index > 2 -%}
                     {%- assign lazy_load = true -%}
