@@ -37,7 +37,9 @@
 }
 
 /* ---------- RESET & BASE ---------- */
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -45,6 +47,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
 }
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -91,20 +94,20 @@ button {
   color: var(--surface);
 }
 .d1 {
-  font-size: clamp(48px, 8.6vw, 112px);
+  font-size: clamp(38px, 8.6vw, 112px); /* smaller minimum font size to prevent mobile word wrapping clipping */
 }
 .d2 {
-  font-size: clamp(30px, 4.6vw, 54px);
+  font-size: clamp(28px, 4.6vw, 54px);
   line-height: .94;
 }
 .d3 {
-  font-size: clamp(21px, 2.5vw, 30px);
+  font-size: clamp(20px, 2.5vw, 30px);
   line-height: 1.04;
   font-weight: 700;
   letter-spacing: -.01em;
 }
 .d4 {
-  font-size: clamp(16px, 1.6vw, 19px);
+  font-size: clamp(15px, 1.6vw, 19px);
   line-height: 1.14;
   font-weight: 700;
   letter-spacing: .005em;
@@ -747,7 +750,7 @@ header .predictive-search,
   .hero-copy { max-width: 470px; }
   .hero-prod { width: min(44vw, 440px); right: 3%; }
 }
-@media (max-width: 900px) {
+@media (max-width: 1023px) { /* Stacks at header menu transition breakpoint (1023px) to prevent tablet overlaps */
   .hero { align-items: flex-end; padding-top: 132px; }
   .hero-copy { max-width: none; }
   .hero-prod { position: relative; right: auto; bottom: auto; width: min(88vw, 420px); margin: 20px auto 0; }
@@ -798,7 +801,7 @@ header .predictive-search,
   color: var(--paper-2);
   line-height: 1.34;
 }
-@media (max-width: 900px) {
+@media (max-width: 1023px) {
   .badges { display: none; }
 }
 
@@ -826,7 +829,7 @@ header .predictive-search,
   margin: 0 auto 6px;
   color: #4f7d10;
 }
-@media (min-width: 901px) {
+@media (min-width: 1024px) {
   .badgestrip { display: none; }
 }
 
@@ -870,8 +873,12 @@ header .predictive-search,
   pointer-events: none;
   transition: opacity .85s var(--ease);
 }
-.hslide.on {
-  opacity: 1;
+.hp,
+.hslide img {
+  max-height: 100% !important; /* ensures images scale to fit smaller containers fluids */
+  max-width: 100% !important;
+  width: auto !important;
+  object-fit: contain;
 }
 .hp {
   position: relative;
@@ -982,9 +989,9 @@ header .predictive-search,
   background: rgba(75, 58, 143, .4);
 }
 
-@media (max-width: 900px) {
-  .hstage { height: clamp(300px, 44svh, 430px); }
-  .ptag { padding: 9px 12px 10px; border-radius: 14px; max-width: 58%; }
+@media (max-width: 1023px) {
+  .hstage { height: clamp(280px, 44svh, 430px); }
+  .ptag { padding: 9px 12px 10px; border-radius: 14px; max-width: 80%; min-width: 140px; }
   .ptag .val strong { font-size: 20px; }
 }
 
@@ -1286,7 +1293,12 @@ main {
   gap: 14px;
   grid-template-columns: 1fr;
 }
-@media (min-width: 760px) {
+@media (min-width: 600px) and (max-width: 959px) {
+  .tiers {
+    grid-template-columns: repeat(2, 1fr); /* tablet grid columns layout balance */
+  }
+}
+@media (min-width: 960px) {
   .tiers {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -1375,7 +1387,12 @@ main {
   gap: 14px;
   grid-template-columns: repeat(2, 1fr);
 }
-@media (min-width: 860px) {
+@media (min-width: 640px) and (max-width: 959px) {
+  .shelf {
+    grid-template-columns: repeat(3, 1fr); /* progressive grids columns for tablet screens */
+  }
+}
+@media (min-width: 960px) {
   .shelf {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -1986,7 +2003,12 @@ footer {
   gap: 28px;
   grid-template-columns: 1fr;
 }
-@media (min-width: 760px) {
+@media (min-width: 540px) and (max-width: 899px) {
+  .fgrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 900px) {
   .fgrid {
     grid-template-columns: 1.3fr 1fr 1fr 1fr;
   }
@@ -2066,6 +2088,10 @@ footer {
 
 /* ---------- RESPONSIVE FOUNDATION ---------- */
 @media (max-width: 760px) {
+  .ico, .burger {
+    width: 44px; /* comfortable mobile touchscreen target sizing */
+    height: 44px;
+  }
   .rcard {
     width: 250px;
     padding: 13px 14px;
@@ -2107,8 +2133,8 @@ footer {
     height: 46px;
   }
   .comborail {
-    margin: 0 -14px;
-    padding: 4px 14px 12px;
+    margin: 0 -18px; /* aligns perfectly flush with parent wrap boundaries */
+    padding: 4px 18px 12px;
   }
   :root {
     --sec-y: 22px;
@@ -2156,7 +2182,7 @@ footer {
     padding: 22px 18px;
   }
   .d1 {
-    font-size: clamp(44px, 13.5vw, 64px);
+    font-size: clamp(34px, 12vw, 56px); /* safety clamp for narrow phone widths (e.g. 320px) */
   }
   .hero {
     padding: 118px 0 var(--sec-y);
