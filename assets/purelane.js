@@ -1,5 +1,5 @@
 (function () {
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.matchMedia('(max-width: 860px), (pointer: coarse)').matches;
   var Purelane = {};
 
   // Keep track of active timers/observers to prevent memory leaks in the Theme Editor
@@ -107,11 +107,20 @@
   Purelane.initParallax = function () {
     hdr = document.getElementById('hdr');
     prod = document.getElementById('heroProd');
+    if (reduce) {
+      if (hdr) hdr.classList.remove('up');
+      if (prod) {
+        prod.style.transform = '';
+        prod.style.opacity = '';
+      }
+      return;
+    }
     Purelane.runParallaxFrame();
   };
 
   Purelane.runParallaxFrame = function () {
     raf = null;
+    if (reduce) return;
     var y = window.scrollY || window.pageYOffset;
     
     // Toggle header style when scrolled
@@ -139,11 +148,13 @@
   };
 
   Purelane.onScroll = function () {
+    if (reduce) return;
     if (!raf) raf = requestAnimationFrame(Purelane.runParallaxFrame);
   };
 
   /* ---------- HERO CAROUSEL ---------- */
   Purelane.initHeroCarousel = function (container) {
+    if (reduce) return;
     var c = container || document;
     var hstage = c.querySelector('#hstage');
     var sectionId = container ? container.getAttribute('id') : 'global';
@@ -220,6 +231,7 @@
 
   /* ---------- PRODUCT ROTATOR ---------- */
   Purelane.initProductRotator = function (container) {
+    if (reduce) return;
     var c = container || document;
     var rot = c.querySelector('#rot');
     var sectionId = container ? container.getAttribute('id') : 'global';

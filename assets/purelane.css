@@ -676,6 +676,22 @@ header .predictive-search,
     background: linear-gradient(180deg, rgba(255, 255, 255, .62) 0%, rgba(255, 255, 255, .34) 36%, rgba(255, 255, 255, .66) 100%);
   }
 }
+@media (max-width: 860px), (pointer: coarse) {
+  .water,
+  .wl,
+  .wl-a,
+  .wl-b,
+  .wl-c,
+  .wl-s,
+  .scene {
+    animation: none !important;
+    transform: none !important;
+    transition: opacity .2s ease;
+  }
+  .scenes {
+    opacity: .92;
+  }
+}
 .hero-grid {
   max-width: var(--maxw);
   margin: 0 auto;
