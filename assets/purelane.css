@@ -1053,6 +1053,48 @@ main {
   line-height: 1.5;
 }
 
+/* ---------- PILLARS ---------- */
+.pillars {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 820px) {
+  .pillars {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.pillar {
+  padding: 26px 24px 24px;
+  display: flex;
+  flex-direction: column;
+}
+.pillar .pi {
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 16px;
+  background: linear-gradient(150deg, rgba(201, 118, 29, .18), rgba(75, 58, 143, .12));
+  border: 1px solid rgba(75, 58, 143, .16);
+  color: #4f7d10;
+}
+.pillar .pi svg {
+  width: 24px;
+  height: 24px;
+}
+.pillar .d3 {
+  margin-bottom: 11px;
+}
+.pillar p {
+  margin-bottom: 20px;
+  flex: 1;
+}
+.pillar .btn {
+  align-self: flex-start;
+}
+
 /* ---------- WHY BUNDLES BEAT BUYING SINGLE ---------- */
 .wb {
   display: grid;
