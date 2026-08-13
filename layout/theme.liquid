@@ -329,6 +329,14 @@
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     {%- if template.name == 'index' -%}
+      <nav class="rail" aria-label="Section progress">
+        <a href="#MainContent" class="on" aria-label="Hero"></a>
+        <a href="#shop" aria-label="Shop"></a>
+        <a href="#combos" aria-label="Combos"></a>
+        <a href="#bundles" aria-label="Bundles"></a>
+        <a href="#voices" aria-label="Reviews"></a>
+      </nav>
+
       <div class="scenes" id="scenes" data-d="1">
         <div class="scene s1 on"></div>
         <div class="scene s2"></div>
@@ -510,5 +518,7 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    {% section 'purelane-sticky-cta' %}
   </body>
 </html>

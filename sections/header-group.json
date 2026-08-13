@@ -2,53 +2,51 @@
   "name": "t:sections.header.name",
   "type": "header",
   "sections": {
-    "announcement-bar": {
-      "type": "announcement-bar",
+    "purelane_header": {
+      "type": "purelane-header",
       "settings": {
-        "color_scheme": "scheme-1",
-        "show_line_separator": true,
-        "show_social": false,
-        "auto_rotate": false,
-        "change_slides_speed": 5,
-        "enable_country_selector": false,
-        "enable_language_selector": false
+        "show_ticker": true,
+        "logo_text": "Purelane",
+        "logo_subtext": "Clean, simply",
+        "menu": "main-menu",
+        "show_search": true,
+        "show_account": true
       },
       "blocks": {
-        "announcement-bar-0": {
+        "ann_1": {
           "type": "announcement",
           "settings": {
-            "text": "Welcome to our store",
-            "text_alignment": "center",
-            "color_scheme": "scheme-1",
-            "link": ""
+            "text": "Free shipping <b>on every bundle across India</b>"
+          }
+        },
+        "ann_2": {
+          "type": "announcement",
+          "settings": {
+            "text": "100% plant-based <b>and non-toxic</b>"
+          }
+        },
+        "ann_3": {
+          "type": "announcement",
+          "settings": {
+            "text": "Loved by <b>30,000+ happy homes</b>"
+          }
+        },
+        "ann_4": {
+          "type": "announcement",
+          "settings": {
+            "text": "Buy 3 <b>at flat ₹499</b>"
           }
         }
       },
       "block_order": [
-        "announcement-bar-0"
+        "ann_1",
+        "ann_2",
+        "ann_3",
+        "ann_4"
       ]
-    },
-    "header": {
-      "type": "header",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "menu_color_scheme": "scheme-1",
-        "logo_position": "middle-left",
-        "menu": "main-menu",
-        "menu_type_desktop": "dropdown",
-        "sticky_header_type": "on-scroll-up",
-        "show_line_separator": true,
-        "enable_country_selector": true,
-        "enable_language_selector": true,
-        "mobile_logo_position": "center",
-        "margin_bottom": 0,
-        "padding_top": 20,
-        "padding_bottom": 20
-      }
     }
   },
   "order": [
-    "announcement-bar",
-    "header"
+    "purelane_header"
   ]
 }

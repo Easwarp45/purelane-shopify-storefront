@@ -41,12 +41,31 @@
             style="height: 122px; width: auto; object-fit: contain;"
           >
         {%- else -%}
-          <!-- SVG fallback if no featured image exists -->
-          <svg viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="65" cy="190" rx="40" ry="7" fill="#01201c" opacity=".5"/>
-            <rect x="31" y="112" width="66" height="60" rx="6" fill="#4b3a8f" opacity="0.8"/>
-            <text x="65" y="146" text-anchor="middle" fill="#ffffff" font-size="10" font-family="Outfit, sans-serif">PURELANE</text>
-          </svg>
+          {%- liquid
+            assign fallback_class = "p-kitchen"
+            assign handle_down = card_product.handle | downcase
+            assign title_down = card_product.title | downcase
+            if handle_down contains "tap" or title_down contains "tap"
+              assign fallback_class = "p-tap"
+            elsif handle_down contains "metal" or title_down contains "copper" or title_down contains "brass" or title_down contains "bronze"
+              assign fallback_class = "p-metal"
+            elsif handle_down contains "washing" or handle_down contains "machine" or title_down contains "washing" or title_down contains "machine"
+              assign fallback_class = "p-wm"
+            elsif handle_down contains "laundry" or title_down contains "laundry"
+              assign fallback_class = "p-laundry"
+            elsif handle_down contains "floor" or title_down contains "floor"
+              assign fallback_class = "p-floor"
+            elsif handle_down contains "toilet" or title_down contains "toilet"
+              assign fallback_class = "p-toilet"
+            elsif handle_down contains "hand" or title_down contains "hand"
+              assign fallback_class = "p-handwash"
+            elsif handle_down contains "dish" or title_down contains "dish"
+              assign fallback_class = "p-dish"
+            elsif handle_down contains "eraser" or title_down contains "eraser"
+              assign fallback_class = "p-eraser"
+            endif
+          -%}
+          <span class="pimg {{ fallback_class }}" role="img" aria-label="{{ card_product.title | escape }}" style="height: 122px; width: 100%; display: block;"></span>
         {%- endif -%}
       </div>
     </a>

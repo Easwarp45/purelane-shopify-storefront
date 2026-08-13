@@ -292,6 +292,25 @@
     Purelane.initProductRotator();
     Purelane.initHeroDrift();
 
+    // Mobile Burger Menu Toggle
+    var burger = document.querySelector('.burger');
+    var headerEl = document.getElementById('hdr');
+    if (burger && headerEl) {
+      var newBurger = burger.cloneNode(true);
+      burger.parentNode.replaceChild(newBurger, burger);
+      
+      newBurger.addEventListener('click', function () {
+        headerEl.classList.toggle('nav-open');
+      });
+      
+      var navLinks = headerEl.querySelectorAll('.nav a');
+      navLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+          headerEl.classList.remove('nav-open');
+        });
+      });
+    }
+
     // Listeners
     window.removeEventListener('scroll', Purelane.onScroll);
     window.addEventListener('scroll', Purelane.onScroll, { passive: true });

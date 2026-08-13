@@ -1,0 +1,55 @@
+{%- if section.settings.show_sticky -%}
+  <div class="sticky" id="purelane-sticky-{{ section.id }}">
+    <span class="lbl">
+      <b>{{ section.settings.text | default: "Pick any 3, pay ₹499" }}</b>
+      <span>{{ section.settings.subtext | default: "Free shipping, always" }}</span>
+    </span>
+    <a class="btn btn-primary btn-sm" href="{{ section.settings.button_link | default: '#bundles' }}">
+      {{ section.settings.button_label | default: "Build bundle" }}
+    </a>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Purelane Sticky CTA",
+  "tag": "section",
+  "class": "section-purelane-sticky-cta",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_sticky",
+      "label": "Enable Sticky CTA Bar",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Announcement Text",
+      "default": "Pick any 3, pay ₹499"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Free shipping, always"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Build bundle"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Sticky CTA"
+    }
+  ]
+}
+{% endschema %}

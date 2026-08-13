@@ -15,20 +15,20 @@
         "badge_1_text_mobile": "Plant powered",
         "badge_2_text_mobile": "Safe for kids",
         "badge_3_text_mobile": "Non-toxic",
-        "slide_1_class": "p-kitchen",
+        "slide_1_class": "p-kbtl",
         "slide_1_title": "Foaming kitchen cleaner",
         "slide_1_price": "₹200",
         "slide_1_compare": "₹299",
         "slide_1_badge": "33% off",
-        "slide_2_class_1": "p-kitchen",
-        "slide_2_class_2": "p-dish",
+        "slide_2_class_1": "p-tbtl",
+        "slide_2_class_2": "p-kbtl",
         "slide_2_title": "Any 2 products",
         "slide_2_price": "₹349",
         "slide_2_compare": "₹598",
         "slide_2_badge": "Save ₹249",
-        "slide_3_class_1": "p-kitchen",
-        "slide_3_class_2": "p-dish",
-        "slide_3_class_3": "p-tap",
+        "slide_3_class_1": "p-tbtl",
+        "slide_3_class_2": "p-mbtl",
+        "slide_3_class_3": "p-kbtl",
         "slide_3_title": "Any 3 products",
         "slide_3_price": "₹499",
         "slide_3_compare": "₹897",
@@ -55,17 +55,17 @@
             "savings": "Save ₹398",
             "title": "Kitchen essentials",
             "products_count": 3,
-            "benefits": "Cuts grease instantly · Squeaky clean dishes · Melts hard water stains",
+            "benefits": "Includes: Foaming Kitchen Cleaner, Dishwash Gel & Tap Cleaner. Everything for a sparkling kitchen, no need to pick separately.",
             "price": 499,
             "compare_at_price": 897,
             "button_label": "Shop bundle",
             "button_link": "shopify://collections/all",
             "product_1_class": "p-kitchen",
-            "product_1_label": "Kitchen",
+            "product_1_label": "Cuts grease instantly",
             "product_2_class": "p-dish",
-            "product_2_label": "Dishwash",
+            "product_2_label": "Squeaky clean dishes",
             "product_3_class": "p-tap",
-            "product_3_label": "Tap clean"
+            "product_3_label": "Melts hard water stains"
           }
         },
         "combo_2": {
@@ -76,17 +76,17 @@
             "savings": "Save ₹448",
             "title": "Laundry care bundle",
             "products_count": 3,
-            "benefits": "Removes tough stains & odour · Softens & freshens every wash · Deep-cleans your machine",
+            "benefits": "Includes: Laundry Detergent, Fabric Conditioner & Machine Cleaner Powder. Softer, fresher wash, all in one box.",
             "price": 499,
             "compare_at_price": 947,
             "button_label": "Shop bundle",
             "button_link": "shopify://collections/all",
             "product_1_class": "p-laundry",
-            "product_1_label": "Laundry",
-            "product_2_class": "p-floor",
-            "product_2_label": "Floor",
+            "product_1_label": "Removes tough stains & odour",
+            "product_2_class": "tile",
+            "product_2_label": "Softens & freshens every wash",
             "product_3_class": "p-wm",
-            "product_3_label": "Machine clean"
+            "product_3_label": "Deep-cleans your machine"
           }
         }
       },
@@ -176,36 +176,51 @@
           "type": "tier",
           "settings": {
             "is_best": false,
-            "badge": "Starter Kit",
-            "qty": "3",
+            "badge": "Starter",
+            "qty": "2",
             "qty_unit": "Products",
-            "price": 499,
-            "compare_at_price": 897,
-            "features": "Flat pricing, Free shipping across India, Zero plastic waste, 100% plant-based formulas",
-            "button_label": "Shop Starter Kit",
+            "price": 349,
+            "compare_at_price": 598,
+            "features": "Pick any two products, Free shipping across India",
+            "button_label": "Build this box",
             "button_link": "shopify://collections/all",
-            "product_1_class": "p-kitchen",
-            "product_2_class": "p-dish",
-            "product_3_class": "p-tap"
+            "product_1_class": "p-combo2"
           }
         },
         "tier_2": {
           "type": "tier",
           "settings": {
             "is_best": true,
-            "badge": "Bestseller Kit",
+            "badge": "Most popular",
+            "qty": "3",
+            "qty_unit": "Products",
+            "price": 499,
+            "compare_at_price": 897,
+            "features": "Pick any three products, Covers kitchen and laundry, Free shipping across India",
+            "button_label": "Build this box",
+            "button_link": "shopify://collections/all",
+            "product_1_class": "p-kitchen",
+            "product_2_class": "p-dish",
+            "product_3_class": "p-tap"
+          }
+        },
+        "tier_3": {
+          "type": "tier",
+          "settings": {
+            "is_best": false,
+            "badge": "Whole home",
             "qty": "5",
             "qty_unit": "Products",
             "price": 799,
             "compare_at_price": 1495,
-            "features": "Flat pricing, Free shipping across India, Zero plastic waste, 100% plant-based formulas, Cuts kitchen grease, descales machines",
-            "button_label": "Shop Bestseller Kit",
+            "features": "Pick any five products, Every room in one order, Free shipping across India",
+            "button_label": "Build this box",
             "button_link": "shopify://collections/all",
             "product_1_class": "p-kitchen",
             "product_2_class": "p-dish",
             "product_3_class": "p-tap",
             "product_4_class": "p-floor",
-            "product_5_class": "p-handwash"
+            "product_5_class": "p-laundry"
           }
         }
       },
@@ -219,7 +234,8 @@
         "cat_3",
         "cat_4",
         "tier_1",
-        "tier_2"
+        "tier_2",
+        "tier_3"
       ],
       "settings": {
         "why_kicker": "The smarter way to shop",
