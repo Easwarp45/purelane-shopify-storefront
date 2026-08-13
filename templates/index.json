@@ -1,75 +1,302 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "purelane_hero": {
+      "type": "purelane-hero",
+      "settings": {
+        "heading": "Clean<br>That<br><span class=\"lime\">Lasts</span>",
+        "subheading": "Homecare that works on the toughest grime, made from plants. Kind to your home, your family and the world outside it.",
+        "button_1_label": "Shop now",
+        "button_1_link": "shopify://collections/all",
+        "button_2_label": "How it works",
+        "button_2_link": "#range",
+        "badge_1_text": "Plant<br>powered",
+        "badge_2_text": "Safe for<br>kids & pets",
+        "badge_3_text": "Zero harsh<br>chemicals",
+        "badge_1_text_mobile": "Plant powered",
+        "badge_2_text_mobile": "Safe for kids",
+        "badge_3_text_mobile": "Non-toxic",
+        "slide_1_class": "p-kitchen",
+        "slide_1_title": "Foaming kitchen cleaner",
+        "slide_1_price": "₹200",
+        "slide_1_compare": "₹299",
+        "slide_1_badge": "33% off",
+        "slide_2_class_1": "p-kitchen",
+        "slide_2_class_2": "p-dish",
+        "slide_2_title": "Any 2 products",
+        "slide_2_price": "₹349",
+        "slide_2_compare": "₹598",
+        "slide_2_badge": "Save ₹249",
+        "slide_3_class_1": "p-kitchen",
+        "slide_3_class_2": "p-dish",
+        "slide_3_class_3": "p-tap",
+        "slide_3_title": "Any 3 products",
+        "slide_3_price": "₹499",
+        "slide_3_compare": "₹897",
+        "slide_3_badge": "Save ₹398"
+      }
+    },
+    "purelane_product_grid": {
+      "type": "purelane-product-grid",
+      "settings": {
+        "kicker": "Explore the range",
+        "heading": "Shop by category",
+        "collection": "all",
+        "products_to_show": 4
+      }
+    },
+    "purelane_best_selling_combos": {
+      "type": "purelane-best-selling-combos",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "combo_1": {
+          "type": "combo",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "is_hero": true,
+            "badge": "Most popular",
+            "savings": "Save ₹398",
+            "title": "Kitchen essentials",
+            "products_count": 3,
+            "benefits": "Cuts grease instantly · Squeaky clean dishes · Melts hard water stains",
+            "price": 499,
+            "compare_at_price": 897,
+            "button_label": "Shop bundle",
+            "button_link": "shopify://collections/all",
+            "product_1_class": "p-kitchen",
+            "product_1_label": "Kitchen",
+            "product_2_class": "p-dish",
+            "product_2_label": "Dishwash",
+            "product_3_class": "p-tap",
+            "product_3_label": "Tap clean"
           }
         },
-        "button": {
-          "type": "buttons",
+        "combo_2": {
+          "type": "combo",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "is_hero": false,
+            "badge": "",
+            "savings": "Save ₹448",
+            "title": "Laundry care bundle",
+            "products_count": 3,
+            "benefits": "Removes tough stains & odour · Softens & freshens every wash · Deep-cleans your machine",
+            "price": 499,
+            "compare_at_price": 947,
+            "button_label": "Shop bundle",
+            "button_link": "shopify://collections/all",
+            "product_1_class": "p-laundry",
+            "product_1_label": "Laundry",
+            "product_2_class": "p-floor",
+            "product_2_label": "Floor",
+            "product_3_class": "p-wm",
+            "product_3_label": "Machine clean"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "combo_1",
+        "combo_2"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "kicker": "Pre-built to save you money",
+        "heading": "Best selling combos",
+        "description": "Swipe through the boxes people order most. Each one is already priced below buying the same products on their own.",
+        "show_swipecue": true
       }
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "purelane_bundles": {
+      "type": "purelane-bundles",
+      "blocks": {
+        "why_1": {
+          "type": "why_item",
+          "settings": {
+            "icon": "money",
+            "title": "Save up to 45%",
+            "description": "Versus buying the same products separately"
+          }
+        },
+        "why_2": {
+          "type": "why_item",
+          "settings": {
+            "icon": "check",
+            "title": "One flat price",
+            "description": "No calculators, no comparing carts"
+          }
+        },
+        "why_3": {
+          "type": "why_item",
+          "settings": {
+            "icon": "star",
+            "title": "Curated by experts",
+            "description": "Products picked to work well together"
+          }
+        },
+        "why_4": {
+          "type": "why_item",
+          "settings": {
+            "icon": "shipping",
+            "title": "Free shipping always",
+            "description": "Included on every bundle, all India"
+          }
+        },
+        "cat_1": {
+          "type": "category",
+          "settings": {
+            "title": "Kitchen bundle",
+            "description": "Grease, dishes & more",
+            "link": "shopify://collections/all",
+            "fallback_class": "p-kitchen"
+          }
+        },
+        "cat_2": {
+          "type": "category",
+          "settings": {
+            "title": "Bathroom bundle",
+            "description": "Deep clean & disinfect",
+            "link": "shopify://collections/all",
+            "fallback_class": "p-toilet"
+          }
+        },
+        "cat_3": {
+          "type": "category",
+          "settings": {
+            "title": "Laundry bundle",
+            "description": "Softer, fresher wash",
+            "link": "shopify://collections/all",
+            "fallback_class": "p-laundry"
+          }
+        },
+        "cat_4": {
+          "type": "category",
+          "settings": {
+            "title": "Hard water bundle",
+            "description": "Melt away limescale",
+            "link": "shopify://collections/all",
+            "fallback_class": "p-tap"
+          }
+        },
+        "tier_1": {
+          "type": "tier",
+          "settings": {
+            "is_best": false,
+            "badge": "Starter Kit",
+            "qty": "3",
+            "qty_unit": "Products",
+            "price": 499,
+            "compare_at_price": 897,
+            "features": "Flat pricing, Free shipping across India, Zero plastic waste, 100% plant-based formulas",
+            "button_label": "Shop Starter Kit",
+            "button_link": "shopify://collections/all",
+            "product_1_class": "p-kitchen",
+            "product_2_class": "p-dish",
+            "product_3_class": "p-tap"
+          }
+        },
+        "tier_2": {
+          "type": "tier",
+          "settings": {
+            "is_best": true,
+            "badge": "Bestseller Kit",
+            "qty": "5",
+            "qty_unit": "Products",
+            "price": 799,
+            "compare_at_price": 1495,
+            "features": "Flat pricing, Free shipping across India, Zero plastic waste, 100% plant-based formulas, Cuts kitchen grease, descales machines",
+            "button_label": "Shop Bestseller Kit",
+            "button_link": "shopify://collections/all",
+            "product_1_class": "p-kitchen",
+            "product_2_class": "p-dish",
+            "product_3_class": "p-tap",
+            "product_4_class": "p-floor",
+            "product_5_class": "p-handwash"
+          }
+        }
+      },
+      "block_order": [
+        "why_1",
+        "why_2",
+        "why_3",
+        "why_4",
+        "cat_1",
+        "cat_2",
+        "cat_3",
+        "cat_4",
+        "tier_1",
+        "tier_2"
+      ],
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "why_kicker": "The smarter way to shop",
+        "why_heading": "Why bundles beat buying single",
+        "cat_kicker": "Bundle categories",
+        "cat_heading": "Find the right bundle for you",
+        "tier_kicker": "Simple pricing",
+        "tier_heading": "Choose your bundle size"
+      }
+    },
+    "purelane_review_wall": {
+      "type": "purelane-review-wall",
+      "blocks": {
+        "rev_1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Works like a charm",
+            "text": "\"An eco option that actually cleans as well as chemical alternatives. It smells much fresher and doesn't trigger my allergies.\"",
+            "name": "Anita",
+            "product": "Laundry detergent",
+            "verified": true
+          }
+        },
+        "rev_2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Best dishwash ever",
+            "text": "\"Switching to this was the best decision for my hands. No dry or cracked skin anymore, and it cleans all grease easily.\"",
+            "name": "Priya",
+            "product": "Dishwash gel",
+            "verified": true
+          }
+        },
+        "rev_3": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Unbelievable grease cut",
+            "text": "\"Cleans our gas stoves and chimney mesh instantly without any chemical smell. Safe for my kids and pets to be around.\"",
+            "name": "Rahul",
+            "product": "Kitchen cleaner",
+            "verified": true
+          }
+        },
+        "rev_4": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Limescale simply melted",
+            "text": "\"Our bathroom taps look brand new. The hard water stains melted away in minutes. Will buy the complete home kit next!\"",
+            "name": "Meera",
+            "product": "Tap descaler",
+            "verified": true
+          }
+        }
+      },
+      "block_order": [
+        "rev_1",
+        "rev_2",
+        "rev_3",
+        "rev_4"
+      ],
+      "settings": {
+        "kicker": "That's what they said",
+        "rating": "4.8",
+        "reviews_count": "8,000+ reviews",
+        "lead_text": "Loved by 12 Lakh+ homes across India for plant-powered cleaning that actually works."
       }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "purelane_hero",
+    "purelane_product_grid",
+    "purelane_best_selling_combos",
+    "purelane_bundles",
+    "purelane_review_wall"
   ]
 }
