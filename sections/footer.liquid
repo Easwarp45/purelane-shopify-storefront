@@ -4,6 +4,7 @@
 {{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
 {{ 'component-list-social.css' | asset_url | stylesheet_tag }}
+{{ 'footer-extra.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .footer {
@@ -295,6 +296,19 @@
             </ul>
           </div>
         {%- endif -%}
+        {%- if section.settings.contact_email != blank or section.settings.contact_phone != blank or section.settings.contact_address != blank -%}
+          <div class="footer__contact">
+            {%- if section.settings.contact_email != blank -%}
+              <a href="mailto:{{ section.settings.contact_email }}" class="link footer__contact-item">{{ section.settings.contact_email }}</a>
+            {%- endif -%}
+            {%- if section.settings.contact_phone != blank -%}
+              <a href="tel:{{ section.settings.contact_phone }}" class="link footer__contact-item">{{ section.settings.contact_phone }}</a>
+            {%- endif -%}
+            {%- if section.settings.contact_address != blank -%}
+              <div class="footer__contact-item">{{ section.settings.contact_address }}</div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
       </div>
     </div>
     <div class="footer__content-bottom-wrapper page-width{% if section.settings.enable_country_selector == false and section.settings.enable_language_selector == false %} footer__content-bottom-wrapper--center{% endif %}">
@@ -320,6 +334,12 @@
     </div>
   </div>
 </footer>
+
+<button id="BackToTop" class="back-to-top" aria-label="Back to top" title="Back to top">
+  <span class="svg-wrapper">{{ 'icon-arrow.svg' | inline_asset_content }}</span>
+</button>
+
+<script src="{{ 'footer-extra.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
@@ -464,6 +484,28 @@
       "default": true,
       "label": "t:sections.footer.settings.show_social.label",
       "info": "t:sections.footer.settings.show_social.info"
+    },
+    {
+      "type": "header",
+      "content": "Contact"
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Contact email",
+      "default": "hello@purelane.com"
+    },
+    {
+      "type": "text",
+      "id": "contact_phone",
+      "label": "Contact phone",
+      "default": "+91 9930 123 234"
+    },
+    {
+      "type": "textarea",
+      "id": "contact_address",
+      "label": "Contact address",
+      "default": "Purelane Eco Products Pvt Ltd"
     },
     {
       "type": "checkbox",

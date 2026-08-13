@@ -1,0 +1,27 @@
+.back-to-top{position:fixed;right:20px;bottom:20px;width:44px;height:44px;background:var(--color-button);color:var(--color-button-text);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 14px rgba(0,0,0,.08);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .22s,transform .22s,visibility .22s}
+.back-to-top.on{opacity:1;visibility:visible;transform:none}
+.back-to-top .svg-wrapper{width:18px;height:18px;display:inline-block}
+.footer__contact{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+.footer__contact-item{color:rgba(var(--color-foreground), .85)}
+
+/* Mobile responsiveness tweaks */
+@media screen and (max-width: 749px) {
+	.footer__blocks-wrapper {
+		display: grid !important;
+		grid-template-columns: 1fr !important;
+		gap: 12px !important;
+	}
+
+	.footer__contact { 
+		align-items: flex-start; 
+		gap:8px;
+	}
+
+	.footer__payment { margin-top: 8px; }
+
+	.back-to-top { right: 12px; bottom: 12px; width:40px; height:40px; }
+	.back-to-top .svg-wrapper { width:16px; height:16px }
+}
+
+/* Ensure focus-visible for skip link */
+.skip-to-content-link:focus { position: fixed; left: 12px; top: 12px; z-index: 9999; }
