@@ -1,10 +1,10 @@
-# Purelane Shopify Storefront MVP
+﻿# Purelane Shopify Storefront MVP
 
 A premium, highly interactive Shopify storefront built on top of the stock Shopify Dawn theme. This storefront converts the Purelane visual prototype into a fully modular, merchant-customizable Shopify theme.
 
 ---
 
-## 🎨 Visual Identity & Design System
+## ðŸŽ¨ Visual Identity & Design System
 This theme implements the **Version 2 (Light Theme)** design cascade from the prototype:
 * **Backgrounds:** Pale mint body backgrounds with glassmorphism card containers (`.glass` and `.glass-2`).
 * **Accents:** Sleek brand purple (`#4b3a8f`) and warm orange leaf (`#c9761d`) highlights.
@@ -13,7 +13,7 @@ This theme implements the **Version 2 (Light Theme)** design cascade from the pr
 
 ---
 
-## ⚡ Main Interactive Features
+## âš¡ Main Interactive Features
 1. **Vertical Progress Rail:** Synchronizes vertical scroll positions to track and highlight links on a progress rail indicator.
 2. **Hero Carousel:** A three-slide carousel exhibiting product configurations with floating glassmorphism price tags.
 3. **Parallax Mouse Drifting:** Interactive mouse coordinates dynamically shift water SVG displacement filters and hero product layers.
@@ -23,7 +23,7 @@ This theme implements the **Version 2 (Light Theme)** design cascade from the pr
 
 ---
 
-## 🛠️ Theme Architecture & Custom Components
+## ðŸ› ï¸ Theme Architecture & Custom Components
 Every custom module is registered as a native Shopify section or snippet, allowing full merchant editing, block addition, and layout reordering in the Shopify Customizer.
 
 ### Custom Sections (`sections/`)
@@ -45,7 +45,7 @@ Every custom module is registered as a native Shopify section or snippet, allowi
 
 ---
 
-## 🚀 Running Locally
+## ðŸš€ Running Locally
 To launch a local development server with hot-reloading:
 
 1. Install the Shopify CLI if you haven't already:
@@ -60,7 +60,7 @@ To launch a local development server with hot-reloading:
 
 ---
 
-## 📝 Code Validation & Quality Assurance
+## ðŸ“ Code Validation & Quality Assurance
 Run validation checks locally using the Shopify Theme Check utility:
 ```bash
 npx shopify theme check
