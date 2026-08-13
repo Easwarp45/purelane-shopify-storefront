@@ -1,0 +1,29 @@
+{% comment %}
+  Renders a Purelane review card.
+  Accepts:
+  - rating: {Number} Number of stars (default: 5)
+  - title: {String} Title of the review
+  - text: {String} Review text
+  - name: {String} Customer name
+  - product: {String} Product or category name
+  - verified: {Boolean} Whether the purchase is verified (default: true)
+{% endcomment %}
+
+<div class="glass rcard">
+  <div class="st">
+    {%- for i in (1..5) -%}
+      {%- if i <= rating -%}★{%- endif -%}
+    {%- endfor -%}
+  </div>
+  <h5>{{ title }}</h5>
+  <p>{{ text }}</p>
+  <div class="who">
+    <b>{{ name }}</b> · <span>{{ product }}</span>
+    {%- if verified != false -%}
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:#4f7d10; width: 12px; height: 12px; flex: 0 0 auto;">
+        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+        <path d="m9 11 3 3L22 4"/>
+      </svg>
+    {%- endif -%}
+  </div>
+</div>

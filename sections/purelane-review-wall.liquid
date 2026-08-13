@@ -1,0 +1,171 @@
+<section class="sec revband" id="voices" data-scene="4">
+  <div class="wrap">
+    <div class="revhead">
+      <div>
+        <span class="kicker">{{ section.settings.kicker | default: "That's what they said" }}</span>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:6px;flex-wrap:wrap">
+          <span class="st" style="font-size:16px">★★★★★</span>
+          <span class="agg"><b>{{ section.settings.rating | default: "4.8" }}</b> · {{ section.settings.reviews_count | default: "8,000+ reviews" }}</span>
+        </div>
+      </div>
+      <p class="body-s" style="margin-left:auto;max-width:32ch">{{ section.settings.lead_text | default: "Loved by 12 Lakh+ homes across India for plant-powered cleaning that actually works." }}</p>
+    </div>
+  </div>
+  
+  <div class="revrail" aria-live="off">
+    <div class="revtrack">
+      <!-- First copy of reviews -->
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'review' -%}
+          {%- render 'purelane-review-card',
+            rating: block.settings.rating,
+            title: block.settings.title,
+            text: block.settings.text,
+            name: block.settings.name,
+            product: block.settings.product,
+            verified: block.settings.verified
+          -%}
+        {%- endif -%}
+      {%- endfor -%}
+      
+      <!-- Duplicate copy for seamless infinite marquee scroll -->
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'review' -%}
+          {%- render 'purelane-review-card',
+            rating: block.settings.rating,
+            title: block.settings.title,
+            text: block.settings.text,
+            name: block.settings.name,
+            product: block.settings.product,
+            verified: block.settings.verified
+          -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Review Wall",
+  "tag": "section",
+  "class": "section-purelane-review-wall",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker Text",
+      "default": "That's what they said"
+    },
+    {
+      "type": "text",
+      "id": "rating",
+      "label": "Average Rating",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "reviews_count",
+      "label": "Reviews Subtitle",
+      "default": "8,000+ reviews"
+    },
+    {
+      "type": "textarea",
+      "id": "lead_text",
+      "label": "Lead Text",
+      "default": "Loved by 12 Lakh+ homes across India for plant-powered cleaning that actually works."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Customer Review",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5,
+          "label": "Rating"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Review Title",
+          "default": "Works like a charm"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review Text",
+          "default": "\"An eco option that actually cleans as well as chemical alternatives. It smells much fresher and doesn't trigger my allergies.\""
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer Name",
+          "default": "Anita"
+        },
+        {
+          "type": "text",
+          "id": "product",
+          "label": "Product purchased",
+          "default": "Laundry detergent"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified Purchase",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Review Wall",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "name": "Anita",
+            "product": "Laundry detergent",
+            "title": "Works like a charm",
+            "text": "\"An eco option that actually cleans as well as chemical alternatives. It smells much fresher and doesn't trigger my allergies.\""
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "name": "Priya",
+            "product": "Dishwash gel",
+            "title": "Best dishwash ever",
+            "text": "\"Switching to this was the best decision for my hands. No dry or cracked skin anymore, and it cleans all grease easily.\""
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "name": "Rahul",
+            "product": "Kitchen cleaner",
+            "title": "Unbelievable grease cut",
+            "text": "\"Cleans our gas stoves and chimney mesh instantly without any chemical smell. Safe for my kids and pets to be around.\""
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "name": "Meera",
+            "product": "Tap descaler",
+            "title": "Limescale simply melted",
+            "text": "\"Our bathroom taps look brand new. The hard water stains melted away in minutes. Will buy the complete home kit next!\""
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

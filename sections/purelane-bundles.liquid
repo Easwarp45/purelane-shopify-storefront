@@ -1,0 +1,496 @@
+<section class="sec" id="bundles" data-scene="3">
+  
+  <!-- PART 1: WHY BUNDLES BEAT BUYING SINGLE -->
+  <div class="wrap" style="margin-bottom: var(--sec-y);">
+    <div class="glass sec-pad rv">
+      <div class="panel-head">
+        <span class="kicker">{{ section.settings.why_kicker | default: "The smarter way to shop" }}</span>
+        <h2 class="d2" style="margin-top:12px">{{ section.settings.why_heading | default: "Why bundles beat buying single" }}</h2>
+      </div>
+      <div class="wb">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'why_item' -%}
+            <div class="wb-i">
+              <span class="ci">
+                {%- if block.settings.icon == 'money' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M16.5 7.2C15.6 6 14 5.4 12 5.4c-2.4 0-4 1.1-4 2.9 0 2 1.7 2.7 4.2 3.3 2.7.6 4.3 1.4 4.3 3.4 0 1.9-1.7 3.1-4.5 3.1-2.2 0-3.8-.7-4.8-2"/></svg>
+                {%- elsif block.settings.icon == 'check' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3.4"/><path d="m8.4 12.2 2.4 2.4 4.8-5"/></svg>
+                {%- elsif block.settings.icon == 'star' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8-5.2-2.8-5.2 2.8 1-5.8L3.6 9.7l5.8-.8Z"/></svg>
+                {%- elsif block.settings.icon == 'shipping' -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2.6 16.4V7.2h10.2v9.2"/><path d="M12.8 10.4h4l3.6 3.2v2.8h-7.6"/><circle cx="6.6" cy="18" r="1.9"/><circle cx="16.6" cy="18" r="1.9"/></svg>
+                {%- else -%}
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/></svg>
+                {%- endif -%}
+              </span>
+              <h4>{{ block.settings.title }}</h4>
+              <p>{{ block.settings.description }}</p>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 2: BUNDLE CATEGORIES -->
+  <div class="wrap" style="margin-bottom: var(--sec-y);">
+    <div class="panel-head rv">
+      <span class="kicker">{{ section.settings.cat_kicker | default: "Bundle categories" }}</span>
+      <h2 class="d2" style="margin-top:12px">{{ section.settings.cat_heading | default: "Find the right bundle for you" }}</h2>
+    </div>
+    <div class="cats">
+      {%- assign cat_index = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'category' -%}
+          {%- assign delay = "" -%}
+          {%- if cat_index == 1 -%}
+            {%- assign delay = "rv-d1" -%}
+          {%- elsif cat_index == 2 -%}
+            {%- assign delay = "rv-d2" -%}
+          {%- elsif cat_index == 3 -%}
+            {%- assign delay = "rv-d3" -%}
+          {%- endif -%}
+          
+          {%- render 'purelane-bundle-card',
+            title: block.settings.title,
+            description: block.settings.description,
+            link: block.settings.link,
+            image: block.settings.image,
+            fallback_class: block.settings.fallback_class,
+            delay_class: delay
+          -%}
+          {%- assign cat_index = cat_index | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <!-- PART 3: BUNDLE TIERS (STARTER KITS) -->
+  <div class="wrap">
+    <div class="panel-head rv">
+      <span class="kicker">{{ section.settings.tier_kicker | default: "Simple pricing" }}</span>
+      <h2 class="d2" style="margin-top:12px">{{ section.settings.tier_heading | default: "Choose your bundle size" }}</h2>
+    </div>
+    
+    <div class="tiers">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'tier' -%}
+          <div class="glass tier{% if block.settings.is_best %} best{% endif %} rv">
+            {%- if block.settings.badge != blank -%}
+              <span class="tag">{{ block.settings.badge }}</span>
+            {%- endif -%}
+            
+            <div class="qty">
+              {{ block.settings.qty }}
+              <small>{{ block.settings.qty_unit | default: "Products" }}</small>
+            </div>
+            
+            <div class="price">
+              ₹{{ block.settings.price }}
+              {%- if block.settings.compare_at_price > block.settings.price -%}
+                <s>₹{{ block.settings.compare_at_price }}</s>
+              {%- endif -%}
+            </div>
+            
+            <!-- Tier Product Staging Stack -->
+            <div class="tierpix {% if block.settings.product_4_class != blank or block.settings.product_5_class != blank %}five{% endif %}">
+              {%- if block.settings.product_1_image != blank -%}
+                <img src="{{ block.settings.product_1_image | image_url: width: 100 }}" class="pimg" alt="P1" loading="lazy" style="height: 54px; width: auto; object-fit: contain;">
+              {%- elsif block.settings.product_1_class != blank -%}
+                <span class="pimg {{ block.settings.product_1_class }}" role="img"></span>
+              {%- endif -%}
+
+              {%- if block.settings.product_2_image != blank -%}
+                <img src="{{ block.settings.product_2_image | image_url: width: 100 }}" class="pimg" alt="P2" loading="lazy" style="height: 54px; width: auto; object-fit: contain;">
+              {%- elsif block.settings.product_2_class != blank -%}
+                <span class="pimg {{ block.settings.product_2_class }}" role="img"></span>
+              {%- endif -%}
+
+              {%- if block.settings.product_3_image != blank -%}
+                <img src="{{ block.settings.product_3_image | image_url: width: 100 }}" class="pimg" alt="P3" loading="lazy" style="height: 54px; width: auto; object-fit: contain;">
+              {%- elsif block.settings.product_3_class != blank -%}
+                <span class="pimg {{ block.settings.product_3_class }}" role="img"></span>
+              {%- endif -%}
+
+              {%- if block.settings.product_4_image != blank -%}
+                <img src="{{ block.settings.product_4_image | image_url: width: 100 }}" class="pimg" alt="P4" loading="lazy" style="height: 54px; width: auto; object-fit: contain;">
+              {%- elsif block.settings.product_4_class != blank -%}
+                <span class="pimg {{ block.settings.product_4_class }}" role="img"></span>
+              {%- endif -%}
+
+              {%- if block.settings.product_5_image != blank -%}
+                <img src="{{ block.settings.product_5_image | image_url: width: 100 }}" class="pimg" alt="P5" loading="lazy" style="height: 54px; width: auto; object-fit: contain;">
+              {%- elsif block.settings.product_5_class != blank -%}
+                <span class="pimg {{ block.settings.product_5_class }}" role="img"></span>
+              {%- endif -%}
+            </div>
+            
+            <!-- Features Checklist -->
+            <ul>
+              {%- assign features_array = block.settings.features | split: "," -%}
+              {%- for feature in features_array -%}
+                {%- if feature != blank -%}
+                  <li>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    {{ feature | strip }}
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+            
+            <a href="{{ block.settings.button_link | default: '#shop' }}" class="btn btn-primary" style="width: 100%; justify-content: center;">
+              {{ block.settings.button_label | default: "Shop Kit" }}
+            </a>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Bundles",
+  "tag": "section",
+  "class": "section-purelane-bundles",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Why Bundles beat single Settings"
+    },
+    {
+      "type": "text",
+      "id": "why_kicker",
+      "label": "Kicker",
+      "default": "The smarter way to shop"
+    },
+    {
+      "type": "text",
+      "id": "why_heading",
+      "label": "Heading",
+      "default": "Why bundles beat buying single"
+    },
+    {
+      "type": "header",
+      "content": "Category Settings"
+    },
+    {
+      "type": "text",
+      "id": "cat_kicker",
+      "label": "Kicker",
+      "default": "Bundle categories"
+    },
+    {
+      "type": "text",
+      "id": "cat_heading",
+      "label": "Heading",
+      "default": "Find the right bundle for you"
+    },
+    {
+      "type": "header",
+      "content": "Tiers / Starter Kits Settings"
+    },
+    {
+      "type": "text",
+      "id": "tier_kicker",
+      "label": "Kicker",
+      "default": "Simple pricing"
+    },
+    {
+      "type": "text",
+      "id": "tier_heading",
+      "label": "Heading",
+      "default": "Choose your bundle size"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "why_item",
+      "name": "Why Bundles Item",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon Type",
+          "options": [
+            { "value": "money", "label": "Money / Cash" },
+            { "value": "check", "label": "Checkmark" },
+            { "value": "star", "label": "Star" },
+            { "value": "shipping", "label": "Truck / Free Shipping" }
+          ],
+          "default": "money"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Item Title",
+          "default": "Save up to 45%"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Item Description",
+          "default": "Versus buying the same products separately"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "name": "Bundle Category Card",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category Title",
+          "default": "Kitchen bundle"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Category Subtext",
+          "default": "Grease, dishes & more"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link Link"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Category Image"
+        },
+        {
+          "type": "text",
+          "id": "fallback_class",
+          "label": "Fallback Prototype CSS Class",
+          "default": "p-kitchen",
+          "info": "p-kitchen, p-toilet, p-laundry, p-tap"
+        }
+      ]
+    },
+    {
+      "type": "tier",
+      "name": "Pricing Tier Card",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "is_best",
+          "label": "Highlight as best value",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Tag Badge (e.g. Best Value)",
+          "default": "Starter Kit"
+        },
+        {
+          "type": "text",
+          "id": "qty",
+          "label": "Quantity (Number)",
+          "default": "3"
+        },
+        {
+          "type": "text",
+          "id": "qty_unit",
+          "label": "Quantity Unit Label",
+          "default": "Products"
+        },
+        {
+          "type": "number",
+          "id": "price",
+          "label": "Tier Price (INR)",
+          "default": 499
+        },
+        {
+          "type": "number",
+          "id": "compare_at_price",
+          "label": "Compare-at Price (INR)",
+          "default": 897
+        },
+        {
+          "type": "textarea",
+          "id": "features",
+          "label": "Checklist features (Separate with commas)",
+          "default": "Flat pricing, Free shipping across India, Zero plastic waste, 100% plant-based formulas"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "Shop Kit"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "header",
+          "content": "Product Stack configuration"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_1_image",
+          "label": "Product 1 Image"
+        },
+        {
+          "type": "text",
+          "id": "product_1_class",
+          "label": "Product 1 Fallback class",
+          "default": "p-kitchen"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_2_image",
+          "label": "Product 2 Image"
+        },
+        {
+          "type": "text",
+          "id": "product_2_class",
+          "label": "Product 2 Fallback class",
+          "default": "p-dish"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_3_image",
+          "label": "Product 3 Image"
+        },
+        {
+          "type": "text",
+          "id": "product_3_class",
+          "label": "Product 3 Fallback class",
+          "default": "p-tap"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_4_image",
+          "label": "Product 4 Image"
+        },
+        {
+          "type": "text",
+          "id": "product_4_class",
+          "label": "Product 4 Fallback class"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_5_image",
+          "label": "Product 5 Image"
+        },
+        {
+          "type": "text",
+          "id": "product_5_class",
+          "label": "Product 5 Fallback class"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Bundles",
+      "blocks": [
+        {
+          "type": "why_item",
+          "settings": {
+            "icon": "money",
+            "title": "Save up to 45%",
+            "description": "Versus buying the same products separately"
+          }
+        },
+        {
+          "type": "why_item",
+          "settings": {
+            "icon": "check",
+            "title": "One flat price",
+            "description": "No calculators, no comparing carts"
+          }
+        },
+        {
+          "type": "why_item",
+          "settings": {
+            "icon": "star",
+            "title": "Curated by experts",
+            "description": "Products picked to work well together"
+          }
+        },
+        {
+          "type": "why_item",
+          "settings": {
+            "icon": "shipping",
+            "title": "Free shipping always",
+            "description": "Included on every bundle, all India"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Kitchen bundle",
+            "description": "Grease, dishes & more",
+            "fallback_class": "p-kitchen"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Bathroom bundle",
+            "description": "Deep clean & disinfect",
+            "fallback_class": "p-toilet"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Laundry bundle",
+            "description": "Softer, fresher wash",
+            "fallback_class": "p-laundry"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "title": "Hard water bundle",
+            "description": "Melt away limescale",
+            "fallback_class": "p-tap"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "badge": "Starter Kit",
+            "qty": "3",
+            "price": 499,
+            "compare_at_price": 897,
+            "features": "Flat pricing, Free shipping across India, Zero plastic waste, 100% plant-based formulas",
+            "product_1_class": "p-kitchen",
+            "product_2_class": "p-dish",
+            "product_3_class": "p-tap"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "is_best": true,
+            "badge": "Bestseller Kit",
+            "qty": "5",
+            "price": 799,
+            "compare_at_price": 1495,
+            "features": "Flat pricing, Free shipping across India, Zero plastic waste, 100% plant-based formulas, Cuts kitchen grease, descales machines",
+            "product_1_class": "p-kitchen",
+            "product_2_class": "p-dish",
+            "product_3_class": "p-tap",
+            "product_4_class": "p-floor",
+            "product_5_class": "p-handwash"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

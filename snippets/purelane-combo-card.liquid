@@ -1,0 +1,126 @@
+{% comment %}
+  Renders a Purelane combo card.
+  Accepts:
+  - title: {String} Title of the combo
+  - products_count: {Number} Number of products in the combo
+  - benefits: {String} Bulleted list of benefits separated by middle dots
+  - price: {Number} Current price (e.g., 499)
+  - compare_at_price: {Number} Compare-at price (e.g., 897)
+  - savings: {String} Savings text (e.g., "Save ₹398")
+  - badge: {String} Optional badge (e.g., "Most popular")
+  - is_hero: {Boolean} Whether this is the highlighted card
+  - product_1_image: {Image} Shopify Image object (optional)
+  - product_1_class: {String} Prototype CSS class if no image (optional)
+  - product_1_label: {String} Product label (optional)
+  - product_2_image: {Image} Shopify Image object (optional)
+  - product_2_class: {String} Prototype CSS class if no image (optional)
+  - product_2_label: {String} Product label (optional)
+  - product_3_image: {Image} Shopify Image object (optional)
+  - product_3_class: {String} Prototype CSS class if no image (optional)
+  - product_3_label: {String} Product label (optional)
+  - product_4_image: {Image} Shopify Image object (optional)
+  - product_4_class: {String} Prototype CSS class if no image (optional)
+  - product_4_label: {String} Product label (optional)
+  - product_5_image: {Image} Shopify Image object (optional)
+  - product_5_class: {String} Prototype CSS class if no image (optional)
+  - product_5_label: {String} Product label (optional)
+  - button_link: {String} URL for the CTA button
+  - button_label: {String} Text for the CTA button
+{% endcomment %}
+
+<div class="glass combo{% if is_hero %} hero-combo{% endif %} rv">
+  <div class="tray">
+    {%- if savings != blank -%}
+      <span class="save">{{ savings }}</span>
+    {%- endif -%}
+    {%- if badge != blank -%}
+      <span class="flag">{{ badge }}</span>
+    {%- endif -%}
+    
+    <div class="stack">
+      {%- if product_1_label != blank or product_1_class != blank or product_1_image != blank -%}
+        <div class="it">
+          {%- if product_1_image != blank -%}
+            <img src="{{ product_1_image | image_url: width: 120 }}" class="pimg" alt="{{ product_1_label | escape }}" loading="lazy" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
+          {%- else -%}
+            <span class="pimg {{ product_1_class }}" role="img" aria-label="{{ product_1_label | escape }}"></span>
+          {%- endif -%}
+          <span>{{ product_1_label }}</span>
+        </div>
+      {%- endif -%}
+      
+      {%- if product_2_label != blank or product_2_class != blank or product_2_image != blank -%}
+        <div class="plus">+</div>
+        <div class="it">
+          {%- if product_2_image != blank -%}
+            <img src="{{ product_2_image | image_url: width: 120 }}" class="pimg" alt="{{ product_2_label | escape }}" loading="lazy" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
+          {%- else -%}
+            <span class="pimg {{ product_2_class }}" role="img" aria-label="{{ product_2_label | escape }}"></span>
+          {%- endif -%}
+          <span>{{ product_2_label }}</span>
+        </div>
+      {%- endif -%}
+      
+      {%- if product_3_label != blank or product_3_class != blank or product_3_image != blank -%}
+        <div class="plus">+</div>
+        <div class="it">
+          {%- if product_3_image != blank -%}
+            <img src="{{ product_3_image | image_url: width: 120 }}" class="pimg" alt="{{ product_3_label | escape }}" loading="lazy" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
+          {%- else -%}
+            <span class="pimg {{ product_3_class }}" role="img" aria-label="{{ product_3_label | escape }}"></span>
+          {%- endif -%}
+          <span>{{ product_3_label }}</span>
+        </div>
+      {%- endif -%}
+
+      {%- if product_4_label != blank or product_4_class != blank or product_4_image != blank -%}
+        <div class="plus">+</div>
+        <div class="it">
+          {%- if product_4_image != blank -%}
+            <img src="{{ product_4_image | image_url: width: 120 }}" class="pimg" alt="{{ product_4_label | escape }}" loading="lazy" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
+          {%- else -%}
+            <span class="pimg {{ product_4_class }}" role="img" aria-label="{{ product_4_label | escape }}"></span>
+          {%- endif -%}
+          <span>{{ product_4_label }}</span>
+        </div>
+      {%- endif -%}
+
+      {%- if product_5_label != blank or product_5_class != blank or product_5_image != blank -%}
+        <div class="plus">+</div>
+        <div class="it">
+          {%- if product_5_image != blank -%}
+            <img src="{{ product_5_image | image_url: width: 120 }}" class="pimg" alt="{{ product_5_label | escape }}" loading="lazy" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
+          {%- else -%}
+            <span class="pimg {{ product_5_class }}" role="img" aria-label="{{ product_5_label | escape }}"></span>
+          {%- endif -%}
+          <span>{{ product_5_label }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+  
+  <div class="body">
+    <h3>{{ title }}</h3>
+    {%- if products_count > 0 -%}
+      <span class="cnt">{{ products_count }} Products</span>
+    {%- endif -%}
+    {%- if benefits != blank -%}
+      <p class="inc">{{ benefits }}</p>
+    {%- endif -%}
+    
+    <div class="prow">
+      <strong>₹{{ price }}</strong>
+      {%- if compare_at_price > price -%}
+        <s>₹{{ compare_at_price }}</s>
+        {%- if savings != blank -%}
+          <em>{{ savings }}</em>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+    <span class="fine">Inclusive of all taxes · COD available</span>
+    
+    <a href="{{ button_link | default: '#shop' }}" class="btn btn-primary" style="width: 100%; justify-content: center;">
+      {{ button_label | default: 'Shop bundle' }}
+    </a>
+  </div>
+</div>

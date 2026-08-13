@@ -1,0 +1,428 @@
+<section class="hero" data-scene="1" id="purelane-hero-{{ section.id }}">
+  <div class="hero-grid">
+    <!-- Desktop Promise Badges -->
+    <div class="badges glass-2" aria-label="Product promises">
+      <div class="badge">
+        <span class="bi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
+            <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
+          </svg>
+        </span>
+        <span>{{ section.settings.badge_1_text | default: "Plant<br>powered" }}</span>
+      </div>
+      <div class="badge">
+        <span class="bi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3 4.5 6v6.2c0 4.3 3.1 7.6 7.5 8.8 4.4-1.2 7.5-4.5 7.5-8.8V6L12 3Z"/>
+            <path d="m9 12 2.2 2.2L15.4 10"/>
+          </svg>
+        </span>
+        <span>{{ section.settings.badge_2_text | default: "Safe for<br>kids & pets" }}</span>
+      </div>
+      <div class="badge">
+        <span class="bi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="8.4"/>
+            <path d="M6.4 17.6 17.6 6.4"/>
+          </svg>
+        </span>
+        <span>{{ section.settings.badge_3_text | default: "Zero harsh<br>chemicals" }}</span>
+      </div>
+    </div>
+
+    <!-- Hero Left Copy -->
+    <div class="hero-copy">
+      <h1 class="d1 rv in">{{ section.settings.heading }}</h1>
+      <div class="rule rv rv-d1">
+        <i></i>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
+          <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
+        </svg>
+        <i></i>
+      </div>
+      <p class="lede rv rv-d2">{{ section.settings.subheading }}</p>
+      
+      <div class="hero-cta rv rv-d3">
+        {%- if section.settings.button_1_label != blank -%}
+          <a class="btn btn-primary" href="{{ section.settings.button_1_link | default: '#shop' }}">
+            {{ section.settings.button_1_label }}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h13m-5-6 6 6-6 6"/>
+            </svg>
+          </a>
+        {%- endif -%}
+        {%- if section.settings.button_2_label != blank -%}
+          <a class="btn btn-ghost" href="{{ section.settings.button_2_link | default: '#how' }}">
+            {{ section.settings.button_2_label }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      <!-- Mobile Promise Badges Strip -->
+      <div class="badgestrip rv rv-d4">
+        <div class="glass-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px; margin:0 auto 6px; color:#4f7d10;">
+            <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
+            <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
+          </svg>
+          {{ section.settings.badge_1_text_mobile | default: "Plant powered" }}
+        </div>
+        <div class="glass-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px; margin:0 auto 6px; color:#4f7d10;">
+            <path d="M12 3 4.5 6v6.2c0 4.3 3.1 7.6 7.5 8.8 4.4-1.2 7.5-4.5 7.5-8.8V6L12 3Z"/>
+            <path d="m9 12 2.2 2.2L15.4 10"/>
+          </svg>
+          {{ section.settings.badge_2_text_mobile | default: "Safe for kids" }}
+        </div>
+        <div class="glass-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:18px; height:18px; margin:0 auto 6px; color:#4f7d10;">
+            <circle cx="12" cy="12" r="8.4"/>
+            <path d="M6.4 17.6 17.6 6.4"/>
+          </svg>
+          {{ section.settings.badge_3_text_mobile | default: "Non-toxic" }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Carousel (Product Staging) -->
+    <div class="hero-prod" id="heroProd">
+      <div class="hstage" id="hstage">
+        
+        <!-- Slide 1: 1-Product State -->
+        <div class="hslide hs1 on">
+          {%- if section.settings.slide_1_image != blank -%}
+            <img src="{{ section.settings.slide_1_image | image_url: width: 400 }}" class="hp a d1" alt="{{ section.settings.slide_1_title | escape }}">
+          {%- else -%}
+            <div class="hp a {{ section.settings.slide_1_class | default: 'p-kitchen' }} d1" role="img" aria-label="{{ section.settings.slide_1_title | escape }}"></div>
+          {%- endif -%}
+          
+          <div class="glass-2 ptag">
+            <span class="lbl">{{ section.settings.slide_1_title }}</span>
+            <div class="val">
+              <strong>{{ section.settings.slide_1_price }}</strong>
+              {%- if section.settings.slide_1_compare != blank -%}
+                <s>{{ section.settings.slide_1_compare }}</s>
+              {%- endif -%}
+            </div>
+            {%- if section.settings.slide_1_badge != blank -%}
+              <span class="cut">{{ section.settings.slide_1_badge }}</span>
+            {%- endif -%}
+          </div>
+        </div>
+
+        <!-- Slide 2: 2-Product State -->
+        <div class="hslide hs2">
+          {%- if section.settings.slide_2_img_1 != blank -%}
+            <img src="{{ section.settings.slide_2_img_1 | image_url: width: 350 }}" class="hp a d1" alt="Product 1">
+          {%- else -%}
+            <div class="hp a {{ section.settings.slide_2_class_1 | default: 'p-kitchen' }} d1"></div>
+          {%- endif -%}
+          {%- if section.settings.slide_2_img_2 != blank -%}
+            <img src="{{ section.settings.slide_2_img_2 | image_url: width: 350 }}" class="hp b d2" alt="Product 2">
+          {%- else -%}
+            <div class="hp b {{ section.settings.slide_2_class_2 | default: 'p-dish' }} d2"></div>
+          {%- endif -%}
+          
+          <div class="glass-2 ptag">
+            <span class="lbl">{{ section.settings.slide_2_title }}</span>
+            <div class="val">
+              <strong>{{ section.settings.slide_2_price }}</strong>
+              {%- if section.settings.slide_2_compare != blank -%}
+                <s>{{ section.settings.slide_2_compare }}</s>
+              {%- endif -%}
+            </div>
+            {%- if section.settings.slide_2_badge != blank -%}
+              <span class="cut">{{ section.settings.slide_2_badge }}</span>
+            {%- endif -%}
+          </div>
+        </div>
+
+        <!-- Slide 3: 3-Product State -->
+        <div class="hslide hs3">
+          {%- if section.settings.slide_3_img_1 != blank -%}
+            <img src="{{ section.settings.slide_3_img_1 | image_url: width: 300 }}" class="hp a d1" alt="Product 1">
+          {%- else -%}
+            <div class="hp a {{ section.settings.slide_3_class_1 | default: 'p-kitchen' }} d1"></div>
+          {%- endif -%}
+          {%- if section.settings.slide_3_img_2 != blank -%}
+            <img src="{{ section.settings.slide_3_img_2 | image_url: width: 300 }}" class="hp b d2" alt="Product 2">
+          {%- else -%}
+            <div class="hp b {{ section.settings.slide_3_class_2 | default: 'p-dish' }} d2"></div>
+          {%- endif -%}
+          {%- if section.settings.slide_3_img_3 != blank -%}
+            <img src="{{ section.settings.slide_3_img_3 | image_url: width: 300 }}" class="hp c d3" alt="Product 3">
+          {%- else -%}
+            <div class="hp c {{ section.settings.slide_3_class_3 | default: 'p-tap' }} d3"></div>
+          {%- endif -%}
+          
+          <div class="glass-2 ptag">
+            <span class="lbl">{{ section.settings.slide_3_title }}</span>
+            <div class="val">
+              <strong>{{ section.settings.slide_3_price }}</strong>
+              {%- if section.settings.slide_3_compare != blank -%}
+                <s>{{ section.settings.slide_3_compare }}</s>
+              {%- endif -%}
+            </div>
+            {%- if section.settings.slide_3_badge != blank -%}
+              <span class="cut">{{ section.settings.slide_3_badge }}</span>
+            {%- endif -%}
+          </div>
+        </div>
+
+      </div>
+      
+      <!-- Dots Controls -->
+      <div class="hdots" id="hdots">
+        <button class="on" aria-label="Show 1 product"></button>
+        <button aria-label="Show 2 products"></button>
+        <button aria-label="Show 3 products"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Hero",
+  "tag": "section",
+  "class": "section-purelane-hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Copy Settings"
+    },
+    {
+      "type": "inline_liquid",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Clean<br>That<br><span class=\"lime\">Lasts</span>"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Homecare that works on the toughest grime, made from plants. Kind to your home, your family and the world outside it."
+    },
+    {
+      "type": "text",
+      "id": "button_1_label",
+      "label": "Primary Button Label",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "button_1_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_2_label",
+      "label": "Secondary Button Label",
+      "default": "How it works"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Promise Badges"
+    },
+    {
+      "type": "inline_liquid",
+      "id": "badge_1_text",
+      "label": "Badge 1 Text (Desktop)",
+      "default": "Plant<br>powered"
+    },
+    {
+      "type": "inline_liquid",
+      "id": "badge_2_text",
+      "label": "Badge 2 Text (Desktop)",
+      "default": "Safe for<br>kids & pets"
+    },
+    {
+      "type": "inline_liquid",
+      "id": "badge_3_text",
+      "label": "Badge 3 Text (Desktop)",
+      "default": "Zero harsh<br>chemicals"
+    },
+    {
+      "type": "text",
+      "id": "badge_1_text_mobile",
+      "label": "Badge 1 Text (Mobile)",
+      "default": "Plant powered"
+    },
+    {
+      "type": "text",
+      "id": "badge_2_text_mobile",
+      "label": "Badge 2 Text (Mobile)",
+      "default": "Safe for kids"
+    },
+    {
+      "type": "text",
+      "id": "badge_3_text_mobile",
+      "label": "Badge 3 Text (Mobile)",
+      "default": "Non-toxic"
+    },
+    {
+      "type": "header",
+      "content": "Slide 1 Configuration (1 Product)"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_1_image",
+      "label": "Slide 1 Image"
+    },
+    {
+      "type": "text",
+      "id": "slide_1_class",
+      "label": "Slide 1 SVG class fallback",
+      "default": "p-kitchen",
+      "info": "Values: p-kitchen, p-dish, p-tap, p-laundry, p-floor, p-toilet, etc."
+    },
+    {
+      "type": "text",
+      "id": "slide_1_title",
+      "label": "Slide 1 Title",
+      "default": "Foaming kitchen cleaner"
+    },
+    {
+      "type": "text",
+      "id": "slide_1_price",
+      "label": "Slide 1 Price",
+      "default": "₹200"
+    },
+    {
+      "type": "text",
+      "id": "slide_1_compare",
+      "label": "Slide 1 Compare-at Price",
+      "default": "₹299"
+    },
+    {
+      "type": "text",
+      "id": "slide_1_badge",
+      "label": "Slide 1 Discount Badge",
+      "default": "33% off"
+    },
+    {
+      "type": "header",
+      "content": "Slide 2 Configuration (2 Products)"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_2_img_1",
+      "label": "Slide 2 Image 1"
+    },
+    {
+      "type": "text",
+      "id": "slide_2_class_1",
+      "label": "Slide 2 SVG class 1 fallback",
+      "default": "p-kitchen"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_2_img_2",
+      "label": "Slide 2 Image 2"
+    },
+    {
+      "type": "text",
+      "id": "slide_2_class_2",
+      "label": "Slide 2 SVG class 2 fallback",
+      "default": "p-dish"
+    },
+    {
+      "type": "text",
+      "id": "slide_2_title",
+      "label": "Slide 2 Title",
+      "default": "Any 2 products"
+    },
+    {
+      "type": "text",
+      "id": "slide_2_price",
+      "label": "Slide 2 Price",
+      "default": "₹349"
+    },
+    {
+      "type": "text",
+      "id": "slide_2_compare",
+      "label": "Slide 2 Compare-at Price",
+      "default": "₹598"
+    },
+    {
+      "type": "text",
+      "id": "slide_2_badge",
+      "label": "Slide 2 Discount Badge",
+      "default": "Save ₹249"
+    },
+    {
+      "type": "header",
+      "content": "Slide 3 Configuration (3 Products)"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_3_img_1",
+      "label": "Slide 3 Image 1"
+    },
+    {
+      "type": "text",
+      "id": "slide_3_class_1",
+      "label": "Slide 3 SVG class 1 fallback",
+      "default": "p-kitchen"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_3_img_2",
+      "label": "Slide 3 Image 2"
+    },
+    {
+      "type": "text",
+      "id": "slide_3_class_2",
+      "label": "Slide 3 SVG class 2 fallback",
+      "default": "p-dish"
+    },
+    {
+      "type": "image_picker",
+      "id": "slide_3_img_3",
+      "label": "Slide 3 Image 3"
+    },
+    {
+      "type": "text",
+      "id": "slide_3_class_3",
+      "label": "Slide 3 SVG class 3 fallback",
+      "default": "p-tap"
+    },
+    {
+      "type": "text",
+      "id": "slide_3_title",
+      "label": "Slide 3 Title",
+      "default": "Any 3 products"
+    },
+    {
+      "type": "text",
+      "id": "slide_3_price",
+      "label": "Slide 3 Price",
+      "default": "₹499"
+    },
+    {
+      "type": "text",
+      "id": "slide_3_compare",
+      "label": "Slide 3 Compare-at Price",
+      "default": "₹897"
+    },
+    {
+      "type": "text",
+      "id": "slide_3_badge",
+      "label": "Slide 3 Discount Badge",
+      "default": "Save ₹398"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Hero"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,78 @@
+{% comment %}
+  Renders a Purelane custom product card.
+  Accepts:
+  - card_product: {Object} Product object (required)
+{% endcomment %}
+
+{%- if card_product != blank -%}
+  {%- liquid
+    assign price = card_product.price
+    assign compare_at_price = card_product.compare_at_price
+    assign discount = 0
+    if compare_at_price > price
+      assign discount = compare_at_price | minus: price | times: 100.0 | divided_by: compare_at_price | round
+    endif
+
+    assign product_badge = ""
+    for tag in card_product.tags
+      if tag contains 'badge:'
+        assign product_badge = tag | split: ':' | last
+      endif
+    endfor
+  -%}
+  <article class="glass card rv">
+    <a href="{{ card_product.url }}" class="card-link-wrapper" style="display: block; color: inherit; text-decoration: none;">
+      <div class="shot">
+        {%- if product_badge != blank -%}
+          <span class="pill">{{ product_badge }}</span>
+        {%- else -%}
+          {%- if compare_at_price > price -%}
+            <span class="pill">Sale</span>
+          {%- endif -%}
+        {%- endif -%}
+        {%- if card_product.featured_image != blank -%}
+          <img 
+            src="{{ card_product.featured_image | image_url: width: 300 }}" 
+            class="pimg" 
+            alt="{{ card_product.featured_image.alt | escape }}" 
+            loading="lazy"
+            style="height: 122px; width: auto; object-fit: contain;"
+          >
+        {%- else -%}
+          <!-- SVG fallback if no featured image exists -->
+          <svg viewBox="0 0 130 200" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="65" cy="190" rx="40" ry="7" fill="#01201c" opacity=".5"/>
+            <rect x="31" y="112" width="66" height="60" rx="6" fill="#4b3a8f" opacity="0.8"/>
+            <text x="65" y="146" text-anchor="middle" fill="#ffffff" font-size="10" font-family="Outfit, sans-serif">PURELANE</text>
+          </svg>
+        {%- endif -%}
+      </div>
+    </a>
+    
+    <h4 style="margin-top: 10px;"><a href="{{ card_product.url }}">{{ card_product.title }}</a></h4>
+    
+    <div class="rate">
+      <b>★ {% if card_product.metafields.reviews.rating.value %}{{ card_product.metafields.reviews.rating.value }}{% else %}4.8{% endif %}</b> 
+      · {% if card_product.metafields.reviews.rating_count.value %}{{ card_product.metafields.reviews.rating_count.value }}{% else %}250{% endif %} reviews
+    </div>
+    
+    <div class="pr">
+      <strong>{{ price | money_without_trailing_zeros }}</strong>
+      {%- if compare_at_price > price -%}
+        <s>{{ compare_at_price | money_without_trailing_zeros }}</s>
+        <em>{{ discount }}% off</em>
+      {%- endif -%}
+    </div>
+    
+    {%- form 'product', card_product, id: nil, class: 'purelane-add-to-cart-form' -%}
+      <input type="hidden" name="id" value="{{ card_product.first_available_variant.id }}">
+      <button type="submit" class="btn btn-ghost btn-sm" style="width: 100%; justify-content: center;" {% unless card_product.available %}disabled{% endunless %}>
+        {%- if card_product.available -%}
+          Add to cart
+        {%- else -%}
+          Sold out
+        {%- endif -%}
+      </button>
+    {%- endform -%}
+  </article>
+{%- endif -%}
