@@ -10,3 +10,6 @@ Thumbs.db
 .shopify
 node_modules
 *.zip
+
+# Project source assets and assessment specs
+/SAMPLE CODE/

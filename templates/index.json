@@ -6,9 +6,9 @@
         "heading": "Clean<br>That<br><span class=\"lime\">Lasts</span>",
         "subheading": "Homecare that works on the toughest grime, made from plants. Kind to your home, your family and the world outside it.",
         "button_1_label": "Shop now",
-        "button_1_link": "shopify://collections/all",
+        "button_1_link": "#shop",
         "button_2_label": "How it works",
-        "button_2_link": "#range",
+        "button_2_link": "#how",
         "badge_1_text": "Plant<br>powered",
         "badge_2_text": "Safe for<br>kids & pets",
         "badge_3_text": "Zero harsh<br>chemicals",
@@ -35,14 +35,139 @@
         "slide_3_badge": "Save ₹398"
       }
     },
-    "purelane_product_grid": {
-      "type": "purelane-product-grid",
+    "purelane_review_wall": {
+      "type": "purelane-review-wall",
+      "blocks": {
+        "rev_1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Works like a charm",
+            "text": "\"An eco option that actually cleans as well as chemical alternatives. It smells much fresher and doesn't trigger my allergies.\"",
+            "name": "Anita",
+            "product": "Laundry detergent",
+            "verified": true
+          }
+        },
+        "rev_2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Best dishwash ever",
+            "text": "\"Switching to this was the best decision for my hands. No dry or cracked skin anymore, and it cleans all grease easily.\"",
+            "name": "Priya",
+            "product": "Dishwash gel",
+            "verified": true
+          }
+        },
+        "rev_3": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Unbelievable grease cut",
+            "text": "\"Cleans our gas stoves and chimney mesh instantly without any chemical smell. Safe for my kids and pets to be around.\"",
+            "name": "Rahul",
+            "product": "Kitchen cleaner",
+            "verified": true
+          }
+        },
+        "rev_4": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "title": "Limescale simply melted",
+            "text": "\"Our bathroom taps look brand new. The hard water stains melted away in minutes. Will buy the complete home kit next!\"",
+            "name": "Meera",
+            "product": "Tap descaler",
+            "verified": true
+          }
+        }
+      },
+      "block_order": [
+        "rev_1",
+        "rev_2",
+        "rev_3",
+        "rev_4"
+      ],
       "settings": {
-        "kicker": "Explore the range",
-        "heading": "Shop by category",
-        "collection": "all",
-        "products_to_show": 4
+        "kicker": "That's what they said",
+        "rating": "4.8",
+        "reviews_count": "8,000+ reviews",
+        "lead_text": "Loved by 12 Lakh+ homes across India for plant-powered cleaning that actually works."
       }
+    },
+    "purelane_ingredients": {
+      "type": "purelane-ingredients",
+      "settings": {
+        "heading": "Sourced from nature"
+      },
+      "blocks": {
+        "ing_1": { "type": "ingredient", "settings": { "icon": "coconut", "title": "Coconut", "description": "Plant-derived cleansers that lift grease" } },
+        "ing_2": { "type": "ingredient", "settings": { "icon": "orange", "title": "Orange peel", "description": "Natural degreaser and fresh citrus lift" } },
+        "ing_3": { "type": "ingredient", "settings": { "icon": "soapnut", "title": "Soap nut", "description": "A traditional plant foaming agent" } },
+        "ing_4": { "type": "ingredient", "settings": { "icon": "neem", "title": "Neem", "description": "Time-tested antibacterial from the tree" } },
+        "ing_5": { "type": "ingredient", "settings": { "icon": "lemongrass", "title": "Lemongrass", "description": "Clean fragrance with nothing synthetic" } }
+      },
+      "block_order": [ "ing_1", "ing_2", "ing_3", "ing_4", "ing_5" ]
+    },
+    "purelane_pillars": {
+      "type": "purelane-how-it-works",
+      "blocks": {
+        "pil_1": {
+          "type": "pillar",
+          "settings": {
+            "icon": "bubbles",
+            "title": "Less scrubbing",
+            "description": "A foaming formulation. The foam clings to grease and lifts it, so you wipe instead of scrub.",
+            "button_label": "Learn more",
+            "button_link": "#shop"
+          }
+        },
+        "pil_2": {
+          "type": "pillar",
+          "settings": {
+            "icon": "shield",
+            "title": "Clean ingredients",
+            "description": "No sulphates, no chlorine, no synthetic fragrance. Nothing on the label you would not want near your food.",
+            "button_label": "Learn more",
+            "button_link": "#ingredients"
+          }
+        },
+        "pil_3": {
+          "type": "pillar",
+          "settings": {
+            "icon": "heart",
+            "title": "Safe around everyone",
+            "description": "Gentle on hands, safe around kids and pets, and it leaves no toxic residue on the surfaces you touch every day.",
+            "button_label": "Learn more",
+            "button_link": "#proof"
+          }
+        }
+      },
+      "block_order": [ "pil_1", "pil_2", "pil_3" ]
+    },
+    "purelane_proof": {
+      "type": "purelane-proof",
+      "settings": {
+        "kicker": "Why it works",
+        "heading": "Tough on grime.<br>Gentle on everything else.",
+        "description": "Every formula is built on plant-derived cleansers and essential oils. It behaves exactly like the cleaner you are used to, minus the things you never signed up for.",
+        "button_label": "See the ingredient list",
+        "button_link": "#ingredients"
+      },
+      "blocks": {
+        "rot_1": { "type": "rotator_product", "settings": { "title": "Kitchen cleaner", "note": "Foam lifts grease, no scrubbing", "fallback_class": "p-kitchen" } },
+        "rot_2": { "type": "rotator_product", "settings": { "title": "Tap & limescale", "note": "Melts hard water stains", "fallback_class": "p-tap" } },
+        "rot_3": { "type": "rotator_product", "settings": { "title": "Laundry detergent", "note": "Tough on odour, soft on fabric", "fallback_class": "p-laundry" } },
+        "rot_4": { "type": "rotator_product", "settings": { "title": "Toilet cleaner", "note": "Kills 99.9% of germs", "fallback_class": "p-toilet" } },
+        "rot_5": { "type": "rotator_product", "settings": { "title": "Floor cleaner", "note": "Neem powered, pet safe", "fallback_class": "p-floor" } },
+        "rot_6": { "type": "rotator_product", "settings": { "title": "Dishwash gel", "note": "Cuts grease, kind to hands", "fallback_class": "p-dish" } },
+        "stat_1": { "type": "stat", "settings": { "number": "99.9%", "title": "Germ kill", "description": "Tested against germs and bacteria" } },
+        "stat_2": { "type": "stat", "settings": { "number": "0%", "title": "Sulphates", "description": "No SLS, chlorine or parabens" } },
+        "stat_3": { "type": "stat", "settings": { "number": "100%", "title": "Plant based", "description": "Cleansers derived from plants" } },
+        "stat_4": { "type": "stat", "settings": { "number": "4.8", "title": "Rated", "description": "Across 8,000+ verified reviews" } }
+      },
+      "block_order": [ "rot_1", "rot_2", "rot_3", "rot_4", "rot_5", "rot_6", "stat_1", "stat_2", "stat_3", "stat_4" ]
     },
     "purelane_best_selling_combos": {
       "type": "purelane-best-selling-combos",
@@ -246,73 +371,24 @@
         "tier_heading": "Choose your bundle size"
       }
     },
-    "purelane_review_wall": {
-      "type": "purelane-review-wall",
-      "blocks": {
-        "rev_1": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Works like a charm",
-            "text": "\"An eco option that actually cleans as well as chemical alternatives. It smells much fresher and doesn't trigger my allergies.\"",
-            "name": "Anita",
-            "product": "Laundry detergent",
-            "verified": true
-          }
-        },
-        "rev_2": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Best dishwash ever",
-            "text": "\"Switching to this was the best decision for my hands. No dry or cracked skin anymore, and it cleans all grease easily.\"",
-            "name": "Priya",
-            "product": "Dishwash gel",
-            "verified": true
-          }
-        },
-        "rev_3": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Unbelievable grease cut",
-            "text": "\"Cleans our gas stoves and chimney mesh instantly without any chemical smell. Safe for my kids and pets to be around.\"",
-            "name": "Rahul",
-            "product": "Kitchen cleaner",
-            "verified": true
-          }
-        },
-        "rev_4": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "title": "Limescale simply melted",
-            "text": "\"Our bathroom taps look brand new. The hard water stains melted away in minutes. Will buy the complete home kit next!\"",
-            "name": "Meera",
-            "product": "Tap descaler",
-            "verified": true
-          }
-        }
-      },
-      "block_order": [
-        "rev_1",
-        "rev_2",
-        "rev_3",
-        "rev_4"
-      ],
+    "purelane_product_grid": {
+      "type": "purelane-product-grid",
       "settings": {
-        "kicker": "That's what they said",
-        "rating": "4.8",
-        "reviews_count": "8,000+ reviews",
-        "lead_text": "Loved by 12 Lakh+ homes across India for plant-powered cleaning that actually works."
+        "kicker": "Bestsellers",
+        "heading": "Loved by 30,000 homes",
+        "collection": "all",
+        "products_to_show": 4
       }
     }
   },
   "order": [
     "purelane_hero",
-    "purelane_product_grid",
+    "purelane_review_wall",
+    "purelane_ingredients",
+    "purelane_pillars",
+    "purelane_proof",
     "purelane_best_selling_combos",
     "purelane_bundles",
-    "purelane_review_wall"
+    "purelane_product_grid"
   ]
 }
