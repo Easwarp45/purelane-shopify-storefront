@@ -93,7 +93,7 @@
         <!-- Slide 1: 1-Product State -->
         <div class="hslide hs1 on">
           {%- if section.settings.slide_1_image != blank -%}
-            <img src="{{ section.settings.slide_1_image | image_url: width: 400 }}" class="hp a d1" alt="{{ section.settings.slide_1_title | escape }}">
+            <img src="{{ section.settings.slide_1_image | image_url: width: 400 }}" class="hp a d1" alt="{{ section.settings.slide_1_title | escape }}" width="{{ section.settings.slide_1_image.width }}" height="{{ section.settings.slide_1_image.height }}">
           {%- else -%}
             <div class="hp a {{ section.settings.slide_1_class | default: 'p-kitchen' }} d1" role="img" aria-label="{{ section.settings.slide_1_title | escape }}"></div>
           {%- endif -%}
@@ -115,12 +115,12 @@
         <!-- Slide 2: 2-Product State -->
         <div class="hslide hs2">
           {%- if section.settings.slide_2_img_1 != blank -%}
-            <img src="{{ section.settings.slide_2_img_1 | image_url: width: 350 }}" class="hp a d1" alt="Product 1">
+            <img src="{{ section.settings.slide_2_img_1 | image_url: width: 350 }}" class="hp a d1" alt="Product 1" width="{{ section.settings.slide_2_img_1.width }}" height="{{ section.settings.slide_2_img_1.height }}">
           {%- else -%}
             <div class="hp a {{ section.settings.slide_2_class_1 | default: 'p-kitchen' }} d1"></div>
           {%- endif -%}
           {%- if section.settings.slide_2_img_2 != blank -%}
-            <img src="{{ section.settings.slide_2_img_2 | image_url: width: 350 }}" class="hp b d2" alt="Product 2">
+            <img src="{{ section.settings.slide_2_img_2 | image_url: width: 350 }}" class="hp b d2" alt="Product 2" width="{{ section.settings.slide_2_img_2.width }}" height="{{ section.settings.slide_2_img_2.height }}">
           {%- else -%}
             <div class="hp b {{ section.settings.slide_2_class_2 | default: 'p-dish' }} d2"></div>
           {%- endif -%}
@@ -142,17 +142,17 @@
         <!-- Slide 3: 3-Product State -->
         <div class="hslide hs3">
           {%- if section.settings.slide_3_img_1 != blank -%}
-            <img src="{{ section.settings.slide_3_img_1 | image_url: width: 300 }}" class="hp a d1" alt="Product 1">
+            <img src="{{ section.settings.slide_3_img_1 | image_url: width: 300 }}" class="hp a d1" alt="Product 1" width="{{ section.settings.slide_3_img_1.width }}" height="{{ section.settings.slide_3_img_1.height }}">
           {%- else -%}
             <div class="hp a {{ section.settings.slide_3_class_1 | default: 'p-kitchen' }} d1"></div>
           {%- endif -%}
           {%- if section.settings.slide_3_img_2 != blank -%}
-            <img src="{{ section.settings.slide_3_img_2 | image_url: width: 300 }}" class="hp b d2" alt="Product 2">
+            <img src="{{ section.settings.slide_3_img_2 | image_url: width: 300 }}" class="hp b d2" alt="Product 2" width="{{ section.settings.slide_3_img_2.width }}" height="{{ section.settings.slide_3_img_2.height }}">
           {%- else -%}
             <div class="hp b {{ section.settings.slide_3_class_2 | default: 'p-dish' }} d2"></div>
           {%- endif -%}
           {%- if section.settings.slide_3_img_3 != blank -%}
-            <img src="{{ section.settings.slide_3_img_3 | image_url: width: 300 }}" class="hp c d3" alt="Product 3">
+            <img src="{{ section.settings.slide_3_img_3 | image_url: width: 300 }}" class="hp c d3" alt="Product 3" width="{{ section.settings.slide_3_img_3.width }}" height="{{ section.settings.slide_3_img_3.height }}">
           {%- else -%}
             <div class="hp c {{ section.settings.slide_3_class_3 | default: 'p-tap' }} d3"></div>
           {%- endif -%}
@@ -194,7 +194,7 @@
       "content": "Hero Copy Settings"
     },
     {
-      "type": "inline_liquid",
+      "type": "liquid",
       "id": "heading",
       "label": "Heading",
       "default": "Clean<br>That<br><span class=\"lime\">Lasts</span>"
@@ -232,19 +232,19 @@
       "content": "Promise Badges"
     },
     {
-      "type": "inline_liquid",
+      "type": "liquid",
       "id": "badge_1_text",
       "label": "Badge 1 Text (Desktop)",
       "default": "Plant<br>powered"
     },
     {
-      "type": "inline_liquid",
+      "type": "liquid",
       "id": "badge_2_text",
       "label": "Badge 2 Text (Desktop)",
       "default": "Safe for<br>kids & pets"
     },
     {
-      "type": "inline_liquid",
+      "type": "liquid",
       "id": "badge_3_text",
       "label": "Badge 3 Text (Desktop)",
       "default": "Zero harsh<br>chemicals"

@@ -41,7 +41,7 @@
       {%- if product_1_label != blank or product_1_class != blank or product_1_image != blank -%}
         <div class="it">
           {%- if product_1_image != blank -%}
-            <img src="{{ product_1_image | image_url: width: 120 }}" class="pimg" alt="{{ product_1_label | escape }}" loading="lazy" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
+            <img src="{{ product_1_image | image_url: width: 120 }}" class="pimg" alt="{{ product_1_label | escape }}" loading="lazy" width="{{ product_1_image.width }}" height="{{ product_1_image.height }}" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
           {%- else -%}
             <span class="pimg {{ product_1_class }}" role="img" aria-label="{{ product_1_label | escape }}"></span>
           {%- endif -%}
@@ -53,7 +53,7 @@
         <div class="plus">+</div>
         <div class="it">
           {%- if product_2_image != blank -%}
-            <img src="{{ product_2_image | image_url: width: 120 }}" class="pimg" alt="{{ product_2_label | escape }}" loading="lazy" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
+            <img src="{{ product_2_image | image_url: width: 120 }}" class="pimg" alt="{{ product_2_label | escape }}" loading="lazy" width="{{ product_2_image.width }}" height="{{ product_2_image.height }}" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
           {%- else -%}
             <span class="pimg {{ product_2_class }}" role="img" aria-label="{{ product_2_label | escape }}"></span>
           {%- endif -%}
@@ -65,7 +65,7 @@
         <div class="plus">+</div>
         <div class="it">
           {%- if product_3_image != blank -%}
-            <img src="{{ product_3_image | image_url: width: 120 }}" class="pimg" alt="{{ product_3_label | escape }}" loading="lazy" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
+            <img src="{{ product_3_image | image_url: width: 120 }}" class="pimg" alt="{{ product_3_label | escape }}" loading="lazy" width="{{ product_3_image.width }}" height="{{ product_3_image.height }}" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
           {%- else -%}
             <span class="pimg {{ product_3_class }}" role="img" aria-label="{{ product_3_label | escape }}"></span>
           {%- endif -%}
@@ -77,7 +77,7 @@
         <div class="plus">+</div>
         <div class="it">
           {%- if product_4_image != blank -%}
-            <img src="{{ product_4_image | image_url: width: 120 }}" class="pimg" alt="{{ product_4_label | escape }}" loading="lazy" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
+            <img src="{{ product_4_image | image_url: width: 120 }}" class="pimg" alt="{{ product_4_label | escape }}" loading="lazy" width="{{ product_4_image.width }}" height="{{ product_4_image.height }}" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
           {%- else -%}
             <span class="pimg {{ product_4_class }}" role="img" aria-label="{{ product_4_label | escape }}"></span>
           {%- endif -%}
@@ -89,7 +89,7 @@
         <div class="plus">+</div>
         <div class="it">
           {%- if product_5_image != blank -%}
-            <img src="{{ product_5_image | image_url: width: 120 }}" class="pimg" alt="{{ product_5_label | escape }}" loading="lazy" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
+            <img src="{{ product_5_image | image_url: width: 120 }}" class="pimg" alt="{{ product_5_label | escape }}" loading="lazy" width="{{ product_5_image.width }}" height="{{ product_5_image.height }}" style="height: 66px; width: auto; object-fit: contain; margin: 0 auto 8px;">
           {%- else -%}
             <span class="pimg {{ product_5_class }}" role="img" aria-label="{{ product_5_label | escape }}"></span>
           {%- endif -%}

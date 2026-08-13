@@ -12,7 +12,7 @@
 <a class="glass cat rv {{ delay_class }}" href="{{ link | default: '#combos' }}">
   <span class="ph">
     {%- if image != blank -%}
-      <img src="{{ image | image_url: width: 250 }}" class="pimg" alt="{{ title | escape }}" loading="lazy" style="height: 176px; width: auto; object-fit: contain; position: relative;">
+      <img src="{{ image | image_url: width: 250 }}" class="pimg" alt="{{ title | escape }}" loading="lazy" width="{{ image.width }}" height="{{ image.height }}" style="height: 176px; width: auto; object-fit: contain; position: relative;">
     {%- else -%}
       <span class="pimg {{ fallback_class | default: 'p-kitchen' }}" role="img" aria-label="{{ title | escape }}"></span>
     {%- endif -%}

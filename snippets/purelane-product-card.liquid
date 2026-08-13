@@ -36,6 +36,8 @@
             class="pimg" 
             alt="{{ card_product.featured_image.alt | escape }}" 
             loading="lazy"
+            width="{{ card_product.featured_image.width }}"
+            height="{{ card_product.featured_image.height }}"
             style="height: 122px; width: auto; object-fit: contain;"
           >
         {%- else -%}

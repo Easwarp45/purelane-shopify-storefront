@@ -96,31 +96,31 @@
             <!-- Tier Product Staging Stack -->
             <div class="tierpix {% if block.settings.product_4_class != blank or block.settings.product_5_class != blank %}five{% endif %}">
               {%- if block.settings.product_1_image != blank -%}
-                <img src="{{ block.settings.product_1_image | image_url: width: 100 }}" class="pimg" alt="P1" loading="lazy" style="height: 54px; width: auto; object-fit: contain;">
+                <img src="{{ block.settings.product_1_image | image_url: width: 100 }}" class="pimg" alt="P1" loading="lazy" width="{{ block.settings.product_1_image.width }}" height="{{ block.settings.product_1_image.height }}" style="height: 54px; width: auto; object-fit: contain;">
               {%- elsif block.settings.product_1_class != blank -%}
                 <span class="pimg {{ block.settings.product_1_class }}" role="img"></span>
               {%- endif -%}
 
               {%- if block.settings.product_2_image != blank -%}
-                <img src="{{ block.settings.product_2_image | image_url: width: 100 }}" class="pimg" alt="P2" loading="lazy" style="height: 54px; width: auto; object-fit: contain;">
+                <img src="{{ block.settings.product_2_image | image_url: width: 100 }}" class="pimg" alt="P2" loading="lazy" width="{{ block.settings.product_2_image.width }}" height="{{ block.settings.product_2_image.height }}" style="height: 54px; width: auto; object-fit: contain;">
               {%- elsif block.settings.product_2_class != blank -%}
                 <span class="pimg {{ block.settings.product_2_class }}" role="img"></span>
               {%- endif -%}
 
               {%- if block.settings.product_3_image != blank -%}
-                <img src="{{ block.settings.product_3_image | image_url: width: 100 }}" class="pimg" alt="P3" loading="lazy" style="height: 54px; width: auto; object-fit: contain;">
+                <img src="{{ block.settings.product_3_image | image_url: width: 100 }}" class="pimg" alt="P3" loading="lazy" width="{{ block.settings.product_3_image.width }}" height="{{ block.settings.product_3_image.height }}" style="height: 54px; width: auto; object-fit: contain;">
               {%- elsif block.settings.product_3_class != blank -%}
                 <span class="pimg {{ block.settings.product_3_class }}" role="img"></span>
               {%- endif -%}
 
               {%- if block.settings.product_4_image != blank -%}
-                <img src="{{ block.settings.product_4_image | image_url: width: 100 }}" class="pimg" alt="P4" loading="lazy" style="height: 54px; width: auto; object-fit: contain;">
+                <img src="{{ block.settings.product_4_image | image_url: width: 100 }}" class="pimg" alt="P4" loading="lazy" width="{{ block.settings.product_4_image.width }}" height="{{ block.settings.product_4_image.height }}" style="height: 54px; width: auto; object-fit: contain;">
               {%- elsif block.settings.product_4_class != blank -%}
                 <span class="pimg {{ block.settings.product_4_class }}" role="img"></span>
               {%- endif -%}
 
               {%- if block.settings.product_5_image != blank -%}
-                <img src="{{ block.settings.product_5_image | image_url: width: 100 }}" class="pimg" alt="P5" loading="lazy" style="height: 54px; width: auto; object-fit: contain;">
+                <img src="{{ block.settings.product_5_image | image_url: width: 100 }}" class="pimg" alt="P5" loading="lazy" width="{{ block.settings.product_5_image.width }}" height="{{ block.settings.product_5_image.height }}" style="height: 54px; width: auto; object-fit: contain;">
               {%- elsif block.settings.product_5_class != blank -%}
                 <span class="pimg {{ block.settings.product_5_class }}" role="img"></span>
               {%- endif -%}
