@@ -873,6 +873,10 @@ header .predictive-search,
   pointer-events: none;
   transition: opacity .85s var(--ease);
 }
+.hslide.on {
+  opacity: 1;
+  pointer-events: auto;
+}
 .hp,
 .hslide img {
   max-height: 100% !important; /* ensures images scale to fit smaller containers fluids */
@@ -1985,6 +1989,40 @@ main {
   outline: none;
   border-color: #b8701c;
   background: #fff;
+}
+
+/* ---------- TRUST BAR ---------- */
+.trust {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  padding: 6px;
+}
+@media (min-width: 820px) {
+  .trust {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.trust-i {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 14px;
+}
+.trust-i svg {
+  width: 26px;
+  height: 26px;
+  color: #4f7d10;
+  flex: 0 0 auto;
+}
+.trust-i span {
+  font-family: 'Outfit', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: var(--paper-2);
+  line-height: 1.32;
 }
 
 /* ---------- FOOTER ---------- */

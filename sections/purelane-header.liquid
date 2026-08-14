@@ -6,8 +6,10 @@
 
 <div class="ticker" aria-hidden="true" id="purelane-ticker-{{ section.id }}">
   <div class="track">
+    {%- assign has_announcements = false -%}
     {%- for block in section.blocks -%}
       {%- if block.type == 'announcement' -%}
+        {%- assign has_announcements = true -%}
         <span>{{ block.settings.text }}</span>
       {%- endif -%}
     {%- endfor -%}
@@ -17,6 +19,19 @@
         <span>{{ block.settings.text }}</span>
       {%- endif -%}
     {%- endfor -%}
+
+    {%- if has_announcements == false -%}
+      <!-- Default fallback announcements if no custom blocks are configured -->
+      <span>Free shipping <b>on every bundle across India</b></span>
+      <span>100% plant-based <b>and non-toxic</b></span>
+      <span>Loved by <b>30,000+ happy homes</b></span>
+      <span>Buy 3 <b>at flat ₹499</b></span>
+      <!-- Duplicate copy for seamless infinite marquee scroll -->
+      <span>Free shipping <b>on every bundle across India</b></span>
+      <span>100% plant-based <b>and non-toxic</b></span>
+      <span>Loved by <b>30,000+ happy homes</b></span>
+      <span>Buy 3 <b>at flat ₹499</b></span>
+    {%- endif -%}
   </div>
 </div>
 

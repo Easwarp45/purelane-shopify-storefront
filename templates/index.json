@@ -469,6 +469,35 @@
         "collection": "all",
         "products_to_show": 8
       }
+    },
+    "purelane_range": {
+      "type": "purelane-range",
+      "settings": {
+        "kicker": "The full range",
+        "heading": "Every room, one shelf",
+        "subheading": "Floors, taps, kitchen, laundry, bathroom and hands. Fourteen plant-based formulas that replace every harsh bottle under your sink.",
+        "hint_text": "Swipe to see the full shelf"
+      }
+    },
+    "purelane_trust_bar": {
+      "type": "purelane-trust-bar",
+      "blocks": {
+        "trust_1": { "type": "trust_item", "settings": { "icon": "plant", "text": "Plant derived<br>formulas" } },
+        "trust_2": { "type": "trust_item", "settings": { "icon": "package", "text": "Recyclable<br>packaging" } },
+        "trust_3": { "type": "trust_item", "settings": { "icon": "shield", "text": "Safe for<br>kids & pets" } },
+        "trust_4": { "type": "trust_item", "settings": { "icon": "globe", "text": "Made in<br>India" } }
+      },
+      "block_order": [ "trust_1", "trust_2", "trust_3", "trust_4" ]
+    },
+    "purelane_signup": {
+      "type": "purelane-signup",
+      "settings": {
+        "kicker": "Join the Purelane Club",
+        "heading": "Get ₹100 off your first bundle",
+        "subheading": "Plus first access to new launches and restocks.",
+        "placeholder": "your@email.com",
+        "button_label": "Get my ₹100 off"
+      }
     }
   },
   "order": [
@@ -479,7 +508,10 @@
     "purelane_proof",
     "purelane_best_selling_combos",
     "purelane_bundles",
-    "purelane_product_grid"
+    "purelane_product_grid",
+    "purelane_range",
+    "purelane_trust_bar",
+    "purelane_signup"
   ]
 }
 
