@@ -25,21 +25,100 @@
               {%- if prod_img != blank -%}
                 <img src="{{ prod_img | image_url: width: 250 }}" class="pimg" alt="{{ block.settings.title | default: prod_img.alt | escape }}" width="{{ prod_img.width }}" height="{{ prod_img.height }}" style="width: auto; object-fit: contain;">
               {%- else -%}
-                <span class="pimg {{ block.settings.fallback_class | default: 'p-kitchen' }}" role="img" aria-label="{{ block.settings.title | escape }}"></span>
+                {%- liquid
+                  assign fallback_class = block.settings.fallback_class | default: 'p-kitchen'
+                  assign fallback_img_name = 'purelane-kitchen.png'
+                  if fallback_class == 'p-floor'
+                    assign fallback_img_name = 'purelane-floor.png'
+                  elsif fallback_class == 'p-tap' or fallback_class == 'p-metal'
+                    assign fallback_img_name = 'purelane-tap.png'
+                  elsif fallback_class == 'p-kitchen'
+                    assign fallback_img_name = 'purelane-kitchen.png'
+                  elsif fallback_class == 'p-toilet'
+                    assign fallback_img_name = 'purelane-toilet.png'
+                  elsif fallback_class == 'p-laundry'
+                    assign fallback_img_name = 'purelane-laundry.png'
+                  elsif fallback_class == 'p-dish'
+                    assign fallback_img_name = 'purelane-dish.png'
+                  elsif fallback_class == 'p-wm'
+                    assign fallback_img_name = 'purelane-wm.png'
+                  elsif fallback_class == 'p-handwash'
+                    assign fallback_img_name = 'purelane-handwash.png'
+                  elsif fallback_class == 'p-eraser'
+                    assign fallback_img_name = 'purelane-eraser.png'
+                  endif
+                -%}
+                <img src="{{ fallback_img_name | asset_url }}" class="pimg" alt="{{ block.settings.title | escape }}" width="130" height="200" style="width: auto; object-fit: contain;">
+              {%- endif -%}
+            {%- endfor -%}
+          {%- elsif collections.all.products.size > 0 -%}
+            {%- for product in collections.all.products limit: 10 -%}
+              {%- liquid
+                assign title_down = product.title | downcase
+                assign handle_down = product.handle | downcase
+                assign cls = 'p-kitchen'
+                if title_down contains 'kitchen' or handle_down contains 'kitchen'
+                  assign cls = 'p-kitchen'
+                elsif title_down contains 'tap' or title_down contains 'limescale' or handle_down contains 'tap' or handle_down contains 'limescale'
+                  assign cls = 'p-tap'
+                elsif title_down contains 'laundry' or handle_down contains 'laundry'
+                  assign cls = 'p-laundry'
+                elsif title_down contains 'toilet' or handle_down contains 'toilet'
+                  assign cls = 'p-toilet'
+                elsif title_down contains 'floor' or handle_down contains 'floor'
+                  assign cls = 'p-floor'
+                elsif title_down contains 'dish' or handle_down contains 'dish'
+                  assign cls = 'p-dish'
+                elsif title_down contains 'washing' or title_down contains 'machine' or handle_down contains 'washing' or handle_down contains 'machine'
+                  assign cls = 'p-wm'
+                elsif title_down contains 'hand' or handle_down contains 'hand'
+                  assign cls = 'p-handwash'
+                elsif title_down contains 'eraser' or handle_down contains 'eraser'
+                  assign cls = 'p-eraser'
+                elsif title_down contains 'copper' or title_down contains 'brass' or handle_down contains 'copper' or handle_down contains 'brass'
+                  assign cls = 'p-metal'
+                endif
+              -%}
+              {%- if product.featured_image != blank -%}
+                <img src="{{ product.featured_image | image_url: width: 250 }}" class="pimg" alt="{{ product.title | escape }}" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}" style="width: auto; object-fit: contain;">
+              {%- else -%}
+                {%- liquid
+                  assign fallback_img_name = 'purelane-kitchen.png'
+                  if cls == 'p-floor'
+                    assign fallback_img_name = 'purelane-floor.png'
+                  elsif cls == 'p-tap' or cls == 'p-metal'
+                    assign fallback_img_name = 'purelane-tap.png'
+                  elsif cls == 'p-kitchen'
+                    assign fallback_img_name = 'purelane-kitchen.png'
+                  elsif cls == 'p-toilet'
+                    assign fallback_img_name = 'purelane-toilet.png'
+                  elsif cls == 'p-laundry'
+                    assign fallback_img_name = 'purelane-laundry.png'
+                  elsif cls == 'p-dish'
+                    assign fallback_img_name = 'purelane-dish.png'
+                  elsif cls == 'p-wm'
+                    assign fallback_img_name = 'purelane-wm.png'
+                  elsif cls == 'p-handwash'
+                    assign fallback_img_name = 'purelane-handwash.png'
+                  elsif cls == 'p-eraser'
+                    assign fallback_img_name = 'purelane-eraser.png'
+                  endif
+                -%}
+                <img src="{{ fallback_img_name | asset_url }}" class="pimg" alt="{{ product.title | escape }}" width="130" height="200" style="width: auto; object-fit: contain;">
               {%- endif -%}
             {%- endfor -%}
           {%- else -%}
-            <!-- Default Fallbacks from the prototype HTML -->
-            <span class="pimg p-floor" role="img" aria-label="Purelane floor cleaner"></span>
-            <span class="pimg p-tap" role="img" aria-label="Purelane tap cleaner"></span>
-            <span class="pimg p-kitchen" role="img" aria-label="Purelane kitchen cleaner"></span>
-            <span class="pimg p-toilet" role="img" aria-label="Purelane toilet cleaner"></span>
-            <span class="pimg p-laundry" role="img" aria-label="Purelane laundry detergent"></span>
-            <span class="pimg p-dish" role="img" aria-label="Purelane dishwash gel"></span>
-            <span class="pimg p-metal" role="img" aria-label="Purelane copper, bronze and brass cleaner"></span>
-            <span class="pimg p-wm" role="img" aria-label="Purelane washing machine cleaner"></span>
-            <span class="pimg p-handwash" role="img" aria-label="Purelane hand wash"></span>
-            <span class="pimg p-eraser" role="img" aria-label="Purelane magic eraser"></span>
+            <!-- Default Fallbacks using real photorealistic asset images -->
+            <img src="{{ 'purelane-floor.png' | asset_url }}" class="pimg" alt="Purelane floor cleaner" width="130" height="200" style="width: auto; object-fit: contain;">
+            <img src="{{ 'purelane-tap.png' | asset_url }}" class="pimg" alt="Purelane tap cleaner" width="130" height="200" style="width: auto; object-fit: contain;">
+            <img src="{{ 'purelane-kitchen.png' | asset_url }}" class="pimg" alt="Purelane kitchen cleaner" width="130" height="200" style="width: auto; object-fit: contain;">
+            <img src="{{ 'purelane-toilet.png' | asset_url }}" class="pimg" alt="Purelane toilet cleaner" width="130" height="200" style="width: auto; object-fit: contain;">
+            <img src="{{ 'purelane-laundry.png' | asset_url }}" class="pimg" alt="Purelane laundry detergent" width="130" height="200" style="width: auto; object-fit: contain;">
+            <img src="{{ 'purelane-dish.png' | asset_url }}" class="pimg" alt="Purelane dishwash gel" width="130" height="200" style="width: auto; object-fit: contain;">
+            <img src="{{ 'purelane-kitchen.png' | asset_url }}" class="pimg" alt="Purelane copper, bronze & brass cleaner" width="130" height="200" style="width: auto; object-fit: contain;">
+            <img src="{{ 'purelane-wm.png' | asset_url }}" class="pimg" alt="Purelane washing machine cleaner" width="130" height="200" style="width: auto; object-fit: contain;">
+            <img src="{{ 'purelane-handwash.png' | asset_url }}" class="pimg" alt="Purelane hand wash" width="130" height="200" style="width: auto; object-fit: contain;">
+            <img src="{{ 'purelane-eraser.png' | asset_url }}" class="pimg" alt="Purelane magic eraser" width="130" height="200" style="width: auto; object-fit: contain;">
           {%- endif -%}
         </div>
       </div>
